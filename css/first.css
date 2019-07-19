@@ -1,0 +1,97 @@
+﻿body {
+    font-family: 'Microsoft YaHei';
+    font-size: 13px;
+    margin: 0px;
+    padding: 0px 0px 20px 0px;
+}
+
+.topadd {
+    margin: 0px;
+    padding: 0px;
+}
+
+.topadd img { width: 100%; }
+
+.fangweitezheng {
+    border-bottom: 1px dashed #bbb;
+    padding: 5px 5px 10px 5px;
+    width: 100%;
+    margin-top: 10px;
+    /*border-radius:5px;*/
+}
+
+.fangweitezheng .title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 10px;
+    /*border-bottom:1px dashed #808080;*/
+}
+
+.fangweitezheng img {
+    border-radius: 5px;
+    max-width: 85%;
+    min-width: 80%;
+}
+
+.fangweitezheng .fangweituxiang {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.fangweitezheng .notice {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #ff6a00;
+}
+
+.shangpinxiangxidiv {
+    margin-top: 5px;
+    border-bottom: 1px dashed #bbb;
+    padding: 5px 5px 10px 5px;
+    /*border-radius:5px;*/
+}
+
+.shangpinxiangxidiv .leftdiv { text-align: right; }
+
+.shangpinxiangxidiv .rightdiv {
+    text-align: left;
+    margin-left: -15px;
+}
+
+.shangpinxiangxidiv .shangpinming {
+    font-weight: bold;
+    text-align: left;
+}
+
+.shangpinxiangxidiv .shortdes { margin-top: 10px; }
+
+.shangpinxiangxidiv .jiage {
+    font-weight: bold;
+    color: red;
+    text-align: left;
+}
+
+.shangpinxiangxidiv .shanpintupian { text-align: center; }
+
+.shangpinxiangxidiv img {
+    max-height: 80px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    /*border:1px solid red;*/
+}
+
+.lingqujifen {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.lingqujifen .getshangchengjifenbutton {
+    background-color: #ff6a00;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 80%;
+    font-size: 15px;
+    font-weight: bold;
+}

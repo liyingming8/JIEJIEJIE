@@ -1,0 +1,165 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+.SY_infobox {
+    margin: 1.5% 0;
+}
+
+.SY_load {
+    display: none;
+}
+
+/*所有溯源信息大标题*/
+.SY_infotile {
+    background-color: red;
+    width: 97%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 10px 20px;
+}
+
+    .SY_infotile span {
+        color: white;
+        margin-left: 17px;
+        font-size: 20px;
+        vertical-align: middle;
+        display: inline-block;
+        letter-spacing: 4px;
+    }
+
+    .SY_infotile img {
+        width: 30px;
+        vertical-align: middle;
+    }
+
+/*所有的溯源信息通用box*/
+.SY_allinfobox {
+    width: 97%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #d5cccc;
+}
+
+/*一般的溯源信息box*/
+.SY_ptinfobox {
+    padding: 5px 0;
+}
+
+    .SY_ptinfobox li {
+        width: 90%;
+        margin: 10px auto;
+        font-size: 16px;
+        font-family: 'Microsoft YaHei';
+    }
+
+    .SY_ptinfobox span {
+        padding-left: 20px;
+    }
+
+/*工艺流程信息，溯源信息内容外层box*/
+.SY_gyinfobox {
+    padding: 5px 0px;
+}
+
+    .SY_gyinfobox li {
+        width: 90%;
+        margin: 5px auto;
+        font-size: 16px;
+        font-family: 'Microsoft YaHei';
+        border-top: 1px dashed #808080;
+    }
+
+.SY_gyfirstinfo {
+    border-top: none !important;
+}
+
+/*溯源信息标题*/
+.SY_syinfotile {
+    box-sizing: border-box;
+    padding: 5px 15px;
+}
+
+    .SY_syinfotile span {
+        margin-left: 15px;
+        font-size: 16px;
+        vertical-align: middle;
+        display: inline-block;
+        letter-spacing: 2px;
+    }
+
+    .SY_syinfotile img {
+        width: 20px;
+        vertical-align: middle;
+    }
+
+/*溯源信息内容box*/
+.SY_syinfocontent {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 5px 5px 5px 52px;
+   
+}
+
+    .SY_syinfocontent p {
+        font-size: 14px;
+        margin:5px 0;
+    }
+
+    /*原酿box*/
+.SY_syinfoylbox {
+  
+}
+
+    .SY_syinfoylbox span {
+        padding-left:5px;
+        font-size: 15px;
+    }
+    .SY_syinfoylbox p {
+        font-size: 14px;
+        margin: 5px 0;
+        padding: 0 0 0 10px;
+    }
+
+    /*工艺信息标题*/
+    .SY_gyinfotile {
+        box-sizing: border-box;
+        padding: 5px 15px;
+    }
+
+    .SY_gyinfotile span {
+        margin-left: 15px;
+        font-size: 16px;
+        vertical-align: middle;
+        display: inline-block;
+        letter-spacing: 2px;
+    }
+
+    .SY_gyinfotile img {
+        width: 20px;
+        vertical-align: middle;
+    }
+
+/*工艺信息内容box*/
+.SY_gyinfocontent {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 5px 5px 5px 52px;
+    overflow: hidden;
+}
+
+    .SY_gyinfocontent p {
+        font-size: 14px;
+    }
+
+        .SY_gyinfocontent p img {
+            float: right;
+            width: 50%;
+        }

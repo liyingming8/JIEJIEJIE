@@ -1,0 +1,23 @@
+#loginbody {
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    MARGIN: 0px;
+    PADDING-TOP: 0px;
+    BACKGROUND-COLOR: #fff;
+    font-size: 13px
+}
+
+#loginwindows {
+    background-position: 0px 0px;
+    position: absolute;
+    height: 320px;
+    width: 701px;
+    top: 50%;
+    left: 50%;
+    margin-left: -350px;
+    margin-top: -160px;
+    z-index: 100;
+    background-attachment: fixed;
+    background: url('../images/guanlixitong2.jpg') no-repeat left top;
+}

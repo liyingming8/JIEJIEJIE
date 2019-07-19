@@ -1,0 +1,54 @@
+﻿body { font-family: 'Microsoft YaHei'; font-size: 13px; margin: 0px; padding: 0px 0px 20px 0px; }
+
+.topadd { margin: 0px; padding: 0px; }
+
+    .topadd img { width: 100%; }
+
+.fangweitezheng { border-bottom: 1px dashed #bbb; padding: 5px 5px 10px 5px; width: 100%; margin-top: 10px; border: 1px dashed orange; border-radius: 6px; /*border-radius:5px;*/ }
+
+    .fangweitezheng .title { font-size: 16px; font-weight: bold; text-align: left; margin-left: 10px; /*border-bottom:1px dashed #808080;*/ }
+
+    .fangweitezheng img { border-radius: 5px; width:80% }
+
+    .fangweitezheng .fangweituxiang { margin-top: 10px; text-align: center; }
+
+    .fangweitezheng .notice { margin-top: 10px; font-size: 13px; color: #ff6a00; text-align: center; }
+
+.shangpinxiangxidiv { margin-top: 5px; border-bottom: 1px dashed #bbb; padding: 5px 5px 10px 5px; /*border-radius:5px;*/ }
+
+    .shangpinxiangxidiv .leftdiv { text-align: right; }
+
+    .shangpinxiangxidiv .rightdiv { text-align: left; margin-left: -15px; top: 0px; left: 0px; }
+
+    .shangpinxiangxidiv .shangpinming { font-weight: bold; text-align: left; }
+
+    .shangpinxiangxidiv .shortdes { margin-top: 10px; }
+
+    .shangpinxiangxidiv .jiage { font-weight: bold; color: red; text-align: left; }
+
+    .shangpinxiangxidiv .shanpintupian { text-align: center; }
+
+    .shangpinxiangxidiv img { max-height: 80px; margin-top: 5px; margin-bottom: 10px; /*border:1px solid red;*/ }
+
+.lingqujifen { margin: 10px 0; text-align: center; color: orange; }
+
+    .lingqujifen .getshangchengjifenbutton { background-color: orange; padding: 5px; height: 100%; border: 1px solid white; border-radius: 5px; width: 115%; font-size: 17px; font-weight: bold; color: white; margin-left: -20px; }
+
+.gengduojingcai { background-color: orange; padding: 5px; height: 100%; width: 100%; font-size: 17px; font-weight: bold; color: white; border-radius: 10px; }
+
+.ProInfo { border: 1px dashed orange; border-radius: 6px; margin-top: 3px; }
+
+.imgpadding { padding-left: 0px; }
+
+.paddingtop { height: 10px; }
+
+
+
+
+
+/*首页溯源信息*/
+.sy_syinfo { border: 1px dashed orange; border-radius: 6px; margin-top: 3px; padding: 15px 20px; font-family: "黑体"; font-size: 15px; font-weight: 600 }
+
+.XinxiInfo { padding-left: 40px; }
+    .XinxiInfo p { font-size: 13px; font-weight: bold; }
+}

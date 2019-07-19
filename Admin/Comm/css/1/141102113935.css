@@ -1,0 +1,62 @@
+﻿.duijianglist {
+    display: -webkit-box;
+    margin: 10px 15px 10px 15px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #f1f1f1;
+    border-radius: 6px;
+}
+
+.duijianglist nav {
+    width: 80px;
+    margin: 5px 5px 5px 5px;
+}
+
+.duijianglist nav img {
+    vertical-align: central;
+    margin: 0px;
+    width: 60px;
+}
+
+.duijianglist article {
+    -webkit-box-flex: 1;
+    margin: 5px 5px 5px 5px;
+    text-align: left;
+    line-height: 20px;
+}
+
+.duijianglist article .jiangpinname span {
+    font-weight: bold;
+    font-size: 14px;
+    color: #313131;
+}
+
+.duijianglist article .jiage span {
+    font-size: 15px;
+    color: #313131;
+    text-decoration: line-through;
+}
+
+.duijianglist article .duijiang {
+    height: 30px;
+    vertical-align: middle;
+    margin-top: 5px;
+}
+
+.duijianglist article .duijiang span {
+    font-weight: bold;
+    font-size: 16px;
+    color: red;
+}
+
+.duijianglist article .duijiang button {
+    background-color: orange;
+    border: 1px solid orange;
+    width: 70px;
+    height: 22px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    margin: 0px 5px 0px 15px;
+}

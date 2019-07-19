@@ -1,0 +1,668 @@
+html {
+    width: 100vw;
+}
+
+body {
+    font-size: 13px;
+    background-color: #f2f2f2;
+    padding: 0.5rem 0.3rem;
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+button, input[type=button], input[type=submit], textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    outline: 0;
+    -webkit-appearance: none;
+    -ms-border-radius: 0;
+    border-radius: 0
+}
+
+.gridtitle {
+    FONT-WEIGHT: bold;
+    BACKGROUND: #1948A3 url('Images/title.gif') repeat-x left top;
+    COLOR: #8CBA1D;
+    LINE-HEIGHT: 120%;
+}
+
+.tdbg {
+    border-bottom: 1px solid #d5e9ff;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    vertical-align: middle;
+}
+
+.tdbgleft {
+    BACKGROUND: #d5e9ff;
+}
+
+.tdbgbottom {
+    BACKGROUND: #71B0DE;
+    HEIGHT: 40px;
+    TEXT-ALIGN: center;
+}
+
+.tdbg LI {
+    MARGIN-LEFT: 15px !important;
+}
+
+.tdbgmouseover {
+    BACKGROUND: #bfdfff;
+    LINE-HEIGHT: 120%;
+}
+
+.tdbgselected {
+    BACKGROUND: #e0eef5;
+    LINE-HEIGHT: 120%;
+}
+
+.tdbgnolineheight {
+    BACKGROUND: #71B0DE;
+}
+
+.tdbgmouseover2 {
+    BACKGROUND: #bfdfff;
+}
+
+.tdbgselected2 {
+    BACKGROUND: #e0eef5;
+}
+
+.tabtitle {
+    FONT-WEIGHT: normal;
+    BACKGROUND: url('Images/titlebg2.gif');
+    WIDTH: 80px;
+    CURSOR: pointer;
+    LINE-HEIGHT: 120%;
+    PADDING-TOP: 2px;
+    HEIGHT: 22px;
+}
+
+.titlemouseover {
+    FONT-WEIGHT: normal;
+    BACKGROUND: url('Images/titlebg2.gif');
+    WIDTH: 80px;
+    CURSOR: pointer;
+    LINE-HEIGHT: 120%;
+    PADDING-TOP: 2px;
+    HEIGHT: 22px;
+}
+
+.tabtitle {
+    BACKGROUND: url('Images/titlebg2.gif');
+}
+
+.titlemouseover {
+    BACKGROUND: url('Images/titlebg1.gif');
+    COLOR: #ffffff;
+}
+
+.highlight {
+    BACKGROUND-COLOR: #fcd147;
+}
+
+.GridViewStyle {
+    border: 1px solid #afd0f1;
+    padding: 5px;
+    margin-top: 5px;
+    text-align: left;
+    width: 100%;
+}
+
+    .GridViewStyle a {
+        color: #356c04;
+        text-align: center;
+        cursor: default;
+    }
+
+.GridViewHeaderStyle th {
+    border: 1px solid #ccc;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: normal;
+}
+
+.GridViewHeaderStyleSmall th {
+    border: 1px solid #ccc;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: normal;
+}
+
+    .GridViewHeaderStyleSmall th span {
+        white-space: nowrap;
+    }
+
+.GridViewHeaderStyle th span {
+    white-space: nowrap;
+}
+
+.GridViewHeaderStyle {
+    background-color: #e6e6e6;
+    color: black;
+    height: 2.8rem;
+    border: 1px solid #EBE9ED;
+}
+
+.GridViewHeaderStyleSmall {
+    background-color: #e6e6e6;
+    color: black;
+    height: 1.5rem;
+    border: 1px solid #EBE9ED;
+}
+
+.GridViewFooterStyle {
+    background-color: #e6e6e6;
+    font-weight: bold;
+    color: orangered;
+    height: 2.5rem;
+    border: 1px solid rgb(204,204,204);
+}
+
+.GridViewFooterStyleSmall {
+    background-color: #e6e6e6;
+    font-weight: bold;
+    color: orangered;
+    height: 1.5rem;
+    border: 1px solid rgb(204,204,204);
+}
+
+.GridViewRowStyle {
+    background-color: #FFF;
+    color: #666;
+    height: 2.8rem;
+}
+
+.GridViewAlternatingRowStyle {
+    background-color: #FFFFFF;
+    color: #666;
+    height: 2.8rem;
+}
+
+.GridViewRowStyleSmall {
+    background-color: #FFF;
+    color: #666;
+    height: 1.4rem;
+}
+
+.GridViewAlternatingRowStyleSmall {
+    background-color: #FFFFFF;
+    color: #666;
+    height: 2rem;
+}
+
+    .GridViewRowStyleSmall td, .GridViewAlternatingRowStyleSmall td {
+        border: 1px solid #EBE9ED;
+        padding: 5px 10px;
+    }
+
+        .GridViewRowStyleSmall td, .GridViewAlternatingRowStyleSmall td span {
+            white-space: nowrap;
+        }
+
+.GridViewRowStyle td, .GridViewAlternatingRowStyle td {
+    border: 1px solid #EBE9ED;
+    padding: 5px 10px;
+}
+
+    .GridViewRowStyle td, .GridViewAlternatingRowStyle td span {
+        white-space: nowrap;
+    }
+
+
+.GridViewSelectedRowStyle {
+    background-color: #E2DED6;
+    font-weight: bold;
+    color: #333333;
+}
+
+.GridViewPagerStyle {
+    color: #666;
+    font-weight: normal;
+    font-size: 0.75rem;
+    padding: 0.8rem 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    border-left: 0.1rem solid #E2DED6;
+    border-right: 0.1rem solid #E2DED6;
+    border-bottom: 0.1rem solid #E2DED6;
+} 
+
+.GridViewPagerStyle select {
+    padding: 0.3rem;
+}
+
+    .GridViewPagerStyle span {
+        padding: 0 0.5rem;
+    }
+
+    .GridViewPagerStyle a {
+        text-decoration: none;
+        color: #666;
+        font-weight: normal;
+    }
+
+    .GridViewPagerStyle table /**/ /* to center the paging links*/ {
+        margin: 0 auto 0 auto;
+        border: none;
+    }
+
+        .GridViewPagerStyle table td /**/ /* to center the paging links*/ {
+            padding: 0 0.15rem;
+            -moz-word-break: break-all;
+            -o-word-break: break-all;
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+
+.input1 {
+    width: 150px;
+    border: 1px solid #cecece;
+}
+
+.input3 {
+    width: 680px;
+    border: 1px solid #cecece;
+}
+
+.input4 {
+    width: 40px;
+    border: 1px solid #cecece;
+}
+
+.input5 {
+    width: 80px;
+    border: 1px solid #cecece;
+}
+
+.input6 {
+    border: 1px solid #cecece;
+    width: 200px;
+}
+
+.input7 {
+    border: 1px solid #cecece;
+}
+
+.input8 {
+    width: 20px;
+    border: 1px solid #cecece;
+}
+
+.contentbody {
+    margin-left: 0;
+}
+
+.topdiv {
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-left: 0.6rem;
+    vertical-align: middle;
+    font-size: 13px; 
+    padding-bottom: 0.2rem;
+    text-align: left;
+    /*width: 100%;*/
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+}
+
+    .topdiv .topitem {
+        float: left;
+        margin-left: 0;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+        .topdiv .topitem table {
+            width: 100%;
+        }
+
+        .topdiv .topitem .inputdatenew {
+            height: 1.98rem;
+            line-height: 1.98rem;
+            width: 5.5rem;
+            padding: 0 0.3rem;
+            vertical-align: middle;
+            border: 0.08rem solid lightgrey;
+        }
+
+        .topdiv .topitem .inputsearch {
+            height: 1.98rem;
+            line-height: 1.98rem;
+            vertical-align: middle;
+            padding: 0 0.3rem;
+            border: 0.08rem solid lightgrey;
+        }
+
+        .topdiv .topitem span {
+            vertical-align: middle;
+            line-height: 3rem;
+            font-size: 14px;
+        }
+
+        .topdiv .topitem .spantitle {
+            line-height: 2.2rem;
+            vertical-align: middle;
+            padding: 0 0.5rem;
+        }
+
+        .topdiv .topitem select {
+            line-height: 2.1rem;
+            height: 2.1rem;
+            padding: 0 0.3rem;
+            border: 0.1rem solid lightgrey;
+        }
+
+    .topdiv .toprightitem {
+        float: right;
+        right: 10px;
+        vertical-align: middle;
+    }
+
+    .topdiv .toprightiteminner {
+        float: left;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+
+    .topdiv .toprightitem span {
+        margin-top: 1px;
+        line-height: 23px;
+        margin-right: 5px;
+    }
+
+    .topdiv .toprightitem select {
+        margin-top: 1px;
+        line-height: 23px;
+        margin-right: 25px;
+    }
+
+    .topdiv .topitem .ajax__calendar_container {
+        z-index: 888
+    }
+
+.itemdiv {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px dashed #b0c4de;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    position: relative;
+    z-index: 0;
+}
+
+    .itemdiv .itemdivtitle {
+        font-weight: bold;
+        margin-left: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+.shoufeilink {
+    height: 25px;
+    width: 70px;
+    text-decoration: none;
+    background-color: #ff6600;
+    color: yellow;
+    font-weight: bold;
+    line-height: 25px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 2px 10px;
+}
+
+.shoufeilinknone {
+    height: 25px;
+    width: 70px;
+    text-decoration: none;
+    background-color: lightgrey;
+    color: yellow;
+    font-weight: bold;
+    line-height: 25px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 2px 10px;
+}
+
+.zhikalink {
+    height: 25px;
+    /*width: 70px;*/
+    text-decoration: none;
+    /*background-color: #2e8b57;*/
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 2px 10px;
+}
+
+.zhikalinknone {
+    height: 25px;
+    /*width: 70px;*/
+    text-decoration: none;
+    /*background-color:lightgrey;*/
+    color: yellow;
+    font-weight: bold;
+    line-height: 25px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 3px;
+    padding: 2px 10px;
+}
+
+.btnyd {
+    border: none;
+    padding: 0 10px;
+    height: 2.2rem;
+    vertical-align: middle;
+}
+
+.btnydinline {
+    border: none;
+    padding: 3px 8px;
+    height: 23px;
+    font-weight: bold;
+    -webkit-box-shadow: 1px 1px 0.5px #888888;
+    -ms-box-shadow: 1px 1px 0.5px #888888;
+    box-shadow: 1px 1px 0.5px #888888;
+    text-decoration: none;
+    cursor: default;
+}
+
+    .btnydinline a {
+        text-decoration: none;
+        color: white;
+        cursor: default;
+    }
+
+.btnydinlineforgridview {
+    border: none;
+    padding: 1px 8px;
+    font-weight: bold;
+    -webkit-box-shadow: 1px 1px 0.5px #888888;
+    -ms-box-shadow: 1px 1px 0.5px #888888;
+    box-shadow: 1px 1px 0.5px #888888;
+    text-decoration: none;
+    cursor: default;
+}
+
+    .btnydinlineforgridview a {
+        text-decoration: none;
+        color: white;
+        cursor: default;
+    }
+
+.GridViewStyle a {
+    color: #356c04;
+    text-align: center;
+    text-decoration: none;
+}
+/*页面样式设置*/
+.div_WholePage {
+    padding: 0.1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #fff;
+}
+
+.div_Nav {
+    background-color: #CEDEF7;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #b0c4de;
+    overflow: hidden;
+}
+
+    .div_Nav table {
+        float: left;
+    }
+
+/*#DDLField {
+    height: 25px;
+}*/
+
+.td1 {
+    color: red;
+    font-family: KaiTi;
+    font-size: 18px;
+    float: right;
+    margin: 3px 20px 0 0;
+    font-weight: bold;
+}
+
+.div_WholePage .container {
+    width: 100%;
+}
+
+
+.btn-warning {
+    display: inline-block;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    padding: 0 18px;
+    background-color: #009688;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+
+.btn-fresh {
+    display: inline-block;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    padding: 0 18px;
+    background-color: #ff6600;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+
+.layui-layer .layui-layer-content {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex
+}
+
+.flex-inline {
+    display: -webkit-inline-flex;
+    display: inline-flex
+}
+
+.f-center {
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center
+}
+
+.f-justify {
+    -webkit-box-pack: justify;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between
+}
+
+.f-wrap {
+    -webkit-flex-wrap: wrap;
+    -webkit-box-lines: multiple;
+    -moz-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.ComboBox_default table td {
+    height: 1.98rem;
+    line-height: 1.98rem;
+}
+.ComboBox_default .text_FW {
+    height: 1.98rem !important;
+    border-left: 0.08rem solid lightgrey !important;
+    border-top: 0.08rem solid lightgrey !important;
+    border-bottom: 0.08rem solid lightgrey !important;
+}
+.ComboBox_default .arrow_FW {
+    height: 1.98rem !important;
+    font-size: 12px !important;
+    border-right: 0.08rem solid lightgrey !important;
+    border-top: 0.08rem solid lightgrey !important;
+    border-bottom: 0.08rem solid lightgrey !important;
+}
+.ComboBox_default .arrow_click_FW { 
+    border-style: solid;
+    width: 16px;
+    height: 1.98rem !important;
+    font-size: 12px !important;
+    border-right: 0.08rem solid lightgrey !important;
+    border-top: 0.08rem solid lightgrey !important;
+    border-bottom: 0.08rem solid lightgrey !important;
+}
+.ComboBox_default .popup_FW li {
+    height: 1.98rem !important;
+} 
+.ComboBox_default .popup_FW {
+    border: 0.08rem solid lightgrey !important;
+} 

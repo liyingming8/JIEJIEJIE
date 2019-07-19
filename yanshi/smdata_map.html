@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>地图实时监控</title>
+    <style>
+        body, html { height: 100%; padding: 0; margin: 0 }
+        #allmap { height: 100%; width: 100% }
+    </style>
+</head>
+<body>
+    <div id="allmap"></div>
+     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ASl2xmUaYpjwdWy3GPBQbpUK"></script>
+    <script>
+        'use strict';
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(110.26057293816, 20.0087964252954), 5);
+        map.enableScrollWheelZoom(true);
+        map.setMapStyle({
+            styleJson: [
+                {
+                    "featureType": "highway",
+                    "elementType": "all",
+                    "stylers": {
+                        "visibility": "off"
+                    }
+                },
+                {
+                    "featureType": "railway",
+                    "elementType": "all",
+                    "stylers": {
+                        "visibility": "off"
+                    }
+                },
+                {
+                    "featureType": "subway",
+                    "elementType": "all",
+                    "stylers": {
+                        "visibility": "off"
+                    }
+                },
+                {
+                    "featureType": "poilabel",
+                    "elementType": "all",
+                    "stylers": {
+                        "visibility": "off"
+                    }
+                },
+                {
+                    "featureType": "country",
+                    "elementType": "labels.text.stroke",
+                    "stylers": {
+                        "visibility": "off"
+                    }
+                },
+                {
+                    "featureType": "continent",
+                    "elementType": "all",
+                    "stylers": {
+                        "visibility": "off"
+                    }
+                },
+                {
+                    "featureType": "background",
+                    "elementType": "all",
+                    "stylers": {
+                        "weight": "0.1"
+                    }
+                }
+            ]
+        });
+        var cx_date = getNowFormatDate(), cx_time = '';
+        function jsonpBack(result) { 
+            if (result.tm != '')
+                cx_time = result.tm;
+            if (result.points != '[]') {
+                var arr = eval("[" + result.points + "]");
+                addMarker(arr);
+            }
+        }
+        function addMarker(adds) {
+            //console.log(adds);
+            if (adds.length > 0) {
+                for (var i = 0; i < adds.length; i++) {
+                    var marker = new BMap.Marker(adds[i]);
+                    map.addOverlay(marker);
+                }
+            }
+        }
+        var inter = setInterval(function () {
+            var jscript2 = document.createElement("script");
+            jscript2.setAttribute("src", "http://www.china315net.com:35222/wuliu/baidumap/data/?company=湖南浏阳河酒厂有限公司&date=" + cx_date + "&tm=" + cx_time + "&callback=jsonpBack");
+            //console.log(jscript2);
+            document.body.appendChild(jscript2);
+            document.body.removeChild(jscript2);
+        }, 4000);
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = year + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+    </script>
+</body>
+</html>

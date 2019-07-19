@@ -1,0 +1,543 @@
+body {
+    margin: 5px;
+    padding: 0px;
+    background: #FFFFFF;
+    font-family: Arial, "宋体", Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000;
+    line-height: 180%;
+}
+
+td {
+    font-size: 16px;
+    line-height: 180%;
+}
+
+/*****************************背景与icon**************************/
+
+#headertop, #headerbottom, .product, #nav li .operation, #nav li .finance, #nav li .administration, #nav li .personnel, #nav li #nav li .tools, #nav li .help, #userstate span, #fotter, .box1, .box2, .box3, .navon, .navon span, .navdesktop { background: url(images/pic_main.gif) no-repeat; }
+
+
+/*****************************综合设置***************************/
+
+a:link, a:visited {
+    line-height: 180%;
+    color: #00F;
+    text-decoration: underline;	
+}
+
+a:hover {
+    line-height: 180%;
+    color: #f30;
+    text-decoration: underline;
+}
+
+img { border: 0px; }
+
+.more {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.more a:link, .more a:visited { text-decoration: none; }
+
+/****************************header布局****************************/
+
+#headertop {
+    background-position: top;
+    background-repeat: repeat-x;
+    height: 34px;
+	
+    padding-left: 10px;
+}
+
+#headerbottom {
+    background-position: left -50px;
+    background-repeat: repeat-x;
+    height: 34px;
+	
+    padding-left: 25px;
+}
+
+/***********************顶部菜单布局开始****************************/
+
+#nav {
+    padding: 0;
+    margin: 4px 0 0 0;
+    list-style: none;
+    height: 22px;
+    width: 810px;
+    position: relative;
+    z-index: 500;
+    font-family: arial, verdana, sans-serif;
+}
+
+#nav li img {
+    float: left;
+    padding: 2px 8px 0 0;
+    display: block;
+}
+
+#nav li.top {
+    display: block;
+    float: left;
+}
+
+#nav li a.top_link {
+    display: block;
+    float: left;
+    height: 23px;
+    line-height: 22px;
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 0 0 0 15px;
+    cursor: pointer;
+}
+
+/*控制菜单大小左边距*/
+
+#nav li a.top_link span {
+    float: left;
+    display: block;
+    padding: 0 12px 0 5px;
+    height: 22px;
+}
+
+#nav li a.top_link span.down {
+    float: left;
+    display: block;
+    padding: 0 15px 0 0;
+    height: 22px;
+    background: #dedede;
+}
+
+#nav li:hover a.top_link {
+    color: #000;
+    background: url(images/three_1.gif) no-repeat;
+}
+
+#nav li:hover a.top_link span { background: url(images/three_1.gif) no-repeat right top; }
+
+/*鼠标移上背景，背景不重复右侧顶部*/
+
+#nav li:hover a.top_link span.down { background: url(images/three_1.gif) no-repeat right top; }
+
+/*鼠标移上背景，背景不重复右侧顶部*/
+
+/* 下拉菜单设置 */
+
+#nav li:hover {
+    position: relative;
+    z-index: 200;
+}
+
+#nav li:hover ul.sub {
+    left: 0px;
+    top: 23px;
+    background: #f9f9f9;
+    padding: 5px 0px 10px 0px;
+    border: 1px solid #666;
+    white-space: nowrap;
+    width: 190px;
+    height: auto;
+    z-index: 300;
+    background-image: url(images/nav_bg.gif);
+    background-repeat: repeat-y;
+}
+
+/*控制二级级菜单位置、背景、边框、背景等*/
+
+#nav li:hover ul.sub li {
+    display: block;
+    height: 22px;
+    position: relative;
+    float: left;
+    width: 180px;
+    font-weight: normal;
+    padding-left: 1px;
+}
+
+#nav li:hover ul.sub li a {
+    display: block;
+    font-size: 12px;
+    height: 22px;
+    width: 188px;
+    line-height: 22px;
+    text-indent: 40px;
+    color: #000;
+    text-decoration: none;
+}
+
+#nav li ul.sub li a.fly { background: url(images/arrow.gif) 170px 7px no-repeat; }
+
+/*控制有三级菜单背景样式*/
+
+#nav li:hover ul.sub li a:hover {
+    background: #0a246a;
+    color: #fff;
+}
+
+/*控制默认栏目鼠标移上背景样式**/
+
+#nav li:hover ul.sub li a.fly:hover {
+    background: #0a246a url(images/arrow_over.gif) 170px 7px no-repeat;
+    color: #fff;
+}
+
+/*控制有三级菜单鼠标移上背景样式*/
+
+#nav li:hover li:hover ul,
+#nav li:hover li:hover li:hover ul,
+#nav li:hover li:hover li:hover li:hover ul,
+#nav li:hover li:hover li:hover li:hover li:hover ul {
+    left: 188px;
+    top: -4px;
+    background: #f9f9f9 url(images/nav_bg.gif) repeat-y;
+    padding: 5px 0px 10px 0px;
+    border: 1px solid #666666;
+    white-space: nowrap;
+    width: 190px;
+    z-index: 400;
+    height: auto;
+}
+
+/*三级菜单背景样式*/
+
+#nav ul,
+#nav li:hover ul ul,
+#nav li:hover li:hover ul ul,
+#nav li:hover li:hover li:hover ul ul,
+#nav li:hover li:hover li:hover li:hover ul ul {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#nav li:hover li:hover a.fly,
+#nav li:hover li:hover li:hover a.fly,
+#nav li:hover li:hover li:hover li:hover a.fly,
+#nav li:hover li:hover li:hover li:hover li:hover a.fly {
+    background: #0a246a url(images/arrow_over.gif) 170px 7px no-repeat;
+    color: #fff;
+}
+
+/*本行控制二级菜单触发打开三级菜单时的样式*/
+
+#nav li:hover li:hover li a.fly,
+#nav li:hover li:hover li:hover li a.fly,
+#nav li:hover li:hover li:hover li:hover li a.fly {
+    background: url(images/arrow.gif) 170px 7px no-repeat;
+    color: #000;
+    border-color: #f9f9f9;
+}
+
+/*这一行控制有四级菜单背景样式*/
+
+/*共用class*/
+
+.box1 {
+    margin-top: 20px;
+    width: 235px;
+    background-position: left -350px;
+    background-repeat: repeat-x;
+    border: 1px solid #bbbbbb;
+}
+
+.box2 {
+    margin-top: 20px;
+    width: 90%;
+    background-position: left -350px;
+    background-repeat: repeat-x;
+    border: 1px solid #bbbbbb;
+}
+
+.box3 {
+    margin-top: 20px;
+    width: 200px;
+    background-position: right -400px;
+    background-repeat: repeat-x;
+    border: 1px solid #0b2369;
+}
+
+.box4 {
+    margin-top: 15px;
+    width: 96%;
+    border: 1px solid #bbbbbb;
+    background-color: #ecebea;
+}
+
+.box4bgcolor { background-color: #ecebea; }
+
+.box4trtitle {
+    background: #ddd;
+    text-align: center;
+}
+
+.box4tr1 { background: #fff; }
+
+.box4tr2 { background: #f8f8f8; }
+
+.box4trhover { background: #e4f3fe; }
+
+.boxli {
+    margin: 10px;
+    width: 100%;
+    color: #999999;
+}
+
+.box5 {
+    margin-top: 20px;
+    width: 96%;
+    padding: 0px;
+}
+
+.box6 {
+    margin-top: 15px;
+    border: 1px solid #bbbbbb;
+    background-color: #ecebea;
+}
+
+.boxbtn a:link, .boxbtn a:visited {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: block;
+    border: 1px solid #fff;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.boxbtn a:hover {
+    background: #dedede;
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    border-top: 1px solid #ffffff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    border-left: 1px solid #ffffff;
+}
+
+.tbleft {
+    width: 225px;
+    padding-top: 10px;
+    padding-left: 25px;
+}
+
+.tbright {
+    width: 260px;
+    padding-top: 10px;
+    padding-right: 25px;
+}
+
+.tbcenter {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.title {
+    height: 25px;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.titlewhite {
+    height: 25px;
+    color: #fff;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.redtext { color: red; }
+
+.bluetext { color: blue; }
+
+.graytext { color: gray; }
+
+/*当前栏目标题*/
+
+.navon {
+    background-position: left -100px;
+    background-repeat: no-repeat;
+    margin: 8px 0px 0px 0px;
+    padding-left: 26px;
+    height: 27px;
+    display: block;
+    float: left;
+}
+
+.navon span {
+    background-position: right -100px;
+    background-repeat: no-repeat;
+    line-height: 27px;
+    display: block;
+    padding-top: 3px;
+    padding-right: 35px;
+}
+
+.navon span a:link, .navon span a:visited {
+    line-height: 27px;
+    text-decoration: none;
+}
+
+/*返回桌面*/
+
+.navdesktop {
+    background-position: left -150px;
+    background-repeat: no-repeat;
+    margin: 8px 0px 0px 0px;
+    padding-left: 20px;
+    padding-top: 4px;
+    height: 23px;
+    width: 45px;
+    display: block;
+    float: left;
+}
+
+.navdesktop a, .navdesktop a:link {
+    line-height: 27px;
+    display: block;
+    color: #000000;
+}
+
+/**********************页面新开窗体设置***********************/
+
+.openwindiv {
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.3;
+    opacity: 0.3;
+    background-color: #EAF2FD;
+    width: 100%;
+    height: 100%;
+    z-index: 886;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    overflow: hidden;
+}
+
+/*半透明层*/
+
+.openwindiv2 {
+    background-color: #EAF2FD;
+    filter: alpha(opacity=60);
+}
+
+/*vs半透明层*/
+
+.openwin {
+    border: 6px solid #9c9c9c;
+    z-index: 888;
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    background: #f7f7f7;
+}
+
+/*主窗口边框和背景*/
+
+.openwin2 {
+    border: 6px solid #9c9c9c;
+    background: #f7f7f7;
+    top: 10px;
+}
+
+/*vs主窗口边框和背景*/
+
+#openwintitle {
+    height: 40px;
+    padding-left: 30px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/*标题行*/
+
+.openwintitle2 {
+    height: 40px;
+    padding-left: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: move;
+}
+
+/*vs标题行*/
+
+.openwinclose {
+    height: 40px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+/*关闭行*/
+
+.openwinborder {
+    border: 1px solid #cccccc;
+    margin-top: 10px;
+    background: #ffffff;
+}
+
+/*新开窗体内容盒子边框*/
+
+.openwinbody {
+    margin: 0px;
+    background: #f7f7f7;
+}
+
+/*新开窗体body*/
+
+.bottomline1 td { border-bottom: 1px solid #ffffff; }
+
+/*新开窗体内容行1*/
+
+.bottomline2 td {
+    border-bottom: 1px solid #ffffff;
+    background: #ffffff;
+}
+
+/*新开窗体内容行2*/
+
+
+.stpage { FONT-FAMILY: webdings; }
+
+/*设置分页字体*/
+
+/*隔离拦*/
+
+.navPoint {
+    FONT-SIZE: 9pt;
+    CURSOR: hand;
+    COLOR: #99ff66;
+    FONT-FAMILY: Webdings;
+}
+
+
+/*弹出筐样式*/
+
+.modalBackground {
+    background-color: #f7f7f7; /*background-color: Gray;*/
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+
+/*.modalPopup
+{
+    background-color: #ffffdd;
+    border-width: 3px;
+    border-style: solid;
+    border-color: Gray;
+    padding: 3px;
+    width: 250px;
+}*/
+
+.modalPopupWindow {
+    border: 6px solid #9c9c9c;
+    z-index: 888;
+    background: #f7f7f7;
+}

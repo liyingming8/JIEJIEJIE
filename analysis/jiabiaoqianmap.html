@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>窜货预警地图</title>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=9db868ad8d169110c5643903108bdfac"></script>
+    <style>
+        .amap-marker { animation: bounce 3s infinite }
+
+        @-webkit-keyframes bounce {
+            from, 20%, 53%, 80%, to { -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+
+            40%, 43% { -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); -webkit-transform: translate3d(0, -10px, 0); transform: translate3d(0, -10px, 0); }
+
+            70% { -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); -webkit-transform: translate3d(0, -5px, 0); transform: translate3d(0, -5px, 0); }
+
+            90% { -webkit-transform: translate3d(0, -4px, 0); transform: translate3d(0, -4px, 0); }
+        }
+
+        @keyframes bounce {
+            from, 20%, 53%, 80%, to { -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+
+            40%, 43% { -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); -webkit-transform: translate3d(0, -10px, 0); transform: translate3d(0, -10px, 0); }
+
+            70% { -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); -webkit-transform: translate3d(0, -5px, 0); transform: translate3d(0, -5px, 0); }
+
+            90% { -webkit-transform: translate3d(0, -4px, 0); transform: translate3d(0, -4px, 0); }
+        }
+
+        .bounce { -webkit-animation-name: bounce; animation-name: bounce; -webkit-transform-origin: center bottom; transform-origin: center bottom; }
+    </style>
+</head>
+<body>
+    <div id="container" style="height:100%">
+
+    </div>
+    <script>
+
+        var map = new AMap.Map('container', {
+            center: [116.397428, 39.90923],
+            zoom: 4
+        });
+        var infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -30) });
+
+        function markerClick(e) {
+            infoWindow.setContent(e.target.content);
+            infoWindow.open(map, e.target.getPosition());
+        }
+        //百度坐标转高德
+        function bd_decrypt(p) {
+            var bd_lng = p[0];
+            var bd_lat = p[1];
+            var X_PI = Math.PI * 3000.0 / 180.0;
+            var x = bd_lng - 0.0065;
+            var y = bd_lat - 0.006;
+            var z = Math.sqrt(x * x + y * y) - 0.00002 * Math.sin(y * X_PI);
+            var theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * X_PI);
+            var gg_lng = z * Math.cos(theta);
+            var gg_lat = z * Math.sin(theta);
+            return [gg_lng, gg_lat]
+        }
+        var compid = getQueryStringByName("compid"),
+            agtid = getQueryStringByName("agtid"),
+            mode = getQueryStringByName("mode"),
+            date_from = getQueryStringByName("date_from"),
+            date_to = getQueryStringByName("date_to");
+        if (compid != null && agtid != null && date_from != null && date_to != null)
+            getpoints();
+        else
+            alert("信息丢失");
+        function getpoints() {
+            var jscript = document.createElement("script");
+            jscript.setAttribute("src", "http://117.34.70.23:32176/gis/fakelabel/points/" + compid + "/" + agtid + "/?" + (mode==null?"":"mode=1&") + "date_from=" + date_from + "&date_to=" + date_to + "&callback=receivePoints");
+            document.body.appendChild(jscript);
+            document.body.removeChild(jscript);
+        }
+        var marker;
+        function receivePoints(result) {
+            console.log(result);
+            for (var i = 0; i < result.length; i++) {
+                marker = new AMap.Marker({
+                    position: bd_decrypt(eval(result[i].lnglat)),
+                    icon: '//os.china315net.com/image/icon_danger2.png',
+                })
+                marker.content = '序号：<span style="font-weight:bold">' + result[i].code + '</span></br>产品：' + result[i].product +
+                    '</br>时间：' + result[i].time + '</br>地址：' + result[i].address +
+                    '</br>超出范围：' + result[i].distance/1000+" 公里" + '</br><button onclick="sendmessage(\'' + result[i].code + '\',\'' + result[i].product + '\',\'' + result[i].time + '\',\''
+                    + result[i].address + '\')">发送短信给稽查人员</button>';
+                marker.on('click', markerClick);
+                marker.setMap(map);
+            }
+        }
+        function getQueryStringByName(name) {
+            var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+            if (result == null || result.length < 1) {
+                return null;
+            }
+            return result[1];
+        }
+
+        function sendmessage(code, product, time, address) {
+            $.ajax({
+                url: '../ajax/sendCode.ashx',
+                type: 'post',
+                data: { agtid: agtid, code: code, product: product, time: time, address: address },
+                success: function (result) {
+                    if (result == "ok")
+                        alert("发送成功");
+                    else
+                        alert("发送失败")
+                }
+            })
+        }
+    </script>
+</body>
+</html>

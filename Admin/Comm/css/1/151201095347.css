@@ -1,0 +1,408 @@
+﻿@CHARSET "UTF-8";
+
+body {
+    margin: 0px;
+    background-color: #39C
+}
+
+.mainPic {
+    background: url("../img/zdfw0111.jpg") repeat scroll 0 0 transparent;
+    clear: both;
+    color: #00FF00;
+    font-family: "微软雅黑";
+    font-size: 60px;
+    font-weight: bold;
+    height: 272px;
+    letter-spacing: 10px;
+    line-height: 200px;
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 250px;
+}
+
+
+.zd { padding: 10px; }
+
+.zd_banner {
+    background: url(../images/zdfw_02.jpg) no-repeat;
+    width: 507px;
+    height: 275px;
+}
+
+.zd_hy01 {
+    background: url(../images/zdfw_013.jpg) repeat-x;
+    border: #bbd4f3 solid 1px;
+}
+
+ul, li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.zd_hy02 { background: url(../images/zdfw_013.jpg) repeat-x; }
+
+.zd_hy02 li {
+    float: left;
+    padding: 2px 0 0 5px;
+    font-size: 12px;
+    color: #0268c5;
+}
+
+.zd_hy03 { padding: 2px 0 0 0; }
+
+.zd_hy04 {
+    font-size: 12px;
+    line-height: 14px;
+    border: 1px solid #8ab5eb;
+    width: 80px;
+}
+
+.zd_hy05 {
+    background: url(../images/zdfw_015.jpg) 2px 0 no-repeat;
+    font-size: 12px;
+    color: #fff;
+    width: 53px;
+    height: 22px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    margin: 3px 0 0 0;
+    padding: 0px;
+    0
+    0
+    3px
+    ;
+}
+
+.zd_hy05 a:link {
+    font-size: 12px;
+    color: #fff;
+    width: 53px;
+    height: 22px;
+    text-decoration: none;
+}
+
+.zd_hy05 a:visited {
+    font-size: 12px;
+    color: #fff;
+    width: 53px;
+    height: 22px;
+    text-decoration: none;
+}
+
+.zd_hy05 a:hover {
+    font-size: 12px;
+    color: #fff;
+    width: 53px;
+    height: 22px;
+}
+
+.zd_main { padding: 8px; }
+
+ {
+    background: url(../images/zdfw0111.jpg) no-repeat;
+    width: 166px;
+    height: 156px;
+    padding: 12px;
+    float: left;
+}
+
+.zd_main_02 {
+    background: url(../image/zdfw_01.jpg) no-repeat;
+    width: 166px;
+    height: 156px;
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.zd_main_02 a:link {
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+}
+
+.zd_main_02 a:visited {
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+}
+
+.zd_main_02 a:hover {
+    font-size: 18px;
+    color: #000;
+}
+
+.border_4 {
+    border: 1px solid #bbd4f3;
+    background: url(../images/zdfw_013.jpg) repeat-x;
+}
+
+.border_bottom { border-bottom: 1px solid #ee7504; }
+
+.border_2sx {
+    border-top: 2px solid #307ec1;
+    border-bottom: 2px solid #307ec1;
+}
+
+.font_blue {
+    font-size: 12px;
+    color: #0268c5;
+}
+
+.border_4_a { border: 1px solid #bbd4f3; }
+
+/**/
+
+.clear { clear: both; }
+
+.nfr238 {
+    float: right;
+    width: 236px;
+    display: inline;
+    background-color: #e3f1ff;
+    height: 917px;
+    border: 1px solid #c5c5c5;
+    margin-bottom: 10px;
+}
+
+.nfr238 h3 {
+    background: url(../images/news/nfrh3.jpg) left top no-repeat;
+    margin: 1px;
+    height: 24px;
+    line-height: 24px;
+    padding: 8px 136px 0px 13px;
+    text-align: center;
+    color: #993200;
+}
+
+.nfr238 ul {
+    padding: 10px 11px;
+    zoom: 1;
+    overflow: hidden;
+    clear: both;
+    width: 214px;
+}
+
+.nfr238 ul li {
+    line-height: 30px;
+    height: 30px;
+    padding-left: 10px;
+    background: url(../images/ico02.jpg) left 15px no-repeat;
+    width: 204px;
+    overflow: hidden;
+}
+
+.nfr238 ul li.nobdr { border-bottom: 0px solid #fff; }
+
+.nfrad { text-align: center; }
+
+.nfrad img { border: 1px solid #a7abaf; }
+
+.nfr238 dl {
+    float: left;
+    padding-left: 8px;
+    width: 106px;
+    margin-top: 10px;
+}
+
+.nfr238 dl dt { }
+
+.nfr238 dl dt img {
+    border: 1px solid #a7abaf;
+    width: 104px;
+    height: 73px;
+}
+
+.nfr238 dl dd {
+    clear: both;
+    text-align: center;
+    height: 19px;
+    line-height: 19px;
+}
+
+.nfl764 {
+    float: left;
+    width: 764px;
+    display: inline;
+    height: 919px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.nfl369 {
+    float: left;
+    width: 364px;
+    border: 1px solid #c8c8c8;
+    padding: 1px;
+    margin-right: 13px;
+    height: 222px;
+    overflow: hidden;
+    margin-bottom: 13px;
+}
+
+.nfl369d {
+    background: url(../images/news/ntitleBg.gif) left top repeat-x;
+    height: 32px;
+    overflow: hidden;
+}
+
+.nfl369d2 {
+    background: url(../images/news/ntitleBg2.gif) left top repeat-x;
+    height: 32px;
+    overflow: hidden;
+}
+
+.nfl369 h3 {
+    height: 32px;
+    line-height: 32px;
+    float: left;
+}
+
+.nfl369_2 h3 {
+    height: 32px;
+    line-height: 32px;
+}
+
+.nfl369 h3 span {
+    float: left;
+    background: url(../images/news/nflh3bg.gif) left top no-repeat;
+    width: 129px;
+    text-align: center;
+    height: 27px;
+    line-height: 27px;
+    margin-top: 5px;
+    margin-left: 10px;
+    color: #064983;
+}
+
+.nfl369_2 h3 span { background: url(../images/news/nflh3bg2.gif) left top no-repeat; }
+
+.nfl369 span.more {
+    float: right;
+    height: 32px;
+    line-height: 32px;
+    padding-right: 10px;
+}
+
+.nfl369 ul {
+    border-top: 1px solid #c8c8c8;
+    margin: 5px 10px 10px;
+    padding-top: 8px;
+}
+
+.nfl369 .focusNewsList li {
+    background: url(../images/ico02.jpg) left center no-repeat;
+    line-height: 28px;
+    height: 28px;
+    padding-left: 10px;
+}
+
+.nfl369 .focusNewsList li span {
+    float: right;
+    color: #ff8c00;
+    line-height: 28px;
+    height: 28px;
+}
+
+.nfl369 .focusNewsList li a:link, .nfl369 .focusNewsList li a:visited, .nfl369 .focusNewsList li a:hover {
+    color: #5a5a5a;
+    font-size: 12px;
+}
+
+/**/
+
+.nimglist {
+    clear: both;
+    margin-bottom: 13px;
+    margin-right: 13px;
+    border: 1px solid #c8c8c8;
+    padding: 1px;
+    height: 198px;
+}
+
+.nimglistd {
+    background: url(../images/news/ntitleBg.gif) left top repeat-x;
+    height: 32px;
+    line-height: 32px;
+}
+
+.nimglist h3 {
+    float: left;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 31px;
+    color: #064983;
+}
+
+.nimglist span.more {
+    float: right;
+    height: 32px;
+    line-height: 32px;
+    padding-right: 10px;
+}
+
+.nimglistct { border-top: 1px solid #c8c8c8; }
+
+.nimglist dl {
+    float: left;
+    padding-left: 11px;
+    width: 172px;
+    margin-top: 13px;
+}
+
+.nimglist dl dt { }
+
+.nimglist dl dt img {
+    border: 1px solid #a7abaf;
+    width: 170px;
+    height: 120px;
+}
+
+.nimglist dl dd {
+    clear: both;
+    text-align: center;
+    height: 19px;
+    line-height: 19px;
+}
+
+/**/
+
+.nfl369_3 {
+    width: auto;
+    float: none;
+    height: 917px;
+}
+
+.nfl369_3 ul {
+    margin: 0px;
+    padding: 23px;
+}
+
+.nfl369_3 .focusNewsList li {
+    border-bottom: 1px dashed #9a9a9a;
+    height: 35px;
+    line-height: 35px;
+}
+
+.nfl369 .focusNewsList li span { font-size: 14px; }
+
+.nfl369_3 .focusNewsList li a:link, .nfl369_3 .focusNewsList li a:visited, .nfl369_3 .focusNewsList li a:hover {
+    color: #5a5a5a;
+    font-size: 14px;
+}
+
+/*
+body {margin: 0px; background-color:#1566ab; }
+ul,li{ list-style-type:none; margin:0; padding:0;}
+.zd_main{ padding:8px;}
+{ background:url(../img/zdfw0111.jpg) no-repeat; width:166px; height:156px; padding: 12px; float:left; display:inline;}
+.zd_main_02{ background:url(../img/zdfw0111.jpg) no-repeat; width:166px; height:156px; font-size:18px; color:#0c2666; text-decoration:none; font-weight:bold}
+.zd_main_02 a:link{ font-size:18px; color:#0c2666; text-decoration:none; font-weight:bold}
+.zd_main_02 a:visited{ font-size:18px; color:#0c2666; text-decoration:none; font-weight:bold}
+.zd_main_02 a:hover{  font-size:18px; color:#0c2666; font-weight:bold}
+/*font-family:"微软雅黑";*/
+
+*/ 

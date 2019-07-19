@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>窜货预警</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=9db868ad8d169110c5643903108bdfac"></script>
+    <script src="../../../js/reset.js"></script>
+    <script src="../../../js/jquery-2.1.1.min.js"></script>
+    <script src="../../../js/public.js"></script>
+    <link href="../../include/MasterPage.css" rel="stylesheet" type="text/css" />
+    <link href="../../include/easyui.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="../../include/js/UploadImage.js" type="text/javascript"></script>
+    <script src="../../include/js/jquery.easyui.min.js"></script>
+    <script src="../../include/js/UploadImage.js" type="text/javascript"></script>
+    <script>
+        //public.getJs("dist/wx/demo/chyj_map.html", ["scanQRCode"])
+    </script>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            position: relative;
+            min-height: 100%;
+        }
+
+
+        p {
+            margin: 0
+        }
+
+        button {
+            border: none;
+            text-decoration: underline;
+            background-color: white
+        }
+
+        #container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .search-container {
+            position: fixed;
+            top: .5rem;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: space-around
+        }
+
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 72%;
+            padding: 0 2.5%;
+            height: 2.3rem;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 1px 1px 1px #E4E2DB
+        }
+
+        .button-sys {
+            width: 8%;
+            padding-right: 5%;
+            border-right: 1px solid lightgray
+        }
+
+        .text-code {
+            border: none;
+            font-size: .75rem;
+            padding: .3rem;
+            width: 50%;
+            border-bottom: 1px solid #f5f5f5
+        }
+
+        .menu {
+            width: 13%;
+            background-color: #fff;
+            text-align: center;
+            height: 2.3rem;
+            border-radius: 5px;
+            box-shadow: 1px 1px 1px #E4E2DB
+        }
+
+            .menu img {
+                height: .9rem;
+                margin-top: .7rem
+            }
+
+        .button-search {
+            background-color: #00A0E9;
+            border-radius: 1rem;
+            color: white;
+            border: none;
+            text-decoration: none
+        }
+
+        .footershow {
+            position: fixed;
+            bottom: 0;
+            left: 45%;
+            _position: absolute;
+            _top: expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);
+        }
+    </style>
+</head>
+<body>
+    <!--<div class="search-container">
+        <div class="search-wrapper">
+            <img class="button-sys" id="button-sys" src="img/icon_sys.png" />
+            <input type="number" class="text-code" id="text-code" name="name" placeholder="输入标签序号" value="" oninput="if(value.length>12)value=value.slice(0,12)" />
+            <button class="button-search" id="button_search">查询</button>
+        </div>
+        <div class="menu">
+            <img src="img/icon_menu.png" />
+        </div>
+    </div>-->
+    <div id="container">
+
+    </div>
+    <div class=" div_WholePage">
+        <div id="footershow" class="footershow">
+            <input type="button" id="finput" value="立即体验" class="btn btn-warning btnyd" style="margin-bottom: 15px; color:white; background-color:dodgerblue ;border-radius:9px" onclick="openWinCenter('../zwjb_ty.aspx', 500, 400, '体验码')" />
+
+        </div>
+    </div>
+    <script>
+        var map = new AMap.Map('container', {
+            center: [116.397428, 39.90923],
+            zoom: 4
+        });
+        var data = [{ label: 888888888881, lat: 29.4789943170624, lng: 106.243332359821, smtime: '2018-05-30 08:17:23', smaddress: '重庆市璧山县大字街', agent: '小明酒业', agentAddress: '海南省海口市秀英区兴海路', product: "好喝酒T600", status: "异常", agentName: "小明" },
+        { label: 888888888882, lat: 34.716507941085, lng: 113.533341513614, smtime: '2018-06-13 12:19:40', smaddress: '河南省郑州市二七区曙光路', agent: '小红烟酒茶房', agentAddress: '河北省邯郸市成安县', product: "好喝酒T100", status: "异常", agentName: "小红" },
+        { label: 888888888883, lat: 34.6157981134201, lng: 108.91835340865, smtime: '2018-05-31 11:47:40', smaddress: '陕西省咸阳市三原县G211(银陕线)', agent: '金金酒业', agentAddress: '山东省临沂市兰山区马陵山路', product: "真田酒s600", status: "异常", agentName: "金金" },
+        { label: 888888888884, lat: 38.0828391812788, lng: 114.444952731147, smtime: '2018-05-31 15:04:11', smaddress: '河北省石家庄市新华区西二环北路辅路', agent: '花花经销商', agentAddress: '河北省唐山市路南区花园街', product: "南酒品香z40", status: "异常", agentName: "花花" },
+        { label: 888888888885, lat: 39.656201360771, lng: 115.753809572154, smtime: '2018-06-01 11:06:27', smaddress: '北京市房山区化唐沟路', agent: '金金店铺', agentAddress: '四川省成都市青白江区S101', product: "好酒s20", status: "异常", agentName: "金金" },
+        {
+            label: 888888888886, lat: 36.4850906684989, lng: 115.858227459701, smtime: "2018-06-14 20:09:20", smaddress: "山东省聊城市东昌府区S329(聊冠路)", agent: "经销商1", agentAddress: "山东省聊城市东昌府区", product: "洋酒12", status: "正常", agentName: "张三"
+        }, {
+            label: 888888888887, lat: 37.7823906005943, lng: 107.408888181581, smtime: "2018-06-12 20:05:37", smaddress: "宁夏回族自治区吴忠市盐池县鼓楼南路", agent: "经销商2", agentAddress: "宁夏回族自治区吴忠市盐池县", product: "样酒13", status: "正常", agentName: "李四"
+        }, {
+            label: 888888888888, lat: 35.1200509477527, lng: 117.186399889291, smtime: "2017-05-24 20:04:43", smaddress: "山东省枣庄市滕州市通盛路", agent: "经销商1", agentAddress: "山东省聊城市东昌府区", product: "洋酒12", status: "异常", agentName: "张三"
+        }, {
+            label: 888888888889, lat: 25.7351765776122, lng: 112.739937520819, smtime: "2016-12-19 19:59:43", smaddress: "湖南省郴州市桂阳县蔡伦南路10-6-、7号", agent: "经销商3", agentAddress: "湖南省郴州市安仁县", product: "洋酒32", status: "异常", agentName: "王二"
+        }, {
+            label: 888888888890, lat: 44.0321661575957, lng: 87.3145672872989, smtime: "2016-12-15 19:05:31", smaddress: "新疆维吾尔自治区昌吉回族自治州昌吉市水电巷", agent: "经销商1", agentAddress: "山东省聊城市东昌府区", product: "洋酒12", status: "异常", agentName: "张三"
+        },
+        {
+            label: 888888888891, lat: 30.6780924664869, lng: 103.96806360872, smtime: "2018-06-14 17:26:40", smaddress: "四川省成都市青羊区光华东三路", agent: "经销商3", agentAddress: "湖南省郴州市安仁县", product: "洋酒12", status: "异常", agentName: "王二"
+        }, {
+            label: 888888888892, lat: 22.7546105393268, lng: 114.02491940469, smtime: "2018-06-14 14:52:15", smaddress: "广东省深圳市宝安区樟阁路", agent: "经销商4", agentAddress: "广东省深圳市宝安区", product: "样酒13", status: "正常", agentName: "小小"
+        }, {
+            label: 888888888893, lat: 31.5867182138856, lng: 120.301708732554, smtime: "2017-05-24 20:04:43", smaddress: "江苏省无锡市北塘区解放西路240号", agent: "经销商4", agentAddress: "广东省深圳市宝安区", product: "洋酒12", status: "异常", agentName: "小小"
+        }, {
+            label: 888888888894, lat: 27.562991212609, lng: 109.97068335599, smtime: "2016-12-19 19:59:43", smaddress: "湖南省怀化市鹤城区武陵路88号", agent: "经销商1", agentAddress: "山东省聊城市东昌府区", product: "洋酒32", status: "异常", agentName: "张三"
+        }, {
+            label: 888888888895, lat: 36.4241060140095, lng: 120.899221300578, smtime: "2016-12-15 19:05:31", smaddress: "山东省青岛市即墨市", agent: "经销商1", agentAddress: "山东省聊城市东昌府区", product: "洋酒12", status: "异常", agentName: "张三"
+        }
+        ]
+        var infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -30) });
+        var marker;
+        for (var i = 0; i < 5; i++) {
+            addDataToMap(i)
+        }
+        function markerClick(e) {
+            infoWindow.setContent(e.target.content);
+            infoWindow.open(map, e.target.getPosition());
+        }
+        var iflag = 5;
+        $("#button_search").click(function () {
+            var code = $("#text-code").val();
+            if (code.length == 12) {
+                if (iflag < 10) {
+                    addDataToMap(iflag);
+                    iflag++;
+                } else {
+                    alert("模拟数据最多查询5个");
+                }
+            } else
+                alert("请正确输入标签序号");
+        })
+
+        var sflag = 10;
+        $("#button-sys").click(function () {
+            if (sflag < 15) {
+                wx.scanQRCode({
+                    needResult: 1,
+                    scanType: ["qrCode"],
+                    success: function () {
+                        addDataToMap(sflag);
+                        sflag++;
+                    }
+                });
+            }
+            else {
+                alert("模拟数据最多查询5个");
+            }
+        })
+        var span;
+        function addDataToMap(n) {
+            marker = new AMap.Marker({
+                position: [data[n].lng, data[n].lat]
+            })
+            marker.setMap(map);
+            if (data[n].status != "正常")
+                span = "<span style='color:red'>" + data[n].status + "</span>";
+            else
+                span = data[n].status;
+            marker.content = '序号：<span style="font-weight:bold">' + data[n].label + '</span></br>产品：天鉴产品</br>扫码时间：' + data[n].smtime + "</br>扫码地址：" + data[n].smaddress + "</br>经销商：<button style='color:red' onclick='showAgentInfo(" + n + ")'>" + data[n].agent + "</button></br>应售区域：" + data[n].agentAddress + "</br>状态：" + span + "";
+            marker.on('click', markerClick);
+            marker.emit('click', { target: marker });
+        }
+        function showAgentInfo(n) {
+            console.log(n);
+        }
+        alert("本页面为展示版页面，数据皆为模拟，扫码或输序号 请随意！")
+    </script>
+</body>
+</html>

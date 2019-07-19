@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>真伪鉴别</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <script src="js/reset.js"></script>
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/main.css?v=5" rel="stylesheet" />
+    <link href="css/public.css" rel="stylesheet" />
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/public.js?v=121332"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+        //授权
+        public.setCookie("compid", "1");
+        public.setCookie("sid", "1");
+        public.sq(1, 1, 'dist/wx/zwjb.html', public.getJs("dist/wx/zwjb.html", ["getLocation", "scanQRCode"]))
+    </script>
+</head>
+<body>
+    <div id="con" style="background:url(img/bg.jpg) no-repeat;background-size:100% 100%;display:none;position:relative">
+        <div style="overflow:auto;height:100%"> 
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <div class="search-txt">
+                        <img src="img/icon_search.png" />
+                        <input id="number_input" type="number" value="" placeholder="请输入您的标签序号" oninput="checkCpid(this)" />
+                    </div>
+                    <button class="search-button" id="search-button">确 定</button>
+                </div>
+            </div>
+            <div class="info-container">
+                <p class="info-subtitle" id="info-subtitle">
+                    请在上方输入框输入<br />您的标签序号
+                </p>
+                <div class="info-wrapper" id="info" style="display:none">
+                    <div class="info-Img">
+                        <img id="fwImg" src="" />
+                        <p class="info-title">请认真核对实物标签上的文字特征信息是否与图片信息一致，相符则为真品，否则谨防假冒</p>
+                    </div>
+                    <ul class="info-list">
+                        <li><span>标签序号：</span><span id="labelcode_span">序号丢失</span></li>
+                        <li><span>物品名称：</span><span id="product_span">海南天鉴样标</span></li>
+                        <li><span>单位名称：</span><span id="company_span">海南天鉴防伪科技有限公司</span></li>
+                        <li><span>已查次数：</span><span id="counter_span">3次</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="appcenter-container">
+                <p class="appcenter-title">—————— 更 多 查 询 方 式 ——————</p>
+                <div class="appcenter-wrapper">
+                    <div id="saoma"><img src="img/icon_saoma.png?v=2" style="height:2.5rem;margin-left:.4rem" /><p>扫 一 扫</p></div>
+                    <a href="tel:400-600-1688"><img src="img/icon_dianhua.png?v=2" style="height:2.5rem;margin-left:.35rem" /><p>电 话</p></a>
+                    <a href="sms:13907578315"><img src="img/icon_duanxin.png?v=2" style="height:2.5rem;margin-left:.3rem" /><p>短 信</p></a>
+                </div>
+                <p class="footer-right">海 南 天 鉴 防 伪 科 技 有 限 公 司</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        var oWht = $(window).height();
+        $("#con").height(oWht);
+        public.loading({ tckid: "loading", noBg: true, info: "加载中...<br/>凹感是辨别真伪的重要特征之一" });
+        wx.ready(function () {
+            $("#loading").hide();
+            $("#con").fadeIn();
+        })
+        wx.error(function (res) {
+            setTimeout(function () {
+                public.showinfobox({
+                    content: "微信配置失败！请刷新或稍后再试！",
+                    btntext: "知道了",
+                    tckid: "tck",
+                    animate: "flipInX",
+                    closeW: true
+                })
+            }, 3000);
+        });
+        var info_subtitle = document.getElementById("info-subtitle");
+        var len;
+        function checkCpid(e) {
+            len = e.value.length;
+            if (len > 12) {
+                e.value = e.value.slice(0, 12);
+                len = 12;
+            }
+            if (len == 12)
+                info_subtitle.innerHTML = "输入完成<br/>点击确定开始查询";
+            else if (len > 0)
+                info_subtitle.innerHTML = "您已输入"+len+"位";
+            else
+                info_subtitle.innerHTML = "请在上方输入框输入<br />您的标签序号";
+
+        }
+        //查询
+        var search_button = $("#search-button");
+        search_button.on("click", query);
+        var cpidFlag;
+        function query() {
+            var cpid = document.getElementById("number_input").value;
+            if (cpidFlag != cpid) {
+                if (cpid.length == 12) {
+                    search_button.addClass("search-button-sending");
+                    search_button.text("验 证 中");
+                    search_button.off("click"); 
+                    public.locationPlace.get(function () {
+                        var weidu = public.locationPlace.weidu;
+                        var jingdu = public.locationPlace.jingdu;
+                        $.ajax({
+                            type: 'post',
+                            url: 'ajax/queryCode.ashx',
+                            data: { cpid: cpid, weidu: weidu, jingdu: jingdu },
+                            success: function (res) {
+                                info_subtitle.style.marginTop = "0";
+                                info_subtitle.innerHTML = "查询完成";
+                                search_button.removeClass("search-button-sending");
+                                search_button.text("确 定");
+                                search_button.on("click", query); 
+                                if (res != 'fail' && res != "no") {
+                                    cpidFlag = cpid;//赋值 防止用户重复提交序号
+                                    var r = JSON.parse(res);
+                                    document.getElementById("info").style.display = "block";
+                                    document.getElementById("labelcode_span").innerText = cpid;
+                                    document.getElementById("fwImg").src = r.img;
+                                    document.getElementById("product_span").innerText = r.product;
+                                    document.getElementById("company_span").innerText = r.company;
+                                    document.getElementById("counter_span").innerText = r.historyCount;
+                                } else if (res == "fail") {
+                                    public.showinfobox({
+                                        content: "网络异常！请稍后或刷新再试！",
+                                        btntext: "知道了",
+                                        tckid: "tck",
+                                        animate: "flipInX",
+                                    })
+                                } else {
+                                    public.showinfobox({
+                                        content: "您的标签有误！请核对！",
+                                        btntext: "知道了",
+                                        tckid: "tck",
+                                        animate: "flipInX",
+                                    })
+                                }
+                            }
+                        })
+                    });
+                }
+                else {
+                    public.showinfobox({
+                        content: "请输入12位数字序号！",
+                        btntext: "知道了",
+                        tckid: "tck",
+                        animate: "flipInX",
+                    })
+                }
+            }
+            else {
+                public.showinfobox({
+                    content: "请勿重复提交！",
+                    btntext: "知道了",
+                    tckid: "tck",
+                    animate: "flipInX",
+                })
+            }
+        }
+        //扫码
+        document.getElementById("saoma").onclick = function () {
+            wx.scanQRCode({
+                needResult: 1,
+                scanType: ["qrCode"],
+                success: function (res) {
+                    var result = res.resultStr;
+                    window.location.href = result;
+                }
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="full-screen" content="yes"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <title>结构三维码的世界</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: url("img/bg.jpg") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .circle-container {
+
+            position: relative;
+            height: 100vw;
+            text-align: center;
+        }
+        .circle-bg{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width:100%;
+            height: 100%;
+            z-index: 3;
+            display: none;
+            background: url("img/code.png") no-repeat center;
+            background-size: 100px;
+        }
+    .circle-wrapper{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width:100%;
+        height: 100%;
+        z-index: 4;
+    }
+        .circle-img {
+            width: 100%;
+            visibility: hidden;
+        }
+        .rotate{
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        .circle-word {
+            position: absolute;
+            top: 45%;
+            left: 0;
+            right: 0;
+            font-size: 25px;
+            color: #fee402;
+            font-weight: bold;
+            letter-spacing: 5px;
+            display: none;
+        }
+
+        .btn {
+            border: 3px solid #f4f4f3;
+            border-radius: 5px;
+            width: 50%;
+            margin: 100px 25% 0;
+            text-align: center;
+            padding: 10px 0;
+            background-color: #355bac;
+        }
+
+        .btn-img {
+            width: 40%;
+            vertical-align: middle;
+        }
+
+        @-webkit-keyframes zoomIn {
+            0% { opacity: 0; -webkit-transform: scale3d(.3,.3,.3); transform: scale3d(.3,.3,.3) }
+            50% { opacity: 1 }
+        }
+
+        @keyframes zoomIn {
+            0% { opacity: 0; -webkit-transform: scale3d(.3,.3,.3); -ms-transform: scale3d(.3,.3,.3); transform: scale3d(.3,.3,.3) }
+            50% { opacity: 1 }
+        }
+
+        .zoomIn { -webkit-animation-name: zoomIn; animation-name: zoomIn;-webkit-animation-duration: 1.5s; animation-duration: 1.5s; -webkit-animation-fill-mode: both; animation-fill-mode: both  }    </style>
+    <script src="../include/js/jquery-2.1.1.min.js"></script> 
+</head>
+<body>
+<div id="con" style="visibility:hidden">
+    <div class="bg"></div>
+    <div class="circle-container" id="circle_container">
+        <div class="circle-bg" id="circle_bg"></div>
+        <div class="circle-wrapper">
+            <img id="circle_img" class="circle-img  " src="img/circle.png">
+            <p class="circle-word" id="circle_word">欢迎来到<br>结构三维码世界！</p>
+        </div>
+    </div>
+    <div class="btn" id="btn" style="display: none">
+        <img class="btn-img" src="img/word.png"/>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        const pid = getQueryString('pid');
+        const openid = getQueryString('openid');
+
+        document.getElementById("con").style.visibility = "visible";
+        $("#circle_bg").fadeIn(1500, ()=> {
+            $("#circle_img").css("visibility","visible")
+            $("#circle_img").addClass(" zoomIn");
+            setTimeout(()=>{
+                $("#circle_bg").fadeOut(6000)
+                $("#circle_img").removeClass(" zoomIn");
+                $("#circle_img").addClass("rotate");
+                    $("#circle_word").fadeIn(1000, () => {
+
+                        $("#btn").fadeIn();
+
+                        //自动跳转 5秒
+                        setTimeout(()=>{
+                            window.location.href = 'swmactive.aspx?pid='+pid+'&openid='+openid;
+                        },5000)
+                    })
+
+            },1500)
+
+        })
+        $("#btn").click(()=>{
+            window.location.href = 'swmactive.aspx?pid='+pid+'&openid='+openid;
+        })
+    }
+    //获取参数
+    function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+</script>
+</body>
+</html>

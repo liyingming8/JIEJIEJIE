@@ -1,0 +1,138 @@
+﻿body {
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    line-height: 32px;
+}
+
+.logindiv {
+    top: -50%;
+    margin: 10px;
+    align-content: center;
+    vertical-align: middle;
+    background-color: #ffdc9b;
+    border: 1px solid #f8f5ef;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.logindiv .ititle {
+    padding: 0px;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+    line-height: 50px;
+    font-size: 15px;
+    text-decoration-line: underline;
+}
+
+.logindiv .inputtext {
+    padding: 0px;
+    height: 30px;
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 5px;
+}
+
+.logindiv .inputbutton {
+    height: 32px;
+    width: 90%;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: orange;
+    color: white;
+    margin: 10px 10px 10px 10px;
+    text-align: center;
+}
+
+.logindiv .itext {
+    padding: 0px;
+    height: 30px;
+    vertical-align: middle;
+    text-align: right;
+}
+
+.navibar {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.navibar .currentpage {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
+}
+
+.navibar .notcurrentpage { border-bottom: 1px solid lightgray; }
+
+.orderitem {
+    border: 1px solid lightgray;
+    background-color: #fff6ed;
+    border-radius: 5px;
+    margin: 10px 2px 0px 2px;
+    padding: 5px 0px 5px 0px;
+    line-height: 25px;
+}
+
+.orderitem .prodpic {
+    margin: 0px;
+    width: 75px;
+    height: 75px;
+}
+
+.orderitem .prodpic img {
+    margin-top: 5px;
+    width: 98%;
+}
+
+.orderitem .ButtonOK {
+    background-color: #ffd800;
+    border: 1px solid orange;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 2px 5px 2px 5px;
+    font-weight: bold;
+}
+
+.orderitem .ButtonOK A { text-decoration: none; }
+
+.orderitem .goodsname {
+    text-align: left;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.orderitem ul li { text-decoration: none; }
+
+.jiedanalert {
+    font-size: 18px;
+    color: red;
+    margin: 20px 5px 10px 5px;
+}
+
+.BottonQuerenJieDan {
+    width: 98%;
+    height: 35px;
+    background-color: darkgreen;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 10px 5px 10px 5px;
+}
+
+.WuLiuInfoInputDiv {
+    margin: 20px 5px 10px 5px;
+    line-height: 40px;
+}
+
+.WuLiuInfoInputDiv .leftarea { text-align: right; }
+
+.WuLiuInfoInputDiv .rightarea { text-align: left; }
+
+.WuLiuInfoInputDiv .rightarea input {
+    height: 28px;
+    line-height: 28px;
+}

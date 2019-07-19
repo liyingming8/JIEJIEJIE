@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="../include/MasterPage.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/vue.min.js"></script>
+    <title>窜货数据</title>
+    <style>
+
+        .btn { color: #356c04; text-align: center }
+    </style>
+</head>
+<body>
+    <div id="vim"> 
+        <table style="width:100%">
+            <tr class="GridViewHeaderStyle">
+                <th>序号</th>
+                <th>标签序号</th>
+                <th>产品信息</th>
+                <th>扫码地址</th>
+                <th>超出范围</th>
+                <th>时间</th>
+                <th></th>
+            </tr>
+            <tr class="GridViewRowStyle" v-for="(info,index) in infos">
+                <td v-text="index+1"></td>
+                <td v-text="info.code"></td>
+                <td v-text="info.product"></td>
+                <td v-text="info.address"></td>
+                <td v-text="info.distance/1000+' 公里'"></td>
+                <td v-text="info.time"></td>
+                <td class="btn"><span style="cursor:pointer" @click="sendmessage(info.agtid,info.code,info.product,info.time,info.address)">发送给稽查员</span></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#vim",
+            data: {
+                agtid: null,
+                from_date: null,
+                to_date: null,
+                compid: null,
+                mode: null,
+                infos: [{}]
+            },
+            methods: {
+                getQueryStringByName: function (name) {
+                    var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+                    if (result == null || result.length < 1) {
+                        return null;
+                    }
+                    return result[1];
+                },
+                getinfos: function () {
+                    if (this.agtid != null && this.compid != null && this.date_from != null && this.date_to != null) {
+
+                        var jscript = document.createElement("script");
+                        jscript.setAttribute("src", "http://117.34.70.23:32176/gis/fakelabel/points/" + this.compid + "/" + this.agtid +
+                            "/?date_from=" + this.date_from + "&date_to=" + this.date_to + (this.mode != null ? "&mode=1" : "") + "&callback=vm.receiveInfos");
+                        console.log('frank'+jscript.src);
+                        document.body.appendChild(jscript);
+                        document.body.removeChild(jscript);
+                    }
+                    else
+                        alert("数据丢失");
+                },
+                receiveInfos: function (result) {
+                    console.log(result);
+                    this.infos = result;
+                },
+                sendmessage: function (agtid, code, product, time, address) {
+                    $.ajax({
+                        url: '../ajax/sendCode.ashx',
+                        type: 'post',
+                        data: { agtid: agtid, code: code, product: product, time: time, address: address },
+                        success: function (result) {
+                            if (result == "ok")
+                                alert("发送成功");
+                            else
+                                alert("发送失败")
+                        }
+                    })
+                }
+            }, created: function () {
+                this.agtid = this.getQueryStringByName("agtid");
+                this.compid = this.getQueryStringByName("compid");
+                this.date_from = this.getQueryStringByName("date_from");
+                this.date_to = this.getQueryStringByName("date_to");
+                if (this.getQueryStringByName("mode") != null) {
+                    this.mode = "1";
+                }
+                this.getinfos();
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Items>
+  <Item ItemName="学历">
+    <Name>初中</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>高中</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>中专</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>大专</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>本科</Name>
+    <Id>5</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>研究生</Name>
+    <Id>6</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>硕士</Name>
+    <Id>7</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>博士</Name>
+    <Id>8</Id>
+  </Item>
+  <Item ItemName="学历">
+    <Name>其它</Name>
+    <Id>9</Id>
+  </Item>
+  <Item ItemName="政治面貌">
+    <Name>群众</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="政治面貌">
+    <Name>团员</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="政治面貌">
+    <Name>党员</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="所在岗位">
+    <Name>员工</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="所在岗位">
+    <Name>经理</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="所在岗位">
+    <Name>总监</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="所在岗位">
+    <Name>副总</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="所在岗位">
+    <Name>总经理</Name>
+    <Id>5</Id>
+  </Item>
+  <Item ItemName="职工状态">
+    <Name>试用</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="职工状态">
+    <Name>正式</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="职工状态">
+    <Name>离职</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="职工状态">
+    <Name>请假</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="婚姻状况">
+    <Name>未婚</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="婚姻状况">
+    <Name>已婚</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="婚姻状况">
+    <Name>离异</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="婚姻状况">
+    <Name>丧偶</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="所属业务">
+    <Name>散拼业务</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="所属业务">
+    <Name>自由行</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="所属业务">
+    <Name>散客业务</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="所属业务">
+    <Name>地接业务</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="所属业务">
+    <Name>组团业务</Name>
+    <Id>5</Id>
+  </Item>
+  <Item ItemName="导游等级">
+    <Name>A级</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="导游等级">
+    <Name>B级</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="导游等级">
+    <Name>C级</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>英语</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>法语</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>日语</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>德语</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>普通话</Name>
+    <Id>5</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>韩语</Name>
+    <Id>6</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>粤语</Name>
+    <Id>7</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>泰语</Name>
+    <Id>8</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>阿拉伯语</Name>
+    <Id>9</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>意大利语</Name>
+    <Id>10</Id>
+  </Item>
+  <Item ItemName="语种">
+    <Name>俄语</Name>
+    <Id>11</Id>
+  </Item>
+  <Item ItemName="采购协议">
+    <Name>酒店房间</Name>
+    <Id>1</Id>
+  </Item>
+  <!--<Item ItemName="采购协议">
+    <Name>门票</Name>
+    <Id>129</Id>
+  </Item>-->
+  <Item ItemName="采购协议">
+    <Name>餐饮</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="采购协议">
+    <Name>高尔夫</Name>
+    <Id>6</Id>
+  </Item>
+  <Item ItemName="采购协议">
+    <Name>购物</Name>
+    <Id>7</Id>
+  </Item>
+  <Item ItemName="采购协议">
+    <Name>演艺门票</Name>
+    <Id>10</Id>
+  </Item>
+  <Item ItemName="采购协议">
+    <Name>陪同费</Name>
+    <Id>8</Id>
+  </Item>
+  <Item ItemName="散拼行程选择">
+    <Name>餐费</Name>
+    <Id>18</Id>
+  </Item>
+  <Item ItemName="散拼行程选择">
+    <Name>昆明市</Name>
+    <Id>79</Id>
+  </Item>
+  <Item ItemName="团队性质">
+    <Name>请选择</Name>
+    <Id>0</Id>
+  </Item>
+  <Item ItemName="团队性质">
+    <Name>普通团</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="团队性质">
+    <Name>重点团</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="团队性质">
+    <Name>专业团</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="团队类别">
+    <Name>请选择</Name>
+    <Id>0</Id>
+  </Item>
+  <Item ItemName="团队类别">
+    <Name>内宾</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="团队类别">
+    <Name>外宾</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="团队类别">
+    <Name>港澳台</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="团队类别">
+    <Name>海外侨胞</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="团队结算性质">
+    <Name>请选择</Name>
+    <Id>0</Id>
+  </Item>
+  <Item ItemName="团队结算性质">
+    <Name>刷卡团</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="团队结算性质">
+    <Name>现付团</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="团队结算性质">
+    <Name>代订团</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="团队结算性质">
+    <Name>担保团</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="团队结算性质">
+    <Name>我社输单</Name>
+    <Id>5</Id>
+  </Item>
+  <Item ItemName="团队结算性质">
+    <Name>对方输单</Name>
+    <Id>6</Id>
+  </Item>
+  <Item ItemName="预订类型">
+    <Name>酒店预定</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="预订类型">
+    <Name>用餐预定</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="预订类型">
+    <Name>车辆预定</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="预订类型">
+    <Name>高尔夫预定</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="合作客户状态">
+    <Name>审核中</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="合作客户状态">
+    <Name>已激活</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="合作客户状态">
+    <Name>已透支</Name>
+    <Id>3</Id>
+  </Item>
+  <Item ItemName="合作客户状态">
+    <Name>已冻结</Name>
+    <Id>4</Id>
+  </Item>
+  <Item ItemName="订单状态">
+    <Name>未支付</Name>
+    <Id>0</Id>
+  </Item>
+  <Item ItemName="订单状态">
+    <Name>已支付</Name>
+    <Id>1</Id>
+  </Item>
+  <Item ItemName="订单状态">
+    <Name>已发货</Name>
+    <Id>2</Id>
+  </Item>
+  <Item ItemName="订单状态">
+    <Name>交易完成</Name>
+    <Id>3</Id>
+  </Item>
+</Items>

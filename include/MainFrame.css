@@ -1,0 +1,75 @@
+﻿a { color: #c75f3e; }
+
+#mytable {
+    width: 700px;
+    padding: 0;
+    margin: 0;
+}
+
+caption {
+    padding: 0 0 5px 0;
+    width: 700px;
+    font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    text-align: right;
+}
+
+th {
+    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #4f6b72;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 3px 3px 3px 6px;
+    background: #D4E6FA no-repeat;
+}
+
+th.nobg {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0 solid #C1DAD7;
+    background: none;
+}
+
+td {
+    background: #fff;
+    font-size: 11px;
+    padding: 2px 2px 2px 2px;
+    color: #4f6b72;
+} 
+
+
+td.alt {
+    background: #F5FAFA;
+    color: #797268;
+}
+
+th.spec {
+    border-left: 1px solid #C1DAD7;
+    border-top: 0;
+    background: #fff no-repeat;
+    font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+th.specalt {
+    border-left: 1px solid #C1DAD7;
+    border-top: 0;
+    background: #f5fafa no-repeat;
+    font: bold 10px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #797268;
+}
+
+/*---------for IE 5.x bug*/
+
+html > body td { font-size: 12px; }
+
+body, td, th {
+    font-family: 宋体, Arial;
+    font-size: 12px;
+}
+
+body {
+    font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #4f6b72;
+    background: #FFFFFF;
+    margin-top: 2px;
+}

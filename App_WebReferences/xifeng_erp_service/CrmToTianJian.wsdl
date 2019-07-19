@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CreateLogisticsInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="requestStr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateLogisticsInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateLogisticsInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateLogisticsInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateLogisticsInfo" />
+  </wsdl:message>
+  <wsdl:message name="CreateLogisticsInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateLogisticsInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CrmToTianJianSoap">
+    <wsdl:operation name="CreateLogisticsInfo">
+      <wsdl:input message="tns:CreateLogisticsInfoSoapIn" />
+      <wsdl:output message="tns:CreateLogisticsInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CrmToTianJianSoap" type="tns:CrmToTianJianSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateLogisticsInfo">
+      <soap:operation soapAction="http://tempuri.org/CreateLogisticsInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CrmToTianJianSoap12" type="tns:CrmToTianJianSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateLogisticsInfo">
+      <soap12:operation soapAction="http://tempuri.org/CreateLogisticsInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CrmToTianJian">
+    <wsdl:port name="CrmToTianJianSoap" binding="tns:CrmToTianJianSoap">
+      <soap:address location="http://40.125.172.241:81/CrmToTianJian.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CrmToTianJianSoap12" binding="tns:CrmToTianJianSoap12">
+      <soap12:address location="http://40.125.172.241:81/CrmToTianJian.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,867 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--因为swiperAnimate需要各种行内元素，所以写的够乱...假如某天你看不懂！这是正常的！因为我也看不懂！-->
+    <meta charset="utf-8" />
+    <title>天鉴三维码®与您相约北京美博会</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <script src="js/reset.js"></script>
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/swiper.css" rel="stylesheet" />
+    <link href="css/animate.min.css?v=55" rel="stylesheet" />
+    <script src="js/zepto.min.js"></script>
+    <script src="js/public.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+        var url = "dist/swm/index_invite_beijingmbh.html" + window.location.search;
+        public.getJs(url, ["onMenuShareAppMessage","onMenuShareTimeline"])
+    </script>
+    <script src="js/swiper.js"></script>
+    <script src="js/swiper.animate1.0.3.min.js"></script>
+    <style>
+        body, html {
+            height: 100%
+        }
+
+        .swiper-container {
+            height: 100%;
+            background-color: #000
+        }
+
+        .swiper-slide {
+            text-align: center
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateZ(0deg)
+            }
+
+            to {
+                transform: rotateZ(360deg)
+            }
+        }
+
+        .icon_music {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9998;
+            width: 10%;
+            animation: rotate 2s linear infinite
+        }
+
+        .logo {
+            position: fixed;
+            top: 35%;
+            left: 20%;
+            width: 60%;
+            animation: rotate 3s linear infinite
+        }
+
+        .subtitle1_img {
+            margin-top: 3rem;
+        }
+
+        .subtitle2_img {
+            margin-top: 3rem;
+            height: 2rem;
+        }
+
+        .icon_arrow {
+            position: fixed;
+            left: 42.5%;
+            width: 15%;
+            bottom: 2%;
+            z-index: 9998;
+            animation: fadeInUp 2s infinite;
+        }
+
+        .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+        }
+
+        .img_house {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%
+        }
+
+        .module {
+            margin: 2rem 0;
+        }
+
+        .module-button {
+            width: 30%;
+        }
+
+        .swmModule-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            margin-top: 3rem;
+            padding: 0 10%
+        }
+
+        .swmModule-wrapper {
+            width: 60%;
+            margin-bottom: 2rem
+        }
+
+            .swmModule-wrapper img:first-child {
+                width: 80%;
+                animation: rotate 6s linear infinite
+            }
+
+            .swmModule-wrapper img:last-child {
+                height: 1.3rem;
+                margin-top: .8rem
+            }
+
+        .p-yuanli {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 80%;
+            margin-bottom: 2rem;
+            margin-top: .3rem;
+            letter-spacing: 2px
+        }
+
+        .span-yuanli-title {
+            padding: .2rem .3rem;
+            border-top-left-radius: 10px;
+            background-color: #F8D89A;
+            font-size: .8rem
+        }
+
+        .span-yuanli-info {
+            color: white;
+            font-size: .8rem
+        }
+
+        .img-linggan {
+            width: 70%
+        }
+
+        .intro-container { 
+            width: 80%;
+            padding: 5% 0;
+            margin: 2rem auto 0;
+            overflow: auto;
+            background-color: RGBA(74,11,11,.7);
+            border-radius: 5px;
+            text-align: justify
+        }
+
+        .intro-title {
+            width: 80%;
+            margin: .5rem auto;
+            color: #ecbe7c;
+            font-size: .8rem;
+            text-indent: 1.5rem;
+            line-height: 130%
+        }
+
+        .intro-wrapper {
+            width: 75%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .intro-inner {
+            font-size: .8rem;
+            color: #EABC7A;
+            list-style: decimal;
+            margin-bottom: .3rem
+        }
+
+            .intro-inner p {
+                color: #fff;
+            }
+
+        .intro-inner-ul {
+        }
+
+            .intro-inner-ul li {
+                color: #fff;
+                margin-bottom: .1rem
+            }
+
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            background-color: rgba(0,0,0,.9);
+        }
+
+        .loading-wrapper {
+            width: 60%;
+            margin: 15rem auto 1rem;
+            background-color: gray;
+            height: 5px;
+        }
+
+        .loading-inner {
+            width: 2%;
+            height: 100%;
+            background-color: white;
+            transition: width .5s
+        }
+
+        .loading-info {
+            text-align: center;
+            font-size: .8rem;
+            font-weight: bold;
+            margin-top: .8rem;
+            color: white
+        }
+
+        .phone_div {
+            position: absolute;
+            bottom: 1%;
+            left: 0;
+            right: 0;
+            color: #a08865;
+            font-size: .8rem;
+        }
+
+            .phone_div a:last-child {
+                margin-left: .2rem
+            }
+
+        .product-container {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .product-wrapper {
+            width: 33%
+        }
+
+        .product-img {
+            width: 70%;
+        }
+
+        .product-name {
+            height: .8rem;
+            margin-bottom: .3rem
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9998;
+            background-color: rgba(0,0,0,.5);
+        }
+
+        .popup-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%
+        }
+
+            .popup-wrapper img {
+                width: 60%;
+            }
+
+        /*新*/
+        .title {
+            color: rgb(244, 244, 122)
+        }
+
+        .subtitle {
+            color: rgb(255, 224, 0)
+        }
+
+        .news-wrapper {
+            padding: .5rem 5%;
+            height: 70%;
+            margin-top: 5%
+        }
+
+        .news-wrapper-title {
+            font-size: .85rem;
+            text-align: justify;
+            color: #fff
+        }
+
+        .swm-img {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 5%;
+            height: 80%;
+            overflow: auto;
+        }
+
+            .swm-img a {
+                width: 27%;
+                margin: .3rem 0;
+                padding: 2%;
+                text-align: center;
+                background-color: white;
+                height: 3rem;
+                overflow: hidden;
+                display: flex;
+                align-items: center
+            }
+
+        .video-item {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 5rem 0 0;
+        }
+
+            .video-item p {
+                width: 100%;
+                font-size: .8rem;
+                margin: 1.5rem 0 .5rem;
+                text-align: center;
+                color: #fff
+            }
+
+        .more_video {
+            font-size: .9rem;
+            margin-top: 5rem;
+            color: gray;
+            text-align: center;
+            text-decoration: underline
+        }
+
+        .sentence {
+            font-size: .85rem;
+            margin-bottom: .5rem;
+            color: #e9bb7a
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container" id="loading-container">
+        <div class="loading-wrapper">
+            <div class="loading-inner" id="loading_inner"></div>
+            <p class="loading-info"><span>加载中 </span><span id="loading_info">2%</span></p>
+        </div>
+    </div>
+    <!--加载-->
+    <script>
+        var oLoading_inner = document.getElementById("loading_inner"),
+            oLoading_info = document.getElementById("loading_info"),
+            oLoding_width = 0,
+            num = 1;
+        var timer = setInterval(function () {
+            oLoding_width += num;
+            if (oLoding_width > 100) {
+                oLoding_width = 100;
+                clearInterval(timer);
+            }
+            oLoading_inner.style.width = oLoding_width + "%";
+            oLoading_info.innerText = oLoding_width + "%";
+            num = Math.floor(Math.random() * 5);
+        }, 200);
+    </script>
+    <div class="swiper-container" id="main">
+        <div class="swiper-wrapper">
+            <!--0-->
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/new/subtitle-mbh1.png" class="subtitle1_img ani" style="height:1.5rem" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s" /> <br />
+                <img src="img/new/subtitle2.png?v=1" class=" ani" style="height:2.2rem;margin-top:1rem" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s" />
+                <img src="img/logo.png" class="logo" />
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    向上滑动即可翻页 结尾有彩蛋哟~
+                </div>
+            </div>
+            <!--1-->
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/new/Page2-1.png" style="height:7rem" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+
+                <img class=" ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s" src="img/new/Pagw2-3.png" style="position:absolute;left:0;top:0;bottom:0;" />
+
+                <img class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1s" swiper-animate-delay="2s" src="img/new/Page2-2.png" style="position:absolute;right:1rem;bottom:8rem;width:12rem"/>
+
+                <img class="ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1s" swiper-animate-delay="1.5s" src="img/new/Page2-4.png" style="position:absolute;left:0;right:0;bottom:0" />
+            </div>
+
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/subtitle2.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div class="module" popupsrc="img/new/sl2.jpg" style="margin-top:2rem;position:relative;">
+                    <img class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="1.5s" src="img/new/zl3.png?v=2" style="position:absolute;top:27.5%;left:15%;height:45%" />
+                    <img class="module-button ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.2s" swiper-animate-delay="2.5s" src="img/new/sl1.png" />
+                </div>
+                <div class="module" popupsrc="img/new/ap1.jpg" style="position:relative;">
+                    <img class="ani" swiper-animate-effect="bounceInRight" swiper-animate-duration="1s" swiper-animate-delay="2.5s" src="img/new/zl4.png?v=2" style="position:absolute;top:27.5%;right:15%;height:45%" />
+                    <img class="module-button ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.2s" swiper-animate-delay="3.5s" src="img/new/ap.png" />
+                </div>
+                <div class="module" popupsrc="img/new/jg1.jpg" style="position:relative;">
+                    <img class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1s" swiper-animate-delay="3.5s" src="img/new/zl5.png?v=2" style="position:absolute;top:27.5%;left:15%;height:45%" />
+                    <img class="module-button ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.2s" swiper-animate-delay="4.5s" src="img/new/j2.png" />
+                </div>
+            </div>
+
+
+
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/mbh2.png" style="height:1.4rem" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div style="margin-top:2rem">
+                    <div style="text-align:center">
+                        <p class="title ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="2s" style="font-size:.9rem">让我们相约 <br />第22届北京国际美博会</p>
+                        <p class="subtitle ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="3s" style="font-size:1.2rem;margin:1rem 0;font-weight:bold">天鉴是海南的！  <br />天鉴三维码是世界的！</p>
+                        <p class="title ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="4s" style="font-size:.8rem">为科技发声   为创造发声 <br />我们期待您的见证</p>
+                    </div>
+                    <div style="padding: 0 5%;margin-top:2rem;text-align:justify">
+                        <p class="subtitle ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay="5s" style="font-size:.75rem">
+                            时间：2019年02月26日－28日<br />
+                            地点：北京·国家会议中心<br />
+                            展馆展位号：4-Z29
+                        </p>
+                    </div>
+                    <img class="img_house ani" src="img/build1.png" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay="6s" />
+                </div>
+            </div>
+
+            <div class="swiper-slide ">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/subtitle2.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <ul class="swmModule-container ">
+                    <li onclick="go('../wx/share.html?v=2',3)" class="swmModule-wrapper ani" swiper-animate-effect="zoomInLeft " swiper-animate-duration="1s" swiper-animate-delay="2.4s">
+                        <img src="img/xinxihuaimg.png?v=2" alt=" " /><br />
+                        <img src="img/xinxihua.png?v=1" alt=" " />
+                    </li>
+                </ul>
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    热线电话：<a href="tel:0898-68647196">0898-68647196</a><a href="tel:13876703090">13876703090</a>
+                </div>
+            </div>
+
+            <!--3-->
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/sanweimaproduct.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+
+                <img src="img/new/ban.jpg" class="ani" style="margin-top:3rem;width:80%" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="2s" />
+                <p class=" sentence ani" style="margin-top:2rem" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="2s">天鉴三维码是工具 <br />是一种结构的、立体的、唯一的、 <br />不可复制的、个性化的码。</p>
+                <p class=" sentence ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="3s">天鉴三维码是消费者的保护伞</p>
+                <p class=" sentence ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="4s">天鉴三维码是商家的平台</p>
+                <p class=" sentence ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="5s">天鉴三维码是监管者的眼睛、耳朵和手</p>
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    热线电话：<a href="tel:0898-68647196">0898-68647196</a><a href="tel:13876703090">13876703090</a>
+                </div>
+            </div>
+            <!--4-->
+
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/lingganw.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div class="ani" style="margin-top: 2rem" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s">
+                    <img class="img-linggan" src="img/linggan1.png" />
+                    <p class="p-yuanli"><span class="span-yuanli-title">原理一</span> <span class="span-yuanli-info">用心如一 &nbsp;&nbsp;&nbsp;深浅永远不同</span></p>
+                </div>
+                <div class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="2s">
+                    <img class="img-linggan" src="img/linggan2.png" />
+                    <p class="p-yuanli"><span class="span-yuanli-title">原理二</span> <span class="span-yuanli-info">水花飞溅 &nbsp;&nbsp;&nbsp;高低永远不同</span></p>
+                </div>
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    热线电话：<a href="tel:0898-68647196">0898-68647196</a><a href="tel:13876703090">13876703090</a>
+                </div>
+            </div>
+            <!--<div class="swiper-slide">
+        <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+        <img src="img/cailiaoimg.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+        <img src="img/jiegouimg1.png" style="width:90%;margin-top: 2rem" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s" />
+        <img src="img/jiegouimg2.png" style="width:90%;margin-top:2rem" class="ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="2s" />
+        <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+            热线电话：<a href="tel:0898-68647196">0898-68647196</a><a href="tel:13876703090">13876703090</a>
+        </div>
+    </div>-->
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/tedianimg.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div class="intro-container swiper-no-swiping ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s">
+                    <ul class="intro-wrapper">
+                        <li class="intro-inner">
+                            <p>
+                                结构三维码不再是一枚防伪标签，而是全社会人人都能使用的工具。
+                            </p>
+                        </li>
+                        <li class="intro-inner">
+                            <p>
+                                结构三维码突破了交货时间限制的问题。即时下单，即时发货，厂商不再为货期发愁。
+                            </p>
+                        </li>
+                        <li class="intro-inner">
+                            <p>
+                                结构三维码解决了“最后一公里”的问题。个性化的二维码需要专业设备才能够印刷生产，普通消费者无法使用，而结构三维码能够让普通老百姓都能够使用。
+                            </p>
+                        </li>
+                        <li class="intro-inner">
+                            <p>
+                                结构三维码解决了商品的买卖和支付安全问题。
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    热线电话：<a href="tel:0898-68647196">0898-68647196</a><a href="tel:13876703090">13876703090</a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/gongnengimg.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div class="intro-container swiper-no-swiping ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s">
+                    <!-- <p class="intro-title">天鉴三维码秉承“一物一码一特征”的特性，为每一个商品建立一个独有的“脸谱”信息数据，这种信息数据通过物理方式展现出来，融合了“码”与防伪标的所有特性，做到了信息与防伪特征的真正融合。实现数字化管理关键节点的可视化，随时掌握市场脉搏。</p>-->
+                    <ul class="intro-wrapper" style="list-style:decimal">
+                        <li class="intro-inner"><p>天鉴三维码让厂商商品有“脸”可刷，永保真品，告别假货，真正实现功能模块化，窜货可预警，销售做活动，营销更方便，数据可利用。</p></li>
+                        <li class="intro-inner"><p>天鉴三维码能使消费者成为火眼金睛，买卖有保证，消费更安全。</p></li>
+                        <li class="intro-inner"><p>天鉴三维码使政府监管者有眼可看，有耳可听，有手可控，真正实现产品源头可追溯，流向可跟踪，信息可查询，问题产品可召回。</p></li>
+
+                    </ul>
+                </div>
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    热线电话：<a href="tel:0898-68647196">0898-68647196</a><a href="tel:13876703090">13876703090</a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/sanweimachanpin.png" style="height:1.7rem;margin:1rem 0" class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div class="swiper-container ani" id="product-swiper" style="background-color:unset;height:auto" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="img/lifanti1.png" style="height:6rem" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="img/zhongguojie1.png" style="height:6rem" />
+                        </div>
+                    </div>
+                </div>
+                <img src="img/qitachanpin.png" style="height:auto;width:80%;" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="2s" />
+                <div class="product-container swiper-no-swiping">
+                    <div class="product-wrapper">
+                        <img class="product-img  ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.5s" swiper-animate-delay="2.3s" src="img/sanweimaimgproduct.png" popupsrc="img/pswm.png?v=22" /><br />
+                        <img class="product-name  ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="2.6s" src="img/sanweimaproduct.png" />
+                    </div>
+                    <div class="product-wrapper">
+                        <img class="product-img ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.5s" swiper-animate-delay="2.6s" src="img/yinyueheimg.png" popupsrc="img/pyinyuehe.png?v=22" /><br />
+                        <img class="product-name  ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="2.9s" src="img/yinyuehe.png" />
+                    </div>
+                    <div class="product-wrapper">
+                        <img class="product-img  ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.5s" swiper-animate-delay="2.9s" src="img/tangjinsanweima.png" popupsrc="img/tjswm.png?v=22" /><br />
+                        <img class="product-name  ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="3.2s" src="img/tangjinswm.png" />
+                    </div>
+                    <div class="product-wrapper">
+                        <img class="product-img  ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.5s" swiper-animate-delay="3.2s" src="img/jiaomaoimg.png" popupsrc="img/pjiaomao.png?v=22" /><br />
+                        <img class="product-name  ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="3.5s" src="img/jiaomao.png" />
+                    </div>
+                    <div class="product-wrapper">
+                        <img class="product-img  ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.5s" swiper-animate-delay="3.5s" src="img/mimasuoimg.png" popupsrc="img/pmimasuo.png?v=22" /><br />
+                        <img class="product-name  ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="3.8s" src="img/mimasuo.png" />
+                    </div>
+                    <div class="product-wrapper">
+                        <img class="product-img  ani" swiper-animate-effect="rotateIn" swiper-animate-duration="1.5s" swiper-animate-delay="3.8s" src="img/zhenjijiegouimg.png" popupsrc="img/pzhenji.png?v=22" /><br />
+                        <img class="product-name  ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1.5s" swiper-animate-delay="4.1s" src="img/zhenjijiegou.png?v=2" />
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="../wx/img/huobaozixun.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div class="news-wrapper ">
+                    <p class="news-wrapper-title ani" swiper-animate-effect="bounceIn" swiper-animate-duration="1.5s" swiper-animate-delay="1.5s">
+                        <img src="../wx/img/timg.png" style="width:5%;" /><span style="vertical-align:middle">“天鉴三维码”发布，商品进入“刷脸”时代！ 国内各大主流媒体争相报道 ！</span>
+                    </p>
+                    <div class="swm-img swiper-no-swiping">
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2s" onclick=" go('http://www.hainan.gov.cn/hn/yw/zwdt/tj/201806/t20180609_2654015.html',9)"> <img src="../wx/img/logo/hngv_logo.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.1s" onclick="go('http://www.stdaily.com/cxzg80/guonei/2018-06/07/content_678662.shtml?from=singlemessage&isappinstalled=0',9)"><img src="../wx/img/logo/kjwsy_04.png" style="width:90%" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.2s" onclick="go('http://www.hi.chinanews.com/hnnew/2018-06-09/464289.html',9)"><img src="../wx/img/logo/hainanxw.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.3s" onclick="go('http://new.qq.com/cmsn/20180611/20180611038322',9)"><img src="../wx/img/logo/qq_logo.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.4s" onclick="go('http://news.ifeng.com/a/20180609/58638985_0.shtml',9)"><img src="../wx/img/logo/fhw.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.5s" onclick="go('http://news.hainan.net/gundong/2018/06/09/3674665.shtml',9)"><img src="../wx/img/logo/hnzx_logo.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.6s" onclick="go('http://hnrb.hinews.cn/html/2018-06/09/content_2_4.htm',9)"><img src="../wx/img/logo/log.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.7s" onclick="go('http://www.jingji.com.cn/html/news/zxxw/107884.html',9)"> <img src="../wx/img/logo/logo.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.8s" onclick="go('http://cn.dailyeconomic.com/roll/2018/06/11/13176.html',9)"><img src="../wx/img/logo/logo_mrjj.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="2.9s" onclick=" go('http://kc.china.com.cn/2018-06/11/content_40377817.htm',9)"><img src="../wx/img/logo/logo4.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="3s" onclick="go('http://nb.chinabyte.com/417/14528417.shtml',9)"><img src="../wx/img/logo/logoGIF1.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="3.1s" onclick="go('http://www.thethirdmedia.com/Article/201806/show407825c77p1.html',9)"><img src="../wx/img/logo/newlogo.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="3.2s" onclick="go('http://hainan.sina.com.cn/news/hnyw/2018-06-09/detail-ihcscwxa9460551.shtml',9)"><img src="../wx/img/logo/sina.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="3.3s" onclick="go('http://www.sohu.com/a/234693908_100122968',9)"> <img src="../wx/img/logo/sohu.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="3.4s" onclick="go('https://weibo.com/5148524797/GkIByr1Ni?type=comment#_rnd1528726327304',9)"><img src="../wx/img/logo/sytt.png" /></a>
+                        <a class="ani" swiper-animate-effect="bounceInLeft" swiper-animate-duration="1.5s" swiper-animate-delay="3.5s" onclick="go('http://m.hinews.cn/mpage.php?id=031463885&from=singlemessage&isappinstalled=0',9)"> <img src="../wx/img/logo/waphi2.png" /></a>
+                    </div>
+                    <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                        下页就是彩蛋了哟
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/new/cd.png" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div class="video-item ani" swiper-animate-effect="zoomInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1.3s">
+                    <iframe src='http://player.youku.com/embed/XMzYwMjk5MzA4MA==' frameborder=0 'allowfullscreen'></iframe>
+                </div>
+                <p onclick="go('../wx/demo/video.html',10)" class="more_video ani" swiper-animate-effect="zoomInUp" swiper-animate-duration="1.5s" swiper-animate-delay="2s">更多视频</p>
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    热线电话：<a href="tel:0898-68647196">0898-68647196</a><a href="tel:13876703090">13876703090</a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <img class="bg ani" src="img/bg.jpg" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" />
+                <img src="img/mbh2.png" style="height:1.4rem" class="subtitle2_img ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1.5s" swiper-animate-delay="1s" />
+                <div style="margin-top:2rem">
+                    <div style="text-align:center">
+                        <p class="title ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="2s" style="font-size:.9rem">让我们相约 <br />第22届北京国际美博会</p>
+                        <p class="subtitle ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="3s" style="font-size:1.2rem;margin:1rem 0;font-weight:bold">天鉴是海南的！  <br />天鉴三维码是世界的！</p>
+                        <p class="title ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="1s" swiper-animate-delay="4s" style="font-size:.8rem">为科技发声   为创造发声 <br />我们期待您的见证</p>
+                    </div>
+                    <div style="padding: 0 5%;margin-top:2rem;text-align:justify">
+                        <p class="subtitle ani" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay="5s" style="font-size:.75rem">
+                            时间：2019年02月26日－28日<br />
+                            地点：北京·国家会议中心<br />
+                            展馆展位号：4-Z29
+                        </p>
+                    </div>
+                    <img class="img_house ani" src="img/build1.png" swiper-animate-effect="fadeIn" swiper-animate-duration="1s" swiper-animate-delay="6s" />
+                </div>
+                <div class="phone_div ani" swiper-animate-effect="fadeInUp" swiper-animate-duration="1.5s" swiper-animate-delay="1s">
+                    到底啦(^v^) 感谢观看 上划可重新观看哟！
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio id="sound" controls="controls" preload="auto" loop="loop" style="position:absolute;z-index:-1;top:0">
+        <source src="img/jjbj.mp3" type="audio/mpeg" style="height:0" />
+    </audio>
+    <div class="popup-container" id="popup">
+        <div class="popup-wrapper">
+            <img id="popup_img" src="" />
+        </div>
+    </div>
+    <img class="icon_music" src="img/music.png" id="icon_music" />
+    <img class="icon_arrow" id="icon_arrow" src="img/arrow.png" />
+    <script>
+        var sound = document.getElementById("sound"),
+            icon_arrow = document.getElementById("icon_arrow"),
+            flag_array = new Array(),
+            index = public.getCookie("swiperIndexSlide");
+        sound.play();//如果是安卓，则可以直接播放
+        var mySwiper = new Swiper('#main', {
+            direction: 'vertical',
+            roundLengths: true,
+            preventIntercationOnTransition: true,
+            updateOnImagesReady: true,
+            preloadImages: true,
+            on: {
+                init: function () {
+                    //打开新页面返回时，能跳到用户跳转前的位置；
+                    if (index != "no" && index != 0) {
+                        this.slideTo(index, 500, true);
+                        public.setCookie("swiperIndexSlide", 0);//始终重置
+                    }
+                    swiperAnimateCache(this); //隐藏动画元素
+                    swiperAnimate(this);
+                },
+                //加载完成...
+                imagesReady: function () {
+                    //timer在上面的js中
+                    clearInterval(timer);
+                    oLoading_inner.style.width = "100%";
+                    oLoading_info.innerText = "100%";
+                    setTimeout(function () {
+                        document.getElementById("loading-container").style.display = "none";
+                        //mySwiper.slideTo(1, 500, true);
+                    }, 700);
+                    if (index == 0 || index == "no") {
+                        setTimeout(function () {
+                            //mySwiper.slideTo(1, 500, true);
+                        }, 5000);
+                    }
+                },
+                slideChangeTransitionEnd: function () {
+                    //如果到底，继续滑动将跳到主页
+                    //如果是从第10页滑下来，删除一个数组，防止马上跳到四个模块 原因我懂，不知道咋说
+                    if (this.activeIndex == 11 && flag_array.length > 0)
+                        flag_array.splice(0, 1);
+                    if (this.activeIndex == 12) {
+                        flag_array.push(this.activeIndex);//因为从上一页面滑动到这也会执行这个方法，所以要判断是不是第二次的手动滑动
+                        if (flag_array.length > 1) {
+                            this.slideTo(0, 500, true);
+                            flag_array = [];//清空数组
+                        }
+                    }
+                    console.log(this.activeIndex);
+                    //判断是否需要将图片旋转起来
+                    if (this.activeIndex == 2) {
+                        var oIcon_Module = document.querySelectorAll(".module .module-button");
+                        for (var i = 0; i < oIcon_Module.length; i++) {
+                            oIcon_Module[i].removeAttribute("style");//针对再次进入不旋转
+                        }
+                        setTimeout(function () {
+                            for (var i = 0; i < oIcon_Module.length; i++) {
+                                oIcon_Module[i].style.animation = "rotate 6s linear infinite";//将两个模块旋转起来
+                            }
+                        }, 5700);
+                    }
+                    if (this.activeIndex == 9) {
+                        var oIcon_Module = document.querySelectorAll(".product-img");
+                        for (var i = 0; i < oIcon_Module.length; i++) {
+                            oIcon_Module[i].removeAttribute("style");//针对再次进入不旋转
+                        }
+                        setTimeout(function () {
+                            for (var i = 0; i < oIcon_Module.length; i++) {
+                                oIcon_Module[i].style.animation = "rotate 6s linear infinite";//将两个模块旋转起来
+                            }
+                        }, 4800);
+                    }
+                    //判断是否要隐藏上划提示图片
+                    if (this.activeIndex == 12)
+                        document.getElementById("icon_arrow").style.display = "none";
+                    //else
+                    //document.getElementById("icon_arrow").style.display = "block";
+
+                    swiperAnimate(this);
+                }
+            }
+        });
+        var productSwiper = new Swiper('#product-swiper', {
+            loop: true,
+            slidesPerView: 3,
+            centeredSlides: true,
+            speed: 2500,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+                waitForTransition: false,
+            },
+        })
+        //mySwiper.slideTo(8, 500, true);
+        function go(url, slide) {
+            public.setCookie("swiperIndexSlide", slide);
+            window.location.href = url;
+        }
+        //音乐图标暂停音乐播放音乐事件
+        var flag = true,
+            oIcon_Music = document.getElementById("icon_music");
+        oIcon_Music.onclick = function () {
+            if (flag) {
+                oIcon_Music.style.animationPlayState = "paused"; sound.pause();
+                flag = false;
+            }
+            else {
+                oIcon_Music.style.animationPlayState = "running"; sound.play();
+                flag = true;
+            }
+        }
+        var oProductImg = document.getElementsByClassName("product-img"),
+            oPopup_Img = document.getElementById("popup_img"),
+            oPopup = document.getElementById("popup"),
+            oModule = document.getElementsByClassName("module");
+        for (var i = 0; i < oProductImg.length; i++) {
+            oProductImg[i].onclick = function () {
+                var url = this.getAttribute("popupsrc");
+                oPopup_Img.src = url;
+                oPopup_Img.style.width = "60%";
+                oPopup.style.display = "block";
+            }
+        }
+
+        for (var i = 0; i < oModule.length; i++) {
+            oModule[i].onclick = function () {
+                var url = this.getAttribute("popupsrc");
+                oPopup_Img.src = url;
+                oPopup_Img.style.width = "100%";
+                oPopup.style.display = "block";
+                oPopup.className += " animated fadeIn";
+            }
+        }
+
+        document.getElementById("popup").onclick = function () {
+            this.style.display = "none";
+        }
+    </script>
+    <script>
+        //兼容苹果不能自动播放音频
+        wx.ready(function () {
+            sound.play();
+
+            //wx.updateAppMessageShareData({
+            //    title: '天鉴三维码与您相约长沙全国糖酒会', // 分享标题
+            //    desc: '让我们相约长沙全国糖酒商品交易会，为科技发声，为创造发声，我们期待您的见证。2018.10.20-24   酒店展位号：三楼321，2018.10.25 - 27   展馆展位号：包装馆BZ228C。', // 分享描述
+            //    link: 'http://tjfnew.china315net.com/dist/swm/index_invite.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            //    imgUrl: 'http://tjfnew.china315net.com/dist/wx/img/logo.jpg', // 分享图标
+            //}, function (res) {
+            //    public.showinfobox({
+            //        content: "感谢您的分享！",
+            //        btntext: "知道了",
+            //        tckid: "tck",
+            //        animate: "flipInX"
+            //    })
+            //});
+
+            wx.onMenuShareAppMessage({
+                title: '天鉴三维码与您相约第22届北京美博会', // 分享标题
+                desc: '让我们相约北京美博会，为科技发声，为创造发声，我们期待您的见证。时间：2018.02.26-28。 地点：北京·国家会议中心， 展馆展位号：4-Z29。', // 分享描述
+                link: 'http://tjfnew.china315net.com/dist/swm/index_invite_beijingmbh.html', // 分享链接
+                imgUrl: 'http://tjfnew.china315net.com/dist/wx/img/logo.jpg', // 分享图标
+                type: 'link', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    public.showinfobox({
+                        content: "感谢您的分享！",
+                        btntext: "知道了",
+                        tckid: "tck",
+                        animate: "flipInX"
+                    })
+                }
+            });
+
+            wx.onMenuShareTimeline({
+                title: '天鉴三维码与您相约北京美博会，为科技发声，为创造发声，我们期待您的见证。', // 分享标题
+                link: 'http://tjfnew.china315net.com/dist/swm/index_invite_beijingmbh.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                imgUrl: 'http://tjfnew.china315net.com/dist/wx/img/logo2.png', // 分享图标
+                success: function () {
+                    public.showinfobox({
+                        content: "感谢您的分享！",
+                        btntext: "知道了",
+                        tckid: "tck",
+                        animate: "flipInX"
+                    })
+                },
+            });
+
+                //wx.updateTimelineShareData({
+                //    title: '天鉴三维码与您相约长沙全国糖酒会，为科技发声，为创造发声，我们期待您的见证。', // 分享标题
+                //    link: 'http://tjfnew.china315net.com/dist/swm/index_invite.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                //    imgUrl: 'http://tjfnew.china315net.com/dist/wx/img/logo2.png', // 分享图标
+                //}, function (res) {
+                //    public.showinfobox({
+                //        content: "感谢您的分享！",
+                //        btntext: "知道了",
+                //        tckid: "tck",
+                //        animate: "flipInX"
+                //    })
+                //});
+            })
+    </script>
+</body>
+</html> 

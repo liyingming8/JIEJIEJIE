@@ -1,0 +1,119 @@
+body {
+    text-align: left;
+    font-family: "宋体", arial;
+    margin: 0;
+    padding: 0;
+    background: #FFF;
+    font-size: 12px;
+    color: #000;
+    background-color: #eef2fb;
+}
+
+/*html{
+    scrollbar-face-color: #f6f6f6; 
+	scrollbar-shadow-color: #cccccc; 
+	scrollbar-highlight-color: #ffffff; 
+	scrollbar-3dlight-color: #cccccc; 
+	scrollbar-darkshadow-color: #ffffff; 
+	scrollbar-track-color: #f6f6f6;
+	scrollbar-arrow-color: #330000;
+}*/
+
+div, form, img, ul, ol, li, dl, dt, dd {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+}
+
+li { list-style-type: none; }
+
+img { vertical-align: top; }
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* Link */
+
+a:link {
+    color: #1f3a87;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #83006f;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #bc2931;
+    text-decoration: underline;
+}
+
+a:active { color: #bc2931; }
+
+/* Color */
+
+.cRed, a.cRed:link, a.cRed:visited { color: #f00; }
+
+.cBlue, a.cBlue:link, a.cBlue:visited, a.cBlue:active { color: #1f3a87; }
+
+.cDRed, a.cDRed:link, a.cDRed:visited { color: #bc2931; }
+
+.cGray, a.cGray:link, a.cGray:visited { color: #4F544D; }
+
+.cDGray, a.cDGray:link, a.cDGray:visited { color: #666; }
+
+.cWhite, a.cWhite:link, a.cWhite:visited { color: #fff; }
+
+.cBlack, a.cBlack:link, a.cBlack:visited { color: #000; }
+
+a.cBlack:hover { color: #bc2931; }
+
+.cYellow, a.cYellow:link, a.cYellow:visited { color: #ff0; }
+
+.cGreen, a.cGreen:link, a.cGreen:visited { color: #008000; }
+
+/* Font  */
+
+.fB { font-weight: bold; }
+
+.f12px { font-size: 12px; }
+
+.f14px { font-size: 14px; }
+
+.left { float: left; }
+
+/* 其他属性 */
+
+.left { float: left; }
+
+.right { float: right; }
+
+.clear {
+    clear: both;
+    font-size: 1px;
+    width: 1px;
+    height: 0;
+    overflow: hidden;
+}
+
+.hidden { display: none; }
+
+.unLine, .unLine a { text-decoration: none; }
+
+.noBorder { border: none; }
+
+.txtleft { text-align: left; }
+
+.txtcenter { text-align: center; }
+
+.txtright { text-align: right; }
+
+.hands { cursor: pointer; }
+
+table.document { margin: 0 auto; }

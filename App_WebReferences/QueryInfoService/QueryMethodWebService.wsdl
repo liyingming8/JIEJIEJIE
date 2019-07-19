@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="QueryOnlyLabelCodeReportInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strCustID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LabelCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryOnlyLabelCodeReportInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryOnlyLabelCodeReportInfoResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryReportInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strCustID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryReportInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryReportInformationResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryCountLablCodeThree">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strCustID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryCountLablCodeThreeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryCountLablCodeThreeResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryCountLabelCodeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strCustID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryCountLabelCodeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryCountLabelCodeInfoResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="QueryOnlyLabelCodeReportInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryOnlyLabelCodeReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryOnlyLabelCodeReportInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryOnlyLabelCodeReportInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryReportInformation" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryReportInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLablCodeThreeSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryCountLablCodeThree" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLablCodeThreeSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryCountLablCodeThreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLabelCodeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryCountLabelCodeInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLabelCodeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryCountLabelCodeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryOnlyLabelCodeReportInfoHttpGetIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="TypeID" type="s:string" />
+    <wsdl:part name="LabelCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryOnlyLabelCodeReportInfoHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInformationHttpGetIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="TypeID" type="s:string" />
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInformationHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLablCodeThreeHttpGetIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLablCodeThreeHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLabelCodeInfoHttpGetIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="TypeID" type="s:string" />
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLabelCodeInfoHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryOnlyLabelCodeReportInfoHttpPostIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="TypeID" type="s:string" />
+    <wsdl:part name="LabelCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryOnlyLabelCodeReportInfoHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInformationHttpPostIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="TypeID" type="s:string" />
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInformationHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLablCodeThreeHttpPostIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLablCodeThreeHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLabelCodeInfoHttpPostIn">
+    <wsdl:part name="strCustID" type="s:string" />
+    <wsdl:part name="TypeID" type="s:string" />
+    <wsdl:part name="StartTime" type="s:string" />
+    <wsdl:part name="EndTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryCountLabelCodeInfoHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:portType name="QueryMethodWebServiceSoap">
+    <wsdl:operation name="QueryOnlyLabelCodeReportInfo">
+      <wsdl:input message="tns:QueryOnlyLabelCodeReportInfoSoapIn" />
+      <wsdl:output message="tns:QueryOnlyLabelCodeReportInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInformation">
+      <wsdl:input message="tns:QueryReportInformationSoapIn" />
+      <wsdl:output message="tns:QueryReportInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLablCodeThree">
+      <wsdl:input message="tns:QueryCountLablCodeThreeSoapIn" />
+      <wsdl:output message="tns:QueryCountLablCodeThreeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLabelCodeInfo">
+      <wsdl:input message="tns:QueryCountLabelCodeInfoSoapIn" />
+      <wsdl:output message="tns:QueryCountLabelCodeInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="QueryMethodWebServiceHttpGet">
+    <wsdl:operation name="QueryOnlyLabelCodeReportInfo">
+      <wsdl:input message="tns:QueryOnlyLabelCodeReportInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryOnlyLabelCodeReportInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInformation">
+      <wsdl:input message="tns:QueryReportInformationHttpGetIn" />
+      <wsdl:output message="tns:QueryReportInformationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLablCodeThree">
+      <wsdl:input message="tns:QueryCountLablCodeThreeHttpGetIn" />
+      <wsdl:output message="tns:QueryCountLablCodeThreeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLabelCodeInfo">
+      <wsdl:input message="tns:QueryCountLabelCodeInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryCountLabelCodeInfoHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="QueryMethodWebServiceHttpPost">
+    <wsdl:operation name="QueryOnlyLabelCodeReportInfo">
+      <wsdl:input message="tns:QueryOnlyLabelCodeReportInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryOnlyLabelCodeReportInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInformation">
+      <wsdl:input message="tns:QueryReportInformationHttpPostIn" />
+      <wsdl:output message="tns:QueryReportInformationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLablCodeThree">
+      <wsdl:input message="tns:QueryCountLablCodeThreeHttpPostIn" />
+      <wsdl:output message="tns:QueryCountLablCodeThreeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLabelCodeInfo">
+      <wsdl:input message="tns:QueryCountLabelCodeInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryCountLabelCodeInfoHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="QueryMethodWebServiceSoap" type="tns:QueryMethodWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QueryOnlyLabelCodeReportInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryOnlyLabelCodeReportInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInformation">
+      <soap:operation soapAction="http://tempuri.org/QueryReportInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLablCodeThree">
+      <soap:operation soapAction="http://tempuri.org/QueryCountLablCodeThree" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLabelCodeInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryCountLabelCodeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="QueryMethodWebServiceSoap12" type="tns:QueryMethodWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="QueryOnlyLabelCodeReportInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryOnlyLabelCodeReportInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInformation">
+      <soap12:operation soapAction="http://tempuri.org/QueryReportInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLablCodeThree">
+      <soap12:operation soapAction="http://tempuri.org/QueryCountLablCodeThree" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLabelCodeInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryCountLabelCodeInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="QueryMethodWebServiceHttpGet" type="tns:QueryMethodWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="QueryOnlyLabelCodeReportInfo">
+      <http:operation location="/QueryOnlyLabelCodeReportInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInformation">
+      <http:operation location="/QueryReportInformation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLablCodeThree">
+      <http:operation location="/QueryCountLablCodeThree" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLabelCodeInfo">
+      <http:operation location="/QueryCountLabelCodeInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="QueryMethodWebServiceHttpPost" type="tns:QueryMethodWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="QueryOnlyLabelCodeReportInfo">
+      <http:operation location="/QueryOnlyLabelCodeReportInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInformation">
+      <http:operation location="/QueryReportInformation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLablCodeThree">
+      <http:operation location="/QueryCountLablCodeThree" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryCountLabelCodeInfo">
+      <http:operation location="/QueryCountLabelCodeInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="QueryMethodWebService">
+    <wsdl:port name="QueryMethodWebServiceSoap" binding="tns:QueryMethodWebServiceSoap">
+      <soap:address location="http://www.china315net.com/webservice/QueryMethodWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="QueryMethodWebServiceSoap12" binding="tns:QueryMethodWebServiceSoap12">
+      <soap12:address location="http://www.china315net.com/webservice/QueryMethodWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="QueryMethodWebServiceHttpGet" binding="tns:QueryMethodWebServiceHttpGet">
+      <http:address location="http://www.china315net.com/webservice/QueryMethodWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="QueryMethodWebServiceHttpPost" binding="tns:QueryMethodWebServiceHttpPost">
+      <http:address location="http://www.china315net.com/webservice/QueryMethodWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

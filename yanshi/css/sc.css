@@ -1,0 +1,694 @@
+﻿
+
+
+/* 白水杜康 弹出对话框 */
+#Zwmark {
+    background-color:rgba(0,0,0,.8);
+
+    /*opacity: 0.70;
+    filter: alpha(opacity=75);*/
+   
+ 
+    position: absolute;
+    left: 0;
+    display: none;
+    top: 0;
+    z-index: 50;
+}
+
+#Srid {
+    position: fixed;
+    z-index: 300;
+    border: 2px solid #943326;
+    background-color: white;
+    display: none;
+    
+    
+}
+
+
+/**/
+/*大背景层 */
+.BigBG {
+    background: url(../images/jf/bg.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    padding-top: 10px;
+    position: relative;
+}
+
+
+
+.BigBGYZ {
+    background: url(../images/jf/bg.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    position: relative;
+}
+
+/*产品特点背景 */
+.BigBGCP {
+    background: url(../images/CP/bg.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    padding-top: 10px;
+    position: relative;
+}
+
+/*透明背景层 */
+.InfoBG {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0.7;
+    position: absolute;
+    filter: alpha(opacity=70);
+    z-index: 1;
+    top: 0px;
+    border-radius: 15px;
+}
+
+/*验证码内容DIV区 。两个手机验证页面*/
+
+.PhSCimg1935 {
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+.PhYZimg1935 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .PhYZimg1935 span {
+        color: #a40000;
+        font-size: 30px;
+        font-family: 华文隶书;
+        font-weight: 600;
+        letter-spacing: 3px;
+        display: inline-block;
+    }
+
+
+.ContenDiv {
+    z-index: 20;
+    position: relative;
+    padding: 7px 0;
+}
+
+    .ContenDiv p {
+        text-align: center;
+        margin-bottom: 0px;
+        margin-top: 6px;
+        padding: 0px;
+        font-size: 18px;
+        font-weight: 700;
+        font-family: 微软雅黑;
+        letter-spacing: 3px;
+        color: #e41a06;
+    }
+
+    .ContenDiv div {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .ContenDiv img {
+        width: 90%;
+    }
+
+    .ContenDiv li {
+        margin-top: 20px;
+    }
+
+        .ContenDiv li input {
+            height: 40px;
+            line-height: 40px;
+            border-radius: 5px;
+            border: transparent;
+            text-align: center;
+            font-size: 18px;
+            font-family: 黑体;
+        }
+
+.ContenDivYZ {
+    z-index: 20;
+    position: relative;
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 15px;
+    padding: 7px 0;
+    border: 0px;
+    background-color: rgba(255, 255, 255, 0.00);
+}
+
+.yzmIMG {
+    text-align: center;
+}
+
+.YzmSr {
+    height: 40px;
+    padding-left: 5px;
+    font-size: 20px;
+    width: 100%;
+    border: 0px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.YzmLQ {
+    background: -webkit-linear-gradient(#eb6100 50%,#a40000 50%);
+    background: linear-gradient(#eb6100 50%,#a40000 50%);
+    width: 40%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: white;
+    font-size: 19px;
+    letter-spacing: 4px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border: transparent;
+    font-family: 黑体;
+}
+
+/* 提示*/
+
+.TCtopli {
+    background: url(../images/SC/bb1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+    line-height: 100px;
+    height: 100px;
+    text-align: center;
+    position: relative;
+}
+
+
+.Tsli {
+    text-align: center;
+    color: black;
+    width: 100%;
+    background-color: white;
+    padding-top: 20px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+    .Tsli p {
+        font-family: 微软雅黑;
+        font-size: 23px;
+        letter-spacing: 6px;
+        font-weight: bolder;
+        text-align: center;
+        color: #ce0f0f;
+    }
+
+.TSBt {
+    width: 90px;
+    height: 28px;
+    border-radius: 4px;
+    border: transparent;
+    color: #f5de98;
+    font-size: 16px;
+    line-height: 28px;
+    color: white;
+}
+
+.EryzmBt {
+    /*background:-webkit-linear-gradient(#eb6100 50%,#a40000 50%);
+   background:linear-gradient(#eb6100 50%,#a40000 50%);*/
+    background-color: red;
+    margin: 20px 0 10px 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.GoJFSC {
+    background: red;
+    margin: 20px 0 10px 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-right: 15px;
+}
+/* Phonesc 积分商城input */
+
+.PhoneSCBT {
+    background: -webkit-linear-gradient(#eb6100 50%,#a40000 50%);
+    background: linear-gradient(#eb6100 50%,#a40000 50%);
+    width: 40%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    color: white;
+    font-size: 19px;
+    letter-spacing: 4px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    border: transparent;
+    font-family: 黑体;
+}
+
+/*获取验证码 */
+.HqYZM {
+    background-color: #d90a0a;
+    display: inline-block;
+    margin: 0 0 0 5%;
+    padding: 0;
+    line-height: 38px;
+    height: 38px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 黑体;
+    width: 40%;
+    border-radius: 5px;
+}
+
+/* 验证码失效 */
+.YZMSX {
+    width: 40%;
+    margin-left: 5%;
+    background-color: #d90a0a;
+    border-radius: 6px;
+    display: none;
+    border: transparent !important;
+    color: white;
+}
+
+
+/* 积分商城*/
+
+/* 顶部*/
+.SCTop {
+    /*background: url(../images/SC/hy.gif);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;*/
+    text-align: center;
+    position: relative;
+    /*height:140px;*/
+}
+
+    .SCTop input {
+        border-radius: 10px;
+        border: transparent;
+        height: 30px;
+        background-color: white;
+        position: absolute;
+        text-align: center;
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+    }
+
+
+/* 积分和兑换记录 */
+.SCInfoDiv {
+    margin: 0;
+    width: 100%;
+}
+
+    .SCInfoDiv li {
+        height: 80px;
+        text-align: center;
+        line-height: 80px;
+        border-bottom: 8px solid #d9d9d9;
+    }
+
+        .SCInfoDiv li span {
+            font-size: 18px;
+            font-weight: 600;
+            vertical-align: middle;
+            font-family: 微软雅黑;
+            color: #3d3939;
+        }
+
+        .SCInfoDiv li img {
+            height: 25px;
+            vertical-align: middle;
+            margin-right: 7px;
+        }
+
+/* 兑换模块*/
+.SCMKDiv {
+    padding: 0 2px;
+    margin: 0;
+    border-bottom: 8px solid #d9d9d9;
+}
+
+    .SCMKDiv li {
+        height: 130px;
+        text-align: center;
+        line-height: 130px;
+    }
+
+        .SCMKDiv li img {
+            width: 100%;
+        }
+
+/*规则 */
+.SCdhgz {
+    position: relative;
+}
+
+    .SCdhgz input {
+        width: 80px;
+        height: 30px;
+        border-radius: 8px;
+        color: red;
+        background-color: #fff45c;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        border: transparent;
+        letter-spacing: 4px;
+    }
+
+    .SCdhgz img {
+        width: 100%;
+    }
+
+
+
+
+/*弹出详细模块*/
+.SCtcInfo {
+    width: 95%;
+    position: absolute;
+    z-index: 60;
+    background-color: white;
+    display: none;
+}
+
+    .SCtcInfo li {
+        width: 100%;
+    }
+
+    .SCtcInfo img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .SCtcInfo input {
+        border-radius: 5px;
+        width: 50%;
+        background: #00B9E1;
+        border: transparent;
+        height: 30px;
+        line-height: 30px;
+        display: inline-block;
+        vertical-align: middle;
+        letter-spacing: 3px;
+        color: white;
+        float: left;
+    }
+
+    .SCtcInfo span {
+        height: 30px;
+        line-height: 30px;
+        display: inline-block;
+        color: red;
+        float: left;
+        width: 50%;
+    }
+
+    .SCtcInfo div {
+        padding: 0 8px;
+    }
+
+/* 弹出结束*/ /* 弹出结束*/ /* 弹出结束*/
+
+/* 兑换记录开始*/
+
+.BigBGJL {
+    background: url(../images/SC/bb2.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    padding-top: 40px;
+    position: relative;
+}
+
+.ContBG {
+    width: 90%;
+    margin-left: 5%;
+    position: relative;
+    padding: 40px 0px;
+    background: url(../images/SC/b1gg.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 500px;
+    text-align: center;
+}
+
+    .ContBG li {
+        text-align: left;
+        padding-left: 30%;
+        margin-top: 20px;
+    }
+
+.DHname {
+    font-size: 25px;
+    color: #fff100;
+}
+
+.DHtime {
+    font-size: 15px;
+    color: white;
+}
+
+/*兑换记录结束*/
+
+/*防伪保真开始 */
+
+/*首页导航用*/
+.Swap {
+    background-color: #434343;
+    height: 100%;
+    overflow: hidden;
+    transition: all 1s;
+}
+
+/*防伪用*/
+.SwapFW {
+    background-color: #f8c300;
+    height: 100%;
+    overflow: hidden;
+}
+
+.contentFW {
+    height: 100%;
+    width: 100%;
+    background-color: #fcfbe7;
+    float: left;
+    background: url(../images/FW/FwBG.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+
+.contentFW-topimg {
+    text-align: left;
+    margin-top: -25px;
+    margin-left: 37px;
+}
+
+    .contentFW-topimg img {
+        width: 50%;
+    }
+
+.contentBT {
+    text-align: center;
+}
+
+    .contentBT span {
+        color: #fcfbe7;
+        font-weight: 800;
+        font-size: 20px;
+    }
+
+.DH_lanmu {
+    width: 130px;
+    margin-top: 0px;
+    background: #434343;
+    text-align: left;
+    left: 100%;
+    float: left;
+}
+
+    .DH_lanmu li {
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid #808080;
+        list-style: none;
+        background-color: #434343;
+        color: #ffffff;
+        font-family: 微软雅黑;
+        font-weight: 600;
+        padding-left: 5px;
+        text-align: center;
+        letter-spacing: 5px;
+    }
+
+        .DH_lanmu li img {
+            width: 25px;
+            margin-right: 5px;
+        }
+
+.DH_cap {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    transition: all 1s;
+}
+/* 防伪保真结束*/
+
+/*回到首页 */
+
+.GOsyBt {
+    width: 80px;
+    height: 30px;
+    border-radius: 8px;
+    color: red;
+    background-color: #fff799;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    border: transparent;
+    letter-spacing: 4px;
+}
+
+
+/* 产品特点*/
+
+/* 外层包裹*/
+.CPwrap {
+    background-color: #c00611;
+    width: 100%;
+    padding-top: 20px;
+}
+
+/*顶图DIV*/
+.TopDivImg {
+    text-align: left;
+    padding: 3px 5%;
+}
+
+.ZYcpDHdiv {
+    width: 100%;
+    padding: 7px 5%;
+    color: black;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+    .ZYcpDHdiv li {
+        float: left;
+        width: 33.3%;
+        text-align: center;
+        border-bottom: 2px solid #fff799;
+        position: relative;
+        padding: 8px 0;
+    }
+
+        .ZYcpDHdiv li span {
+            position: absolute;
+            left: 45%;
+            bottom: -6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background: #fff799;
+            border: transparent;
+        }
+
+        .ZYcpDHdiv li a {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+.Cpimg {
+    margin-top: 20px;
+    text-align: left;
+    position: relative;
+}
+
+    .Cpimg p {
+        color: #fff799;
+        font-size: 17px;
+        padding: 0px 6%;
+        margin: 0;
+        letter-spacing: 2px;
+        font-family: 隶书;
+        width: 100%;
+    }
+/*产品特点结束 */
+
+/* 新首页*/
+
+.yaindex-wrap {
+    background-image: url(../images/SY/bgl.gif);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100%;
+    width: 100%;
+}
+
+.yaindex-top {
+    margin-top: 20px;
+}
+
+    .yaindex-top img {
+        width: 90%;
+    }
+
+.yaindex-leftimg, .yaindex-topimg {
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+
+.yaindex-rightsideBar, .yaindex-rightsideBar ul {
+    padding: 0px;
+}
+
+.DhJFli li {
+    width: 100%;
+    list-style: none;
+    margin-top: 10px;
+    background-color: red;
+    opacity: 0.3;
+}
+
+.DhNJFli {
+    width: 50%;
+    list-style: none;
+    margin-top: 10px;
+    float: left;
+    opacity: 0.3;
+}
+
+.yaindex-rightsideBar img, .yaindex-footer img {
+    width: 100%;
+}
+
+.yaindex-leftimg img {
+    width: 0px;
+    margin-top: 50%;
+    margin-left: 50%;
+}
+
+/*新首页结束*/
+
+
+

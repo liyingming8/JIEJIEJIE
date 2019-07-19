@@ -1,0 +1,261 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+li { list-style-type: none; }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    font-size: 13px;
+    text-decoration: none;
+    color: #313131;
+}
+
+a {
+    text-decoration: none;
+    color: #08114a;
+}
+
+header {
+    display: -webkit-box;
+    border: 1px solid;
+    border-color: #f1f1f1;
+    border-radius: 6px;
+    background-color: white;
+    height: 40px;
+    margin: 0 15px;
+    text-align: center;
+}
+
+header nav {
+    margin-top: 10px;
+    text-align: center;
+    -webkit-box-flex: 1;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: #393939;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #393939;
+}
+
+header button {
+    margin: 8px 5px 5px 5px;
+    background-color: #ff6a00;
+    color: white;
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+    -webkit-box-flex: 1;
+    border: 1px solid #FFFFFF;
+    border-radius: 6px;
+    text-align: center;
+    height: 25px;
+    vertical-align: central;
+}
+
+#ad { margin: 10px 15px 10px 15px; }
+
+#ad img {
+    width: 100%;
+    margin: 10px auto;
+    border-radius: 6px;
+}
+
+#getjifen {
+    margin: 20px 15px 10px 15px;
+    background-color: white;
+    text-align: center;
+    line-height: 22px;
+    border: 1px solid white;
+    border-radius: 6px;
+}
+
+#getjifen table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#getjifen table span {
+    text-align: left;
+    margin-top: 0px;
+}
+
+#getjifen table span b {
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+}
+
+#getjifen button {
+    border: 1px solid #ff7700;
+    border-radius: 6px;
+    background-color: #ff7700;
+    height: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.main {
+    display: -webkit-box;
+    margin: 15px 40px 0px 40px;
+    text-align: center;
+}
+
+.main div {
+    -webkit-box-flex: 1;
+    text-align: center;
+}
+
+.main div a {
+    text-decoration: none;
+    color: #313131;
+}
+
+.main div img { width: 60px; }
+
+.txt {
+    color: #393939;
+    text-align: center;
+    vertical-align: bottom;
+    letter-spacing: 1px;
+}
+
+#fengeline {
+    margin: 30px 15px 5px 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #808080;
+}
+
+.showshangpin {
+    margin: 15px 15px auto;
+    border: 1px solid #f1f1f1;
+    display: -webkit-box;
+    background-color: white;
+    border-radius: 6px;
+}
+
+.showshangpin nav {
+    width: 120px;
+    text-align: center;
+}
+
+.showshangpin nav img {
+    width: 110px;
+    height: 80px;
+    margin-left: 5px;
+}
+
+.showshangpin nav .shanpinname {
+    vertical-align: bottom;
+    font-size: 14px;
+    color: #393939;
+    font-weight: bold;
+    margin-left: 10px auto;
+}
+
+.showshangpin article {
+    -webkit-box-flex: 1;
+    padding: 5px;
+    color: #393939;
+    line-height: 18px;
+}
+
+.showshangpin article span { text-decoration: line-through; }
+
+.showshangpin article b {
+    color: red;
+    font-size: 15px;
+}
+
+.showshangpin article button {
+    background-color: #ff7700;
+    border: 1px solid #ff7700;
+    border-radius: 6px;
+    margin-left: 10px;
+    height: 20px;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+#appdown {
+    display: -webkit-box;
+    border: 1px solid #f1f1f1;
+    border-radius: 6px;
+    height: 35px;
+    margin: 15px 15px auto;
+    background-color: white;
+    text-align: center;
+}
+
+#appdown nav {
+    -webkit-box-flex: 1;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+footer {
+    display: -webkit-box;
+    margin: 15px auto;
+    background-color: white;
+    font-size: 14px;
+    letter-spacing: 2px;
+    height: 30px;
+}
+
+
+footer div {
+    -webkit-box-flex: 1;
+    margin: 8px 15px auto;
+}
+
+footer div a {
+    text-decoration: none;
+    color: #313131;
+    margin-left: 15px;
+}
+
+footer article {
+    -webkit-box-flex: 1;
+    text-align: right;
+    margin: 8px 15px auto;
+}
+
+footer article a {
+    text-decoration: none;
+    color: #313131;
+}
+
+#bottom {
+    display: -webkit-box;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+}
+
+#bottom #logo {
+    -webkit-box-flex: 1;
+    text-align: right;
+}
+
+#bottom #logo img { width: 40px; }
+
+#bottom #company {
+    -webkit-box-flex: 1;
+    text-align: left;
+    line-height: 20px;
+}

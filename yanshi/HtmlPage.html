@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>天鉴信息化平台</title>
+    <!--<link href="../../css/swiper.css" rel="stylesheet" />
+    <link href="../../css/animate.min.css?v=3" rel="stylesheet" />-->
+    <link href="layuiadmin/layui/css/layui.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <style>
+        body, html {
+            overflow-y: hidden;
+            overflow-x: hidden;
+            background: url(img/swm.jpg) no-repeat fixed center;
+            max-height: 20%;
+            max-width: 60%;
+            background-color: #6699ff;
+        }
+
+        .toast {
+            width: 1200px;
+            height: 670px;
+            background: transparent;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+            position: fixed;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!--<div class="toast">-->
+
+    <div class="layui-container">
+
+
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>
+                始终等比例水平排列
+
+            </legend>
+        </fieldset>
+
+
+        <div class="layui-row">
+            <div class="layui-col-xs12 layui-col-md8">
+                <div class="grid-demo grid-demo-bg1">移动：12/12、桌面：8/12</div>
+            </div>
+            <div class="layui-col-xs6 layui-col-md4">
+                <div class="grid-demo">移动：6/12、桌面：4/12</div>
+            </div>
+            <div class="layui-col-xs6 layui-col-md12">
+                <div class="grid-demo grid-demo-bg2">移动：6/12、桌面：12/12</div>
+            </div>
+        </div>
+    </div>
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    $("#bg").attr('src', "img/bg3.jpg");
+    $("#bg1").attr('src', "img/bg3.jpg");
+
+
+    } else {
+    $("#bg").attr('src', "img/swm.jpg");
+    $("#bg1").attr('src', "img/swm.jpg");
+
+    }
+
+    <!--</div>-->
+    <script src="../../js/swiper.js"></script>
+    <script src="../../js/swiper.animate1.0.3.min.js"></script>
+    <script src="layuiadmin/layui/layui.js"></script>
+
+    <!--<script language="javascript">
+        var mySwiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            slidesPerColumn: 2,
+            slidesPerColumnFill: 'row',
+        })
+    </script>-->
+</body>
+</html>

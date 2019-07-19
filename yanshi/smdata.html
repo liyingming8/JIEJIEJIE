@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>流量统计</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <script src="  js/reset.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="  js/jquery-2.1.1.min.js"></script>
+    <style>
+        .date-center { margin: 1rem 0 }
+        .title { font-size: .8rem; }
+        .radio-box { margin: .5rem 0; }
+            .radio-box span { }
+    </style>
+</head>
+<body>
+    <div class="date-center">
+        <span class="title">选择日期：</span>
+        <input id="datePicker" type="date" name="name" />
+        <div class="radio-box">
+            <span class="title">选择阶段：</span>
+            <input type="radio" name="d" value="today" checked="checked" /><span class="title">按天</span>
+            <input type="radio" name="d" value="week" /><span class="title">按周</span>
+            <input type="radio" name="d" value="month" /><span class="title">按月</span>
+            <input type="radio" name="d" value="year" /><span class="title">按年</span>
+        </div>
+    </div>
+    <div id="container">
+
+    </div>
+    <div id="container2" style="height:700px"></div>
+    <script>
+        var datePicker = document.getElementById("datePicker"), date_now = getNowFormatDate();
+        var radio_box = document.getElementsByClassName("radio-box")[0];
+        var radio = radio_box.getElementsByTagName("input");
+        var value_flag;
+        datePicker.value = date_now;
+        datePicker.onchange = function () {
+            date_now = this.value; 
+            radio[0].click();
+        }
+        for (var i = 0; i < radio.length; i++) {
+            radio[i].onclick = function () {
+                value_flag = this.value;
+                getDataWithJsonp(this.value)
+            }
+        } 
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '产品分类流量统计'
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: '扫码量'
+                }
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    colorByPoint: true
+                }
+            },
+            series: [{
+                name: "总扫码量",
+                data: [
+                ]
+            }]
+        })
+        var chart2 = Highcharts.chart('container2', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '总体时间分布'
+            },
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {
+                title: {
+                    text: '扫码量'
+                }
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    colorByPoint: true
+                }
+            },
+            series: [{
+                name: "时扫码量",
+                data: [
+                ]
+            }]
+        })
+        var comp_name = ["烟类", "酒类","食品类","日化类","五金类","服装类","水果类","电器类","农资类"];
+        function callbackFunction(result) {
+            var smData = result.data;
+            //console.log(smData);
+            var arr = new Array();
+            var arr2 = new Array();
+            for (var i = 0; i < smData.length; i++) {
+                arr[i] = [comp_name[i], smData[i].total];
+            }
+            for (var i = 0; i < smData[0].details.length; i++) {
+                var num = 0;
+                for (var a = 0; a < smData.length; a++) { 
+                    num += smData[a].details[i];
+                }
+                switch (value_flag) {
+                    case "week":
+                        arr2[i] = ["星期"+(i+1), num];
+                        break;
+                    case "month":
+                        arr2[i] = [ i + 1+"号", num];
+                        break;
+                    case "year":
+                        arr2[i] = [i + 1 + "月", num];
+                        break;
+                    default:
+                        arr2[i] = [i + "点", num];
+                        break;
+                }
+            }
+
+            chart.series[0].update({
+                data: arr
+            })
+            chart2.series[0].update({
+                data: arr2
+            })
+        }
+        getDataWithJsonp();
+        var src = "";
+        function getDataWithJsonp(value) {
+            var jscript = document.createElement("script");
+            if (value && value !='today') {
+                src = "rank/" + value +"/10/?order=desc";
+            }
+            else {
+                src = "dt/rank/10/?dt=" + date_now;
+            }
+            jscript.setAttribute("src", "http://www.china315net.com:35222/qry/" + src + "&callback=callbackFunction");
+            console.log("http://www.china315net.com:35222/qry/" + src + "");
+            document.body.appendChild(jscript);
+            document.body.removeChild(jscript);
+        }
+
+
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = year + seperator1 + month + seperator1 + strDate;
+            return currentdate;
+        }
+    </script>
+
+</body>
+</html>
