@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Web.Services;
 using System.Data;
 using System.Data.SqlClient;
+using TJ.DBUtility;
 /// <summary>
 /// WebServiceFaHuoOnline 的摘要说明
 /// </summary>
@@ -24,7 +25,7 @@ public class WebServiceFaHuoOnline : WebService {
     /// <returns></returns>
     public SqlConnection GetConnection()
     {
-        string str = ConfigurationManager.ConnectionStrings["SqlServerConnString"].ToString();
+        string str = ConnectionInfo.SqlServerConnString;
         myConn = new SqlConnection(str);
         return myConn;
     }
@@ -34,7 +35,7 @@ public class WebServiceFaHuoOnline : WebService {
     /// <returns></returns>
     public SqlConnection GetConnectionWL()
     {
-        string str = ConfigurationManager.ConnectionStrings["SqlServerConnStringWuLiu"].ToString();
+        string str = ConnectionInfo.SqlServerConnStringWuLiu;
         myConn = new SqlConnection(str);
         return myConn;
     }

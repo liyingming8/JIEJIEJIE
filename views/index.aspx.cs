@@ -8,15 +8,29 @@ using commonlib;
 using TJ.BLL;
 using TJ.DBUtility;
 using TJ.Model;
+using System.Web.UI.HtmlControls;
 
 public partial class views_index : AuthorPage
-{ 
-    BTJ_RoleInfo _blrole = new BTJ_RoleInfo();  
-    public string UserName = ""; 
+{
+    BTJ_RoleInfo _blrole = new BTJ_RoleInfo();
+    public string UserName = "";
     protected void Page_Load(object sender, EventArgs e)
     {
+        pub();
         if (!IsPostBack)
         {
+            if (int.Parse(GetCookieCompID()) == 26914)
+            {
+                //LAY_app_body.InnerHtml = "<div class=\"layadmin-tabsbody-item layui-show\">< iframe src = \"../Admin/Welcome.aspx\" frameborder = \"0\" class=\"layadmin-iframe\" name=\"hreflink\" id=\"ifq\"></iframe></div>";
+                LAY_app_body.InnerHtml = "<div class=\"layadmin-tabsbody-item layui-show\"><iframe src=\"../Admin/Welcome.aspx\" frameborder=\"0\" class=\"layadmin-iframe\" name=\"hreflink\" id = \"ifq\"></iframe> </div>";
+            }
+            else
+            {
+                LAY_app_body.InnerHtml = "<div class=\"layadmin-tabsbody-item layui-show\"><iframe src=\"../views/home/console.aspx\" frameborder=\"0\" class=\"layadmin-iframe\" name=\"hreflink\" id = \"ifq\"></iframe> </div>";
+                left_menu.InnerHtml = "<a href=\"javascript:;\" lay-tips=\"主页\" lay-direction=\"2\">" +
+                      "<i class=\"layui-icon layui-icon-home\"></i><cite>主页</cite></a><dl class=\"layui-nav-child\"><dd data-name=\"console\" class=\"layui-this\">" +
+                      "<a lay-href=\"../views/home/console.aspx\">控制台</a></dd> </dl>";
+            }
             string menustring = GetMenuString();
             literal_compname.Text = GetCompName();
             Literal mnliter = new Literal();
@@ -33,7 +47,7 @@ public partial class views_index : AuthorPage
                 tjCompTypeID.Value = sc.EncryptQueryString(mcomp.CompTypeID.ToString());
                 tjCompTypeID.Expires.AddDays(1);
                 Response.Cookies.Add(tjCompTypeID);
-            } 
+            }
         }
     }
 
@@ -45,7 +59,7 @@ public partial class views_index : AuthorPage
         if (!_rid.Equals(155))
         {
             string authorMenuString = _blrole.GetList(_rid).AuthorMenuInfo;
-            return ReturnAuthorMenuString(authorMenuString); 
+            return ReturnAuthorMenuString(authorMenuString);
         }
         var btjCompRoles = new BTJ_Comp_Roles();
         IList<MTJ_Comp_Roles> comroleist = btjCompRoles.GetListsByFilterString("CompID=" + GetCookieCompID());
@@ -65,7 +79,7 @@ public partial class views_index : AuthorPage
             if (mtjCompRoles.isactive)
             {
                 sb.Append(_btjRolePackage.GetList(mtjCompRoles.rpackid).ridstring);
-            } 
+            }
         }
         return ReturnAuthorMenuString(sb.ToString());
     }
@@ -73,12 +87,12 @@ public partial class views_index : AuthorPage
     private string ReturnAuthorMenuString(string authoredstr)
     {
         string authorMenuString = authoredstr;
-        if (authorMenuString.Length > 0) 
+        if (authorMenuString.Length > 0)
         {
             var sb = new StringBuilder();
             if (authorMenuString.Length > 0)
             {
-                DataTable dt = _tbexe.ExecuteQuery("select  SiteID,PageName from TJ_SiteMap where SysTypeID<>" + DAConfig.Huizongtypeid + " and SysTypeID<>"+DAConfig.luodiyetypeid+" and ParentID=0 and SiteID in (" + (authorMenuString.StartsWith(",") ? authorMenuString.Substring(1) : authorMenuString) + ") order by ShowOrder", null);
+                DataTable dt = _tbexe.ExecuteQuery("select  SiteID,PageName from TJ_SiteMap where SysTypeID<>" + DAConfig.Huizongtypeid + " and SysTypeID<>" + DAConfig.luodiyetypeid + " and ParentID=0 and SiteID in (" + (authorMenuString.StartsWith(",") ? authorMenuString.Substring(1) : authorMenuString) + ") order by ShowOrder", null);
                 foreach (DataRow dr in dt.Rows)
                 {
                     sb.Append(
@@ -100,7 +114,7 @@ public partial class views_index : AuthorPage
     private string SubSiteLinkString(string pSiteID, string authorMenuString)
     {
         var sb = new StringBuilder();
-        DataTable list = _tbexe.ExecuteQuery("select SiteID,LinkPath,PageName from TJ_SiteMap where ParentID=" + pSiteID + " and SysTypeID<>" + DAConfig.Huizongtypeid + " and SysTypeID<>" + DAConfig.luodiyetypeid+" order by  ShowOrder", null);
+        DataTable list = _tbexe.ExecuteQuery("select SiteID,LinkPath,PageName from TJ_SiteMap where ParentID=" + pSiteID + " and SysTypeID<>" + DAConfig.Huizongtypeid + " and SysTypeID<>" + DAConfig.luodiyetypeid + " order by  ShowOrder", null);
         if (list.Rows.Count > 0)
         {
             sb.Append("<dl class=\"layui-nav-child\">");
@@ -109,13 +123,41 @@ public partial class views_index : AuthorPage
                 if (authorMenuString.Contains("," + dr["SiteID"] + ","))
                 {
                     _tempnickname = dr["PageName"].ToString();
-                    _linkurlstring ="../"+ ((dr["LinkPath"].ToString().StartsWith("CRM") ||dr["LinkPath"].ToString().StartsWith("JiShi")) ? dr["LinkPath"].ToString() : "Admin/" + dr["LinkPath"]);
-                    sb.Append("<dd data-name=\"list\"><a lay-href=\"" + _linkurlstring + "\">" + _tempnickname + "</a></dd>");
+                    if (_tempnickname.Equals("产品属性"))
+                    {
+                        string cd = "ff";
+                    }
+                    _linkurlstring = "../" + ((dr["LinkPath"].ToString().StartsWith("CRM") || dr["LinkPath"].ToString().StartsWith("JiShi")) ? dr["LinkPath"].ToString() : "Admin/" + dr["LinkPath"]);
+                    int index = _linkurlstring.LastIndexOf('=');
+                    if (index > 0)
+                    {
+                        string url = _linkurlstring.Substring(index + 1);
+                        if (url.Equals("inventory/delivery/list/") || url.Equals("inventory/stk/") || url.Equals("inventory/list/"))
+                        {
+                            string getcid = GetCookieCompID();
+                            sb.Append("<dd data-name=\"list\"><a lay-hrefgg=\"" + url + getcid + "\"  >" + _tempnickname + "</a></dd>");
+                        }
+                        else
+                        {
+                            sb.Append("<dd data-name=\"list\"><a lay-hrefgg=\"" + url + "\"  >" + _tempnickname + "</a></dd>");
+                        }
+                    }
+                    else
+                    {
+                        sb.Append("<dd data-name=\"list\"><a lay-href=\"" + _linkurlstring + "\">" + _tempnickname + "</a></dd>");
+                    }
+
                 }
             }
             sb.Append("</dl>");
         }
         list.Dispose();
         return sb.ToString().Replace(",]", "]");
+    }
+
+    public string pub()
+    {
+        string getuid = GetCookieUID();
+        return getuid;
     }
 }

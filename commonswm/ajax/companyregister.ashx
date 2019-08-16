@@ -61,11 +61,13 @@ public class companyregister : IHttpHandler {
                 muser.MobileNumber = cPhone;
                 muser.RID = 155;
                 muser.AddressInfo = cCity + " " + cAddr;
-                muser.IsActived = 1;
+                //状态
+                muser.IsActived = 0;
+                //muser.IsActived = 1;
                 muser.RegisterDate = DateTime.Now;
                 btjuser.Insert(muser);
                 HuYi_Info.HY_dxinfoNoYzm("三维码注册待审核，请马上审核！", "18889810919", "天鉴防伪");
-                context.Response.Write("{\"rs\":100,\"nr\":\"您的资料已经提交，请稍候！\"}");
+                //context.Response.Write("{\"rs\":100,\"nr\":\"您的资料已经提交，请稍候！\"}");
                     context.Response.End();
             }
         }

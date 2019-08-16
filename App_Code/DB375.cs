@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using TJ.DBUtility;
 
 /// <summary>
 /// DB375 的摘要说明
@@ -24,14 +25,11 @@ public class DB375
     {
         get
         {
-            string str = ConfigurationManager.ConnectionStrings["SqlServerConnStringCYJY"].ToString();
+            string str = ConnectionInfo.SqlServerConnStringCYJY;
             myConn = new SqlConnection(str);
             return myConn;
 
-        }
-
-       
-
+        } 
     }
  
 
@@ -41,7 +39,7 @@ public class DB375
     {
         get
         {
-            string str = ConfigurationManager.ConnectionStrings["SqlServerConnStringCYJY"].ToString();
+            string str = ConnectionInfo.SqlServerConnStringCYJY;
             var myConnCYJY = new SqlConnection(str);
             return myConnCYJY;
         }

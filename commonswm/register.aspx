@@ -4,26 +4,21 @@
 
 <html>
 <head id="Head1" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="full-screen" content="yes" />
-    <meta name="x5-fullscreen" content="true" />
+    <meta name="full-screen" content="yes" /> 
     <meta name="description" content="三维码激活" />
     <meta content="telephone=no" name="format-detection" />
     <title>注册信息</title>
     <script>
-        const ohtml = document.documentElement;
+        var ohtml = document.documentElement;
         function getsize() {
             var size = ohtml.clientWidth;
             if (size > 640) size = 640;
             ohtml.style.fontSize = size / 20 + 'px';
         }
-        getsize();
-        window.onresize = function () {
-            getsize();
-        }
+        getsize(); 
     </script>
     <script src="../js/vue.min.js"></script> 
     
@@ -192,7 +187,7 @@
 </head>
 <body style="background-color: #F5f5f5;">
     <form id="form1" runat="server">
-        <div id="vim">
+        <div id="vim" style="display:none">
                 <div class="header">
                     注册您的信息
                 </div> 
@@ -277,7 +272,7 @@
                         <input class="item-input" type="text" value="" placeholder="请输入身份证号码" v-model="person.code"  />
                     </div>
                     <div class="item">
-                         <span class="item-title">身份证正面</span>
+                         <span class="item-title">身份证<br/>(正面)</span>
                         <div class="item-photo-container">
                           <img class="item-photo-it" v-if="person.codeimg!=null" :src="person.codeimg" />
                             <div v-else class="item-photo-edit">
@@ -469,13 +464,15 @@
                 }
             },
             created: function () {
-                document.getElementById("vim").style.display = "block";
+                
 
             },
             mounted: function () {
             }
         })
-
+	window.onload=function(){
+		document.getElementById("vim").style.display = "block";
+	}
         window.addEventListener("message", function (event) {
             const loc = event.data;
             if (loc && loc.module == "locationPicker") {

@@ -6,20 +6,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link href="../include/MasterPage.css" rel="stylesheet" type="text/css" />
-    <link href="../include/easyui.css" rel="stylesheet" />  
+    <link href="../include/easyui.css" rel="stylesheet" /> 
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="div_WholePage">
             <div class="topdiv">
                  <div class="topitem">
-                    <input type="button" value="新增" class="btn btn-warning btnyd" onclick="openWinCenter('TJ_WHBuJiangAndEdit.aspx?cmd=add', 590, 350, '布奖管理')" />
+                    <input type="button" value="新增" class="btn btn-warning btnyd" onclick="openWinCenter('TJ_WHBuJiangAndEdit.aspx?cmd=add', 660, 500, '布奖管理')" />
                 </div>
                 <div class="topitem">
                     <asp:DropDownList ID="DDLField" runat="server">
                         <asp:ListItem Value="Remarks1">产品名称</asp:ListItem>
-                        <asp:ListItem Value="beizhu1">标签包编码</asp:ListItem>
+                        <asp:ListItem Value="BaoBianHao">标签包编码</asp:ListItem>
                     </asp:DropDownList>
                 </div>              
                 <div class="topitem">
@@ -28,8 +31,8 @@
                     <asp:Button ID="BtnSearch0" runat="server" Text="查找" CssClass="btn btn-warning btnyd" OnClick="BtnSearch0_Click" />
                 </div>                           
             </div>
-            <div style="overflow-x:auto"><asp:GridView ID="GridView1" EnableViewState="False" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="Remarks1" Width="100%"
-                  OnRowDeleting="GridView1_RowDeleting" PageSize="20"   OnRowDataBound="GridView1_RowDataBound" CssClass="GridViewStyle">
+            <div style="overflow-x:auto"><asp:GridView ID="GridView1" EnableViewState="False" runat="server" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="ID" Width="100%"
+                  PageSize="20"   OnRowDataBound="GridView1_RowDataBound" CssClass="GridViewStyle">
                 <Columns>
                     <asp:TemplateField HeaderText="编辑">
                             <ItemTemplate>
@@ -37,25 +40,52 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" Width="30px" />
                         </asp:TemplateField>
-                    <asp:TemplateField HeaderText="产品名称">
+                    <asp:TemplateField HeaderText="产品名称" >
                         <ItemTemplate>
                             <asp:Label ID="Remarks1" runat="server" Text='<%# Bind("Remarks1") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="标签包编码">
+                     <asp:TemplateField HeaderText="前段是否显示" >
                         <ItemTemplate>
-                            <asp:Label ID="beizhu1" runat="server" Text='<%# Bind("beizhu1") %>'></asp:Label>
+                            <asp:Label ID="beizhu1" runat="server" Text='<%# ReturnIsActive(Eval("beizhu1").ToString()) %>'></asp:Label>
                         </ItemTemplate>
+                         <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="标签包编码" >
+                        <ItemTemplate >
+                            <asp:Label ID="Startlabelcode" runat="server" Text='<%# Bind("BaoBianHao") %>' ></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="积分值">
                         <ItemTemplate>
                             <asp:Label ID="beizhu" runat="server" Text='<%# Bind("beizhu") %>'></asp:Label>
                         </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="总数">
+                        <ItemTemplate>
+                            <asp:Label ID="total" runat="server" Text='<%# Bind("total") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="未使用">
+                        <ItemTemplate>
+                            <asp:Label ID="no_use" runat="server" Text='<%# Bind("no_use") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="已使用">
+                        <ItemTemplate>
+                            <asp:HyperLink ID="used" runat="server" Text='<%# Bind("used") %>' style="text-decoration:underline;cursor:pointer;color:red"></asp:HyperLink>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="布奖时间">
                         <ItemTemplate>
                             <asp:Label ID="BJDate" runat="server" Text='<%# Bind("BJDate") %>'></asp:Label>
                         </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>       
                     <asp:TemplateField HeaderText="备注">
                         <ItemTemplate>

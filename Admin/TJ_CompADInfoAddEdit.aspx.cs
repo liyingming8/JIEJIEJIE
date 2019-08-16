@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using TJ.Model;
 using TJ.BLL;
 using commonlib;
+using TJ.DBUtility;
 
 public partial class Admin_TJ_CompADInfoAddEdit : AuthorPage
 {
@@ -13,6 +14,7 @@ public partial class Admin_TJ_CompADInfoAddEdit : AuthorPage
     private readonly BTB_Products_Infor bproduct = new BTB_Products_Infor();
     private readonly CommonFunWL commwl = new CommonFunWL();
     private readonly CommonFun comm = new CommonFun();
+    TabExecute _tab = new TabExecute();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -54,22 +56,33 @@ public partial class Admin_TJ_CompADInfoAddEdit : AuthorPage
         mod.UserID = int.Parse(GetCookieUID());
         mod.Discriptions = inputDiscriptions.Value.Trim();
         mod.Remarks = inputRemarks.Value.Trim();
-        mod.FilePath = HF_FilePath.Value;
-        mod.SpecialURLLink = inputSpecialURLLink.Value;
-        mod.GoodsID = Convert.ToInt32(ComboBox_GoodsID.SelectedValue.Equals(null) ? "0" : ComboBox_GoodsID.SelectedValue);
-        switch (HF_CMD.Value.Trim())
+        string kko = HF_FilePath.Value.ToString();
+        if (string.IsNullOrEmpty(HF_FilePath.Value.ToString()))
         {
-            case "add":
-                mod.UploadDate = DateTime.Now;
-                mod.ModifyDate = DateTime.Now;
-                bll.Insert(mod);
-                break;
-            case "edit":
-                mod.ModifyDate = DateTime.Now;
-                bll.Modify(mod);
-                break;
+            MessageBox.Show(this, "请先选择图片并点击上传按钮！");
+            //MessageBox.ShowAjax(UpdatePanel1, "请先选择图片并点击上传按钮！");
         }
-        ScriptManager.RegisterStartupScript(UpdatePanel1, GetType(), "reload", "closemyWindow();", true);
+        else
+        {
+            mod.FilePath = HF_FilePath.Value;
+
+
+            mod.SpecialURLLink = inputSpecialURLLink.Value;
+            mod.GoodsID = Convert.ToInt32(ComboBox_GoodsID.SelectedValue.Equals(null) ? "0" : ComboBox_GoodsID.SelectedValue);
+            switch (HF_CMD.Value.Trim())
+            {
+                case "add":
+                    mod.UploadDate = DateTime.Now;
+                    mod.ModifyDate = DateTime.Now;
+                    bll.Insert(mod);
+                    break;
+                case "edit":
+                    mod.ModifyDate = DateTime.Now;
+                    bll.Modify(mod);
+                    break;
+            }
+            ScriptManager.RegisterStartupScript(UpdatePanel1, GetType(), "reload", "closemyWindow();", true);
+        }
         // ScriptManager.RegisterStartupScript(UpdatePanel1, GetType(), "info", "location.href='TJ_CompADInfo.aspx'", true);
     }
 
@@ -89,9 +102,16 @@ public partial class Admin_TJ_CompADInfoAddEdit : AuthorPage
 
     private void FillDLL()
     {
-        ComboBoxADID.DataSource = badinfo.GetLists();
-        ComboBoxADID.DataBind();
-        ComboBoxADID.SelectedValue = "0";
+        if (int.Parse(GetCookieCompID())==26914) {
+            ComboBoxADID.DataSource = _tab.ExecuteNonQuery("select ADID,ADName from TJ_AdInfo where ADID=1");
+            ComboBoxADID.DataBind();
+            ComboBoxADID.SelectedValue = "0";
+        }else
+        {
+            ComboBoxADID.DataSource = badinfo.GetLists();
+            ComboBoxADID.DataBind();
+            ComboBoxADID.SelectedValue = "0";
+        }
         ComboBox_GoodsID.DataTextField = "Products_Name";
         ComboBox_GoodsID.DataValueField = "Infor_ID";
         if (GetCookieCompTypeID() == DAConfig.CompTypeIDChangJia.ToString())

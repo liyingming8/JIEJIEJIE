@@ -8,7 +8,7 @@ using commonlib;
 public partial class Admin_TJ_CompADInfoAddEditSimple : AuthorPage
 {
     private readonly BTJ_CompADInfo bll = new BTJ_CompADInfo();
-    private MTJ_CompADInfo mod = new MTJ_CompADInfo(); 
+    private MTJ_CompADInfo mod = new MTJ_CompADInfo();
     private readonly BTB_Products_Infor bproduct = new BTB_Products_Infor();
     private readonly CommonFunWL commwl = new CommonFunWL();
     public string Bilv = "2/1";
@@ -31,7 +31,7 @@ public partial class Admin_TJ_CompADInfoAddEditSimple : AuthorPage
             if (!string.IsNullOrEmpty(Request.QueryString["ADID"]))
             {
                 hdadid.Value = Request.QueryString["ADID"];
-            } 
+            }
             FillDll();
             switch (HF_CMD.Value)
             {
@@ -44,7 +44,7 @@ public partial class Admin_TJ_CompADInfoAddEditSimple : AuthorPage
                     break;
                 default:
                     break;
-            } 
+            }
         }
     }
 
@@ -82,26 +82,39 @@ public partial class Admin_TJ_CompADInfoAddEditSimple : AuthorPage
     private void fillinput(int id)
     {
         MTJ_CompADInfo ms = bll.GetList(id);
-        hdadid.Value = ms.ADID.ToString().Trim(); 
+        hdadid.Value = ms.ADID.ToString().Trim();
         inputDiscriptions.Value = ms.Discriptions.Trim();
         inputRemarks.Value = ms.Remarks.Trim();
         showimage.Src = ms.FilePath;
         savefilepath.Value = ms.FilePath;
         ComboBox_GoodsID.SelectedValue = ms.GoodsID.ToString();
         inputSpecialURLLink.Value = ms.SpecialURLLink;
-    } 
+    }
 
     private void FillDll()
-    { 
+    {
         ComboBox_GoodsID.DataTextField = "Products_Name";
         ComboBox_GoodsID.DataValueField = "Infor_ID";
-        if (GetCookieCompTypeID() == DAConfig.CompTypeIDChangJia.ToString())
-        {
-            ComboBox_GoodsID.DataSource = bproduct.GetListsByFilterString("CompID=" + GetCookieCompID());
-        }
+        string hh = GetCookieCompTypeID();
+        string hhhh = DAConfig.CompTypeIDChangJia.ToString();
+        string hhhehe = DAConfig.CompTypeIDJingXiaoShang.ToString();
+        string hhhhhee = DAConfig.CompTypeIDZhongDuanDIan.ToString();
+        string gggg=DAConfig.CompanyType.ToString();
+        //if (GetCookieCompTypeID() == DAConfig.CompTypeIDChangJia.ToString()|| GetCookieCompTypeID()=="484")
+        //{
+        //    ComboBox_GoodsID.DataSource = bproduct.GetListsByFilterString("CompID=" + GetCookieCompID());
+        //}
+        //if (GetCookieCompTypeID() == DAConfig.CompTypeIDJingXiaoShang.ToString())
+        //{
+        //    ComboBox_GoodsID.DataSource = commwl.ReturnGetAgentAuthorProductInfo(GetCookieCompID());
+        //}
         if (GetCookieCompTypeID() == DAConfig.CompTypeIDJingXiaoShang.ToString())
         {
             ComboBox_GoodsID.DataSource = commwl.ReturnGetAgentAuthorProductInfo(GetCookieCompID());
+        }
+        else
+        {
+            ComboBox_GoodsID.DataSource = bproduct.GetListsByFilterString("CompID=" + GetCookieCompID());
         }
         ComboBox_GoodsID.DataBind();
         ComboBox_GoodsID.Items.Add(new ListItem("指定产品...", "0"));

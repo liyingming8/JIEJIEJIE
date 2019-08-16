@@ -45,7 +45,9 @@ function upImg(bili) {
 
         }
         $img.cropper({
-            aspectRatio: bili,         //1 / 1,  //图片比例,1:1
+            //aspectRatio: bili,         //1 / 1,  //图片比例,1:1
+            aspectRatio: 16 / 9,
+            viewMode: 1,
             crop: function (data) {
                 var $imgData = $img.cropper('getCroppedCanvas');
                 var dataurl = $imgData.toDataURL(type);

@@ -48,7 +48,7 @@ public partial class Admin_commonswm_TJ_RegistercommonswmCompanys : AuthorPage
         if (ID.Length > 0)
         {
             //双击后编辑修改方法
-            return string.Format("javascript:var win=openWinCenter('TJ_RegistercommonswmCompanysAddEdit.aspx?cmd=edit&ID={0}',760,520,'公司信息')", ID);
+            return string.Format("javascript:var win=openWinCenter('TJ_RegistercommonswmCompanysAddEdit.aspx?cmd=edit&ID={0}',760,520,'审核信息')", ID);
         }
         else
         {

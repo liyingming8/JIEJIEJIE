@@ -3,6 +3,7 @@ using System.Web.Services;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using TJ.DBUtility;
 
 /// <summary>
 /// WebServiceScan 的摘要说明
@@ -36,11 +37,11 @@ public class WebServiceScanGetInfo : WebService
         string str = string.Empty;
         if (flag == "qd")
         {
-            str = ConfigurationManager.ConnectionStrings["SqlServerConnString"].ToString();
+            str = ConnectionInfo.SqlServerConnString;
         }
         else
         {
-            str = ConfigurationManager.ConnectionStrings["SqlServerConnStringWuLiu"].ToString();
+            str = ConnectionInfo.SqlServerConnStringWuLiu;
         }
 
         myConn = new SqlConnection(str);

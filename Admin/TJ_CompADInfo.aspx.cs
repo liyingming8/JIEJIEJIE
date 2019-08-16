@@ -236,4 +236,15 @@ public partial class Admin_TJ_CompADInfo : AuthorPage
         _currentindex = e.NewPageIndex;
         DisplayData(e.NewPageIndex, AspNetPager1.PageSize);
     }
+
+    protected string ReturnIsActive(string IsActive)
+    {
+        if (IsActive.Equals("True"))
+        {
+            return "是";
+        }else
+        {
+            return "否";
+        }
+    }
 }

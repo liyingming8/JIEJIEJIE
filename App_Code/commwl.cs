@@ -10,6 +10,7 @@ using System.Text;
 using System.Web.Security;
 using TJ.Model;
 using TJ.BLL;
+using TJ.DBUtility;
 
 /// <summary>
 /// comm 的摘要说明
@@ -20,10 +21,10 @@ public class commwl
     private readonly SqlCommand sqlcmd = new SqlCommand();
 
     private readonly SqlConnection sqlconn =
-        new SqlConnection(ConfigurationManager.ConnectionStrings["SqlServerConnStringWuLiu"].ToString());
+        new SqlConnection(ConnectionInfo.SqlServerConnStringWuLiu);
 
     private readonly SqlConnection sqlconnmarketing =
-        new SqlConnection(ConfigurationManager.ConnectionStrings["SqlServerConnString"].ToString());
+        new SqlConnection(ConnectionInfo.SqlServerConnString);
 
     private readonly DBClass db = new DBClass(_showmode);
     private string tempsqlstring = "";

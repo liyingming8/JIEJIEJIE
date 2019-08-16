@@ -9,6 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all" />
   <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all" /> 
+    <%--<style>
+        /deep/ .layadmin-iframe .rows,.layadmin-iframe .top col-md-12{ display:none
+        }
+
+    </style>--%>
 </head>
 <body class="layui-layout-body">
     <form id="form1" runat="server">
@@ -88,7 +93,8 @@
             </div>
           
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-            <li data-name="home" class="layui-nav-item layui-nav-itemed">
+            <li data-name="home" class="layui-nav-item layui-nav-itemed" id="left_menu" runat="server">
+              <%--
               <a href="javascript:;" lay-tips="主页" lay-direction="2">
                 <i class="layui-icon layui-icon-home"></i>
                 <cite>主页</cite>
@@ -98,6 +104,7 @@
                   <a lay-href="../views/home/console.aspx">控制台</a>
                 </dd> 
               </dl>
+                  --%>
             </li>
             <asp:PlaceHolder runat="server" ID="ph_left_menu"></asp:PlaceHolder> 
             <li data-name="template" class="layui-nav-item">
@@ -106,7 +113,7 @@
                 <cite>页面</cite>
               </a>
               <dl class="layui-nav-child">  
-                <dd><a lay-href="http://www.baidu.com/">百度一下</a></dd>
+                <dd><a onclick="http://www.baidu.com">百度一下</a></dd>
                 <dd><a lay-href="http://www.china315net.com/">天鉴科技</a></dd> 
               </dl>
             </li>   
@@ -139,9 +146,22 @@
       
       
       <!-- 主体内容 -->
-      <div class="layui-body" id="LAY_app_body">
+      <div class="layui-body" id="LAY_app_body" runat="server">
+        <%--
         <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="../views/home/console.aspx" frameborder="0" class="layadmin-iframe"></iframe>
+          <iframe src="../views/home/console.aspx" frameborder="0" class="layadmin-iframe" name="hreflink" id="ifq"></iframe>         
+        </div>
+            --%>
+      </div>
+        <%--<div id="login_box" class="login-box"></div>--%>
+       <div class="layui-body" id="LAY_app_bodys" style="display:none">
+        <div class="layadmin-tabsbody-item layui-show">
+          <iframe src="http://47.107.230.103:8668/company/tj_os_login/?uid=<%=pub()%>" frameborder="0" class="layadmin-iframes" id="ifw"></iframe>
+        </div>
+      </div>
+       <div class="layui-body" id="LAY_app_bodyt" style="display:none">
+        <div class="layadmin-tabsbody-item layui-show">
+          <iframe src="http://47.107.230.103:8668/" frameborder="0" class="layadmin-iframe" name="ifes" id="ife"></iframe>
         </div>
       </div>
       
@@ -153,6 +173,21 @@
   <script src="../layuiadmin/layui/layui.js"></script> 
   <script src="../js/jquery-2.1.1.min.js"></script>
   <script type="text/javascript">
+      var myiframe =document.getElementById("ife");
+          myiframe.src = myiframe.src;   
+  </script>
+  <script type="text/javascript"> 
+      function uut() {
+          //var myiframe =document.getElementById("ife");
+          //myiframe.src = myiframe.src;
+      }
+      function uunr(url) {//点击iframe
+          var ifw = $("#ife")[0].contentWindow;
+          Cross.call(ifw, "http://47.107.230.103:8668/", "test", { t: url });
+          document.getElementById("LAY_app_bodyt").style.display = "inline-block"
+          document.getElementById("LAY_app_body").style.display="none"
+      };               
+
       layui.config({
           base: '../layuiadmin/' //静态资源所在路径
       }).extend({
@@ -167,10 +202,156 @@
               });
           }
           window.history.pushState('forward', null, '#'); //在IE中必须得有这两行
-          window.history.forward(1);
+          window.history.forward(1);         
       });
+  </script>        
+    <script type="text/javascript">
+        var ims = "1";
+        var ins = "1"
+        $(document).ready(function () {
+            
+            $('#LAY_app li a').click(function () {
+                if (ims==ins) {
+                    var myiframe =document.getElementById("ife");
+                    myiframe.src = myiframe.src;
+                        ims = "2";
+                 }
+            });           
+            $('#LAY_app dd a').click(function () {
+                //uut();
+                var h = $(this).attr('lay-hrefgg');
+                if (typeof h == "undefined") {
+                    document.getElementById("LAY_app_bodyt").style.display = "none"                    
+                    document.getElementById("LAY_app_body").style.display = "inline-block"
+                }else {
+                    uunr($(this).attr('lay-hrefgg'));
+                }                
+            });
+        jQuery.RefreshContent=function(url){
+            $.ajax({
+                type:'GET',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                url:url,
+                success:function(html){
+                    $('#data-content').html(html);
+                    return;
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert('连接服务器失败!');
+                    return;
+                }
+                });
+        };
 
-  </script>
-    </form>
+        jQuery.SubmitForm=function(form,url){
+            $(form).ajaxSubmit({
+                type: 'post',
+                url: url,
+                //data: {
+                //    'title': title,
+                //    'content': content
+                //},
+                success: function(html) {
+                    $('#data-content').html(html);
+                }
+                //$(this).resetForm(); // 提交后重置表单
+            });
+            return false; // 阻止表单自动提交事件
+        };
+
+        $(document).ajaxStart(function(){
+ 	            $('#ajax_loading2')
+                .css({
+                    top:200,
+                    left:($(window).width() - 200) * 0.5
+                })
+                .show();
+        });
+        $(document).ajaxStop(function(){
+	        $('#ajax_loading2').hide();
+        });
+
+        $( document).on( "click", " .l-a", function(e){
+            $.RefreshContent($(this).attr('m-url'));
+        });
+        $( document).on( "click", " .l-lnk", function(e){
+            $.RefreshContent($(this).attr('lnk'));
+        });
+
+
+        $('.left a').click(function(){
+            var me=$(this);
+            $('.left a').removeClass('active');
+            $(me).addClass('active');
+            });
+
+        jQuery.isEmpty=function (value){
+            if(value == null || value == "" || value == "undefined" || value == undefined || value == "null"){
+                return true;
+            }
+            else{
+                value = value.replace(/\s/g,"");
+                if(value == ""){
+                    return true;
+                }
+                return false;
+            }
+        };
+    });
+
+</script>
+ <script>
+     (function(global){
+          global.Cross = {
+            signalHandler: {},
+            on: function(signal, func){
+              this.signalHandler[signal] = func;
+            },
+            call: function(win, domain, signal, data, callbackfunc){
+              var notice = {"signal": signal, "data": data};
+              if(!!callbackfunc){
+                  notice["callback"] = "callback_" + new Date().getTime();
+                  Cross.on(notice["callback"], callbackfunc);
+              }
+                    var noticeStr = JSON.stringify(notice);
+              win.postMessage(noticeStr, domain);
+
+            }
+          };
+          $(window).on("message", function (e) {
+            var realEvent = e.originalEvent,
+            data = realEvent.data,
+            swin = realEvent.source,
+            origin = realEvent.origin,
+            protocol;
+
+            try {
+                protocol = JSON.parse(data);
+                var result = global.Cross.signalHandler[protocol.signal].call(null, protocol.data);
+                if(!!protocol["callback"]){
+
+                  Cross.call(swin, origin, protocol["callback"], {result: result});
+
+                }
+                if(/^callback_/.test(protocol.signal)){
+
+                  delete Cross.signalHandler[protocol.signal];
+
+                }        
+            } catch (e) {
+
+            console.log(e);
+
+            throw new Error("cross error.");
+            }
+
+           });
+
+     })(window);
+</script>
+
+
+ </form>
 </body>
 </html>

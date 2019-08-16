@@ -5,7 +5,6 @@ using System.Web.UI;
 using System.Data;
 using System.Text.RegularExpressions;
 
-
 public partial class Admin_TJ_WHBuJiangAndEdit : AuthorPage
 {
     TabExecute _tab = new TabExecute();
@@ -18,98 +17,119 @@ public partial class Admin_TJ_WHBuJiangAndEdit : AuthorPage
             {
                 HF_CMD.Value = Request.QueryString["cmd"].Trim();
             }
-            if (Request.QueryString["DanHao"] != null && !Request.QueryString["DanHao"].Trim().Equals(""))
+            if (Request.QueryString["ID"] != null && !Request.QueryString["ID"].Trim().Equals(""))
             {
-                HF_ID.Value = Request.QueryString["DanHao"].Trim();
+                HF_ID.Value = Request.QueryString["ID"].Trim();
             }
             switch (HF_CMD.Value)
             {
                 case "add":
                     FillComboBoxProduct();
-                    FillComboBoxDanHao();
-                    Button1.Text = "添加";
+                    Button1.Text = "添加";                  
                     break;
                 case "edit":
                     Button1.Text = "修改";
-                    //FillComboBoxProduct();
+                    PackCodeEdit.Disabled = true;
+                    ComboBox_Product.Enabled = false;
                     fillinput(HF_ID.Value.Trim());
                     break;
                 default:
                     break;
             }
+            if (!string.IsNullOrEmpty(Request.QueryString["uid"]))
+            {
+                PackCodeEdit.Value= Request.QueryString["BaoBianHao"];
+            }
+            PackCodeEdit.Attributes.Add("onclick", XiangXiLinkString());
         }
     }
 
-    private void fillinput(string DanHao)
+    protected string XiangXiLinkString()
     {
-        //string mSQL = "select top 1 * from TJ_BaseLabelCodeInfo_2019 where DanHao='" + DanHao+ "' and HBJE is not null and cast(HBJE as int)>0 and Compid="+GetCookieCompID();
-        string mSQL = "select top 1 beizhu1 as DanHao,beizhu,Remarks,Remarks1 as Products_Name from TB_SmallBuJiang where Remarks1='" + DanHao + "' and Compid=" + GetCookieCompID();
-        DataTable mDataTable=_tab.ExecuteNonQuery(mSQL);//ComboBox_DanHao
-        if (mDataTable.Rows.Count>0)
+        string hh = Request.Url.PathAndQuery;
+        return "openWinCenter('TJ_WHBuJiangPackCodeAndEdit.aspx?r=" +
+                   Sc.EncryptQueryString(Request.Url.PathAndQuery) + "',500, 360, '标签包编码 ')";
+    }
+
+    private void fillinput(string ID)
+    {
+        string mSQL = "select  beizhu1,BaoBianHao as DanHao,beizhu,Remarks,Remarks1 as Products_Name from TB_SmallBuJiang where ID=" + ID;
+        DataTable mDataTable = _tab.ExecuteNonQuery(mSQL);
+        if (mDataTable.Rows.Count > 0)
         {
-            ComboBox_DanHao.DataSource = mDataTable;
-            ComboBox_DanHao.DataBind();
-            ComboBox_DanHao.SelectedValue= mDataTable.Rows[0]["DanHao"].ToString();
             ComboBox_Product.DataSource = mDataTable;
+            PackCodeEdit.Value = mDataTable.Rows[0]["DanHao"].ToString();
             ComboBox_Product.DataBind();
             ComboBox_Product.SelectedValue = mDataTable.Rows[0]["Products_Name"].ToString();
-            Jifen_Text.Value= mDataTable.Rows[0]["beizhu"].ToString();
+            Jifen_Text.Value = mDataTable.Rows[0]["beizhu"].ToString();
             inputRemarks.Value = mDataTable.Rows[0]["Remarks"].ToString();
+            if (mDataTable.Rows[0]["beizhu1"].ToString().Equals("1"))
+            {
+                CheckBox_IsActive.Checked = true;
+            }
+            else
+            {
+                CheckBox_IsActive.Checked = false;
+            }
         }
+        mDataTable.Dispose();
     }
 
     protected void FillComboBoxProduct()
     {
-        ComboBox_Product.DataSource = wuliu.ExecuteNonQuery("select Products_Name from TB_Products_Infor where CompID="+GetCookieCompID());
+        ComboBox_Product.DataSource = wuliu.ExecuteNonQuery("select Products_Name from TB_Products_Infor where CompID=" + GetCookieCompID());
         ComboBox_Product.DataBind();
     }
 
-    protected void FillComboBoxDanHao()
-    {
-        string mSQL = "select distinct DanHao from TJ_BaseLabelCodeInfo_2019 where DanHao is not null and len(DanHao)>0 and HBJE is null and Compid=" + GetCookieCompID();
-        ComboBox_DanHao.DataSource = _tab.ExecuteNonQuery(mSQL);
-        ComboBox_DanHao.DataBind();
-    }
-  
     protected void Button1_Click(object sender, EventArgs e)
     {
         string Remarks = inputRemarks.Value;
         if (CheckInput())
         {
-            int DanHao=Convert.ToInt32(ComboBox_DanHao.SelectedValue);
+            string DanHao = PackCodeEdit.Value;
             string mProductName = ComboBox_Product.SelectedValue;
-            if (Jifen_Text.Value.Length>0) {
-                if (IsInt(Jifen_Text.Value)) {
-                    if (Convert.ToInt32(Jifen_Text.Value)<=100) {
+            if (Jifen_Text.Value.Length > 0)
+            {
+                if (IsInt(Jifen_Text.Value))
+                {
+                    if (Convert.ToInt32(Jifen_Text.Value) < 100)
+                    {
                         int JiFen = Convert.ToInt32(Jifen_Text.Value);
-                        string mSQL = "select * from TB_SmallBuJiang where beizhu1='" + DanHao + "' and Compid=" + GetCookieCompID()+ " and Remarks1='"+ mProductName + "'";
-                        DataTable mDataTable = _tab.ExecuteNonQuery(mSQL);
-                        if (mDataTable.Rows.Count > 0)
+                        string mSQL = "select count(ID) from TB_SmallBuJiang where BaoBianHao='" + DanHao + "' and Compid=" + GetCookieCompID();
+                        int IsActive = 0;
+                        if (CheckBox_IsActive.Checked)
                         {
-                            _tab.ExecuteNonQuery("update TB_SmallBuJiang set beizhu=cast(" + JiFen + " as int),BJDate=GETDATE(),Remarks='"+ Remarks + "' where beizhu1='" + DanHao + "' and compid=" + GetCookieCompID());
+                            IsActive = 1;
+                        }
+                        string rowCount = _tab.ExecuteQueryForSingleValue(mSQL);
+                        if (int.Parse(rowCount) > 0)
+                        {
+                            _tab.ExecuteNonQuery("update TB_SmallBuJiang set beizhu=cast(" + JiFen + " as int),BJDate=GETDATE(),Remarks='" + Remarks + "',beizhu1="+ IsActive + " where BaoBianHao='" + DanHao + "' and compid=" + GetCookieCompID());
                             _tab.ExecuteNonQuery("update TJ_BaseLabelCodeInfo_2019 set HBJE=cast(" + JiFen + " as int) where DanHao='" + DanHao + "' and compid=" + GetCookieCompID());
                         }
                         else
                         {
-                            string insertSQL = "insert into TB_SmallBuJiang(compid,UID,BJDate,Remarks,beizhu1,beizhu,Remarks1) values(" + GetCookieCompID() + "," + GetCookieUID() + ",GETDATE(),'" + inputRemarks.Value + "'," + DanHao + ",cast(" + JiFen + " as int),'"+ mProductName + "')";
+                            string insertSQL = "insert into TB_SmallBuJiang(compid,UID,BJDate,Remarks,BaoBianHao,beizhu,Remarks1,beizhu1) values(" + GetCookieCompID() + "," + GetCookieUID() + ",GETDATE(),'" + inputRemarks.Value + "','" + DanHao + "',cast(" + JiFen + " as int),'" + mProductName + "',"+ IsActive + ")";
                             _tab.ExecuteNonQuery(insertSQL);
                             _tab.ExecuteNonQuery("update TJ_BaseLabelCodeInfo_2019 set HBJE=cast(" + JiFen + " as int) where DanHao='" + DanHao + "' and compid=" + GetCookieCompID());
                         }
-                    }else
-                    {
-                        MessageBox.Show(this, "积分值不能超过100！");
+                        ScriptManager.RegisterStartupScript(UpdatePanel1, GetType(), "reload", "closemyWindow();", true);
                     }
-                } else
+                    else
+                    {
+                        MessageBox.Show(this, "积分值小于100！");
+                    }
+                }
+                else
                 {
                     MessageBox.Show(this, "积分值为正整数！");
                 }
-            }else
-            {
-                MessageBox.Show(this, "积分值不能为空！");
             }
-            MessageBox.Show(this, "提交成功！");
-            ScriptManager.RegisterStartupScript(UpdatePanel1, GetType(), "reload", "closemyWindow();", true);
-        }
+            else
+            {
+                MessageBox.Show( this,"积分值不能为空！");
+            }
+        } 
     }
 
     private bool IsInt(string intstring)
@@ -117,18 +137,19 @@ public partial class Admin_TJ_WHBuJiangAndEdit : AuthorPage
         return Regex.IsMatch(intstring, @"^[1-9]\d*$");
     }
 
+
     private bool CheckInput()
     {
+        if (!(PackCodeEdit.Value.Length > 0))
+        {
+            MessageBox.Show(this, "请指定标签包编号！"); 
+            return false;
+        }
         if (ComboBox_Product.SelectedValue == "0" || ComboBox_Product.SelectedValue == null)
         {
-            Response.Write("<script>alert('请指定产品名称！');</script>");
+            MessageBox.Show(this, "请指定产品名称！"); 
             return false;
-        }
-        if (ComboBox_DanHao.SelectedValue == "0" || ComboBox_DanHao.SelectedValue == null)
-        {
-            Response.Write("<script>alert('请指定标签包编号！');</script>");
-            return false;
-        }
+        } 
         return true;
     }
 }

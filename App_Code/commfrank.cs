@@ -32,21 +32,21 @@ public class commfrank
     string str = "";
     public SqlConnection GetConnection()
     {
-        str = ConfigurationManager.ConnectionStrings["SqlServerConnString"].ToString();
+        str = ConnectionInfo.SqlServerConnString;
         myConn = new SqlConnection(str);
         return myConn; 
     }
 
     public SqlConnection GetConnectionWuLiu()
     {
-        str = ConfigurationManager.ConnectionStrings["SqlServerConnStringWuLiu"].ToString();
+        str = ConnectionInfo.SqlServerConnStringWuLiu;
         myConn = new SqlConnection(str);
         return myConn;
     }
 
     public NpgsqlConnection GetConnectionCRM()
     {
-        str = ConfigurationManager.ConnectionStrings["SqlServerConnStringWuLiu"].ToString();
+        str = ConnectionInfo.PGDBConnStrCRM;
         myConnpg = new NpgsqlConnection(str);
         return myConnpg;
     }
@@ -287,7 +287,7 @@ public class commfrank
                         int t = 0;
                         if (string.IsNullOrEmpty(tempvl) || tempvl.Equals("0"))
                         {
-                            t = _tab.ExecuteNonQuery("INSERT INTO TJ_Activity_JXS_Win(compid,agentid,awtypeid,winreason,prizevl,prizeintro,gettm,confirmtm,jxstypeid) VALUES(" + compid + "," + row["AcceptAgentID"] + "," + obj["tpid"] + ",'扫码积分'," + Convert.ToDecimal(obj["prvl"].ToString()) * Convert.ToInt32(row["cnt"]) + ",'" + obj["awnm"] + "','" + Convert.ToDateTime(row["AcceptDay"]).ToString("yyyy-MM-dd") + "','" + DateTime.Now + "',3)", null);
+                            t = _tab.ExecuteNonQuery("INSERT INTO TJ_Activity_JXS_Win(compid,agentid,awtypeid,winreason,prizevl,prizeintro,gettm,confirmtm,jxstypeid,yearnm,monthnm,daynm) VALUES(" + compid + "," + row["AcceptAgentID"] + "," + obj["tpid"] + ",'扫码积分'," + Convert.ToDecimal(obj["prvl"].ToString()) * Convert.ToInt32(row["cnt"]) + ",'" + obj["awnm"] + "','" + Convert.ToDateTime(row["AcceptDay"]).ToString("yyyy-MM-dd") + "','" + DateTime.Now + "',3,"+ Convert.ToDateTime(row["AcceptDay"]).Year + ","+ Convert.ToDateTime(row["AcceptDay"]).Month+ "," + Convert.ToDateTime(row["AcceptDay"]).Day + ")", null);
                         }
                         else
                         {

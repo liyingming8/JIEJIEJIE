@@ -18,6 +18,7 @@ public partial class Admin_TJ_CompADInfoSimple : AuthorPage
     readonly TabExecute _tab = new TabExecute(); 
     protected void Page_Load(object sender, EventArgs e)
     {
+        string copid = GetCookieCompID();
         if (!IsPostBack)
         {
             _currentindex = 1;
@@ -26,15 +27,15 @@ public partial class Admin_TJ_CompADInfoSimple : AuthorPage
         }
     }
 
-    public string ReturnProductName(string Info_ID)
+    public string ReturnProductName(string copid)
     {
-        if (Info_ID.Equals("") || Info_ID == null || Info_ID == "0")
+        if (copid.Equals("") || copid == null || copid == "0")
         {
             return "不限";
         }
         else
         {
-            return bproduct.GetList(int.Parse(Info_ID)).Products_Name;
+            return bproduct.GetList(int.Parse(copid)).Products_Name;
         }
     } 
 

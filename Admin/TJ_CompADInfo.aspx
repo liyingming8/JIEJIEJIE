@@ -44,15 +44,15 @@
                             <asp:Label ID="LabelCompID" runat="server" Text='<%# ReturnCompName(Eval("CompID").ToString()) %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="图片">
                         <ItemTemplate>
                             <asp:Image Height="40px" ImageUrl='<%# Eval("FilePath").ToString() %>' runat="server" />
-                            <asp:Label ID="labelFilePath" runat="server" Text='<%# Eval("FilePath").ToString() %>'></asp:Label>
+                            <%--<asp:Label ID="labelFilePath" runat="server" Text='<%# Eval("FilePath").ToString() %>'></asp:Label>--%>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="是否有效">
                         <ItemTemplate>
-                            <asp:Label ID="LabelIsActive" runat="server"></asp:Label>
+                            <asp:Label ID="LabelIsActive" runat="server" Text='<%# ReturnIsActive(Eval("IsActive").ToString()) %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="上传时间">

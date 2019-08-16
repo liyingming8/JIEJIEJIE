@@ -62,7 +62,7 @@ public partial class Admin_TJ_ProductSettingAndEdited : AuthorPage
         string Remarks = inputRemarks.Value;
         if (IsInt(product_code))
         {
-            if (product_code.Length < 6 || product_code.Length > 8)
+            if (product_code.Length < 4 || product_code.Length > 8)
             {
                 Response.Write("<script>alert('产品编码长度有误(4-8位)！');</script>");
             }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Web;
 using Newtonsoft.Json;
 using Npgsql;
+using TJ.DBUtility;
 
 /// <summary>
 ///DBClass 的摘要说明
@@ -15,15 +16,15 @@ public class DBClass
     SqlConnection myConn;
     SqlCommand myCmd;
     DataSet ds;
-    private DataTable dttemp;
+    private DataTable dttemp; 
     public DataSet Mydataset;
-    public SqlDataAdapter ada;
+    public SqlDataAdapter ada; 
     private NpgsqlConnection pgconn;
     private NpgsqlCommand pgcommd;
-    private readonly string _showmode = "0";
+    private readonly string _showmode="0";
     public DBClass(string sm)
     {
-        _showmode = sm;
+        _showmode = sm; 
     }
 
     public DBClass()
@@ -36,22 +37,22 @@ public class DBClass
         string str = "";
         if (showmode.Equals("1"))
         {
-            str = ConfigurationManager.ConnectionStrings["SqlServerConnStringShowMode"].ToString();
+            str = ConnectionInfo.SqlServerConnStringShowMode;
         }
         else
         {
-            str = ConfigurationManager.ConnectionStrings["SqlServerConnString"].ToString();
+            str= ConnectionInfo.SqlServerConnString;
         }
-
+         
         myConn = new SqlConnection(str);
         return myConn;
 
     }
     public SqlConnection GetConnectionstrbbe()
-    {
-        string str = ConfigurationManager.ConnectionStrings["GuanDongBaoBeiEr"].ToString();
+    { 
+        string str = ConnectionInfo.GuanDongBaoBeiEr;
         myConn = new SqlConnection(str);
-        return myConn;
+        return myConn; 
     }
 
     public SqlConnection GetConnectionWL(string showmode)
@@ -59,12 +60,12 @@ public class DBClass
         string str = "";
         if (showmode.Equals("1"))
         {
-            str = ConfigurationManager.ConnectionStrings["SqlServerConnStringWuLiuShowMode"].ToString();
+            str = ConnectionInfo.SqlServerConnStringWuLiuShowMode;
         }
         else
         {
-            str = ConfigurationManager.ConnectionStrings["SqlServerConnStringWuLiu"].ToString();
-        }
+            str = ConnectionInfo.SqlServerConnStringWuLiu;
+        } 
         myConn = new SqlConnection(str);
         return myConn;
     }
@@ -73,28 +74,28 @@ public class DBClass
     {
         get
         {
-            string str = ConfigurationManager.ConnectionStrings["SqlServerConnStringSM"].ToString();
+            string str = ConnectionInfo.SqlServerConnStringSM;
             myConn = new SqlConnection(str);
             return myConn;
-        }
+        } 
     }
     public SqlConnection GetConnectionJGXQ()
     {
-        string str = ConfigurationManager.ConnectionStrings["ConnectionStringJGXQ"].ToString();
+        string str = ConnectionInfo.ConnectionStringJGXQ;
         myConn = new SqlConnection(str);
-        return myConn;
+        return myConn; 
     }
 
     public SqlConnection GetConnectionCYJY()
-    {
-        string str = ConfigurationManager.ConnectionStrings["SqlServerConnStringCYJY"].ToString();
+    { 
+        string str = ConnectionInfo.SqlServerConnStringCYJY;
         myConn = new SqlConnection(str);
-        return myConn;
+        return myConn; 
     }
 
     public NpgsqlConnection GetPGConnctionGIS()
     {
-        string str = ConfigurationManager.ConnectionStrings["PGConnStringGis"].ToString();
+        string str = ConnectionInfo.PGConnStringGis;
         pgconn = new NpgsqlConnection(str);
         return pgconn;
     }
@@ -156,7 +157,7 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from CY_User where " + str + " order by RegistDate desc ", myConn);
+        ada = new SqlDataAdapter("select * from CY_User where " + str + " order by RegistDate desc ", myConn); 
         ada.Fill(ds, "userinfo");
         return ds.Tables["userinfo"];
 
@@ -237,7 +238,7 @@ public class DBClass
             if (myConn.State == ConnectionState.Closed)
             {
                 myConn.Open();
-            }
+            } 
             string myCmd = "SELECT COUNT(*) as num,sm_date as time FROM TJ_375SMinfo  where CompID=" + compid + " and sm_date>='" + startime + "' and sm_date<'" + endtime + "'  group by sm_date order by time ";
             Mydataset = new DataSet();
             ada = new SqlDataAdapter(myCmd, myConn);
@@ -246,7 +247,7 @@ public class DBClass
         }
     }
 
-    public DataTable GetsmcsForAllMonth(string startime, string endtime, string compid, string showmode)
+    public DataTable GetsmcsForAllMonth(string startime, string endtime, string compid,string showmode)
     {
         using (var myConn = GetConnection(_showmode))
         {
@@ -262,8 +263,8 @@ public class DBClass
             else
             {
                 myCmd = "SELECT COUNT(ID) as num,(Convert(varchar,sm_year)+RIGHT('0'+Convert(varchar,sm_month),2)) as time FROM TJ_375SMinfo  where CompID=" + compid + " and sm_date>='" + startime + "' and sm_date<'" + endtime + "'  group by sm_year,sm_month order by time ";
-            }
-            dttemp = new DataTable();
+            } 
+            dttemp = new DataTable(); 
             ada = new SqlDataAdapter(myCmd, myConn);
             ada.Fill(dttemp);
             return dttemp;
@@ -289,7 +290,7 @@ public class DBClass
                 {
                     if (myCmd == "")
                     {
-                        myCmd = "SELECT COUNT(ID) as num,(Convert(varchar,sm_year)+RIGHT('0'+Convert(varchar,sm_month),2)) as time FROM TJ_SMinfo_" + i + "  where CompID=" + compid + " and sm_date>='" + startime + "' and sm_date<='" + endtime + "'  group by sm_year,sm_month order by time ";
+                        myCmd = "SELECT COUNT(ID) as num,(Convert(varchar,sm_year)+RIGHT('0'+Convert(varchar,sm_month),2)) as time FROM TJ_SMinfo_" + i+ "  where CompID=" + compid + " and sm_date>='" + startime + "' and sm_date<='" + endtime + "'  group by sm_year,sm_month order by time ";
                     }
                     else
                     {
@@ -320,6 +321,33 @@ public class DBClass
         }
     }
 
+    public DataTable GetFanByMonthBack(string startdaime, string endtime, string compid)
+    {
+        using (var mycon = GetConnection(_showmode))
+        {
+            if (myConn.State == ConnectionState.Closed)
+            {
+                mycon.Open();
+            }
+            string sqlcmd = "";
+            if (_showmode.Equals("1"))
+            {
+                sqlcmd = "Select count(UserID) as num, (Convert(varchar,reg_year)+RIGHT('0'+Convert(varchar,reg_month),2)) as time from TJ_User where  RID is null and reg_date>='" +
+                          startdaime + "' and reg_date<='" + endtime + "' group by reg_year,reg_month order by time";
+            }
+            else
+            {
+                sqlcmd = "Select count(UserID) as num, (Convert(varchar,reg_year)+RIGHT('0'+Convert(varchar,reg_month),2)) as time from TJ_User where CompID=" + compid + " and RID is null and reg_date>='" +
+                           startdaime + "' and reg_date<='" + endtime + "' group by reg_year,reg_month order by time";
+            }
+           
+            dttemp = new DataTable();
+            ada= new SqlDataAdapter(sqlcmd,myConn);
+            ada.Fill(dttemp);
+            return dttemp;
+        }
+    }
+
     public DataTable GetFanByMonth(string startdaime, string endtime, string compid)
     {
         using (var mycon = GetConnection(_showmode))
@@ -341,13 +369,13 @@ public class DBClass
             {
             */
             dttemp = new DataTable();
-            string sqlcmdLastMonth = "select top 1 ynm,mnm from TJ_Fans_RaiseInfo where CompId=" + compid+ " order by ynm desc,mnm desc";
+            string sqlcmdLastMonth = "select top 1 ynm,mnm from TJ_Fans_RaiseInfo where CompId=" + compid + " order by ynm desc,mnm desc";
             ada = new SqlDataAdapter(sqlcmdLastMonth, myConn);
             ada.Fill(dttemp);
-            if (dttemp.Rows.Count>0)
+            if (dttemp.Rows.Count > 0)
             {
                 //新增从最大月份开始
-                string mMaxMonth = dttemp.Rows[0][0].ToString()+"-"+ dttemp.Rows[0][1].ToString();
+                string mMaxMonth = dttemp.Rows[0][0].ToString() + "-" + dttemp.Rows[0][1].ToString();
                 if (!mMaxMonth.Equals(Convert.ToDateTime(endtimeLastMonuth).ToString("yyyy-M")))
                 {
                     dttemp.Clear();
@@ -355,8 +383,8 @@ public class DBClass
                           Convert.ToDateTime(Convert.ToDateTime(mMaxMonth).ToString("yyyy-MM-dd")).AddMonths(1).ToString("yyyy-MM-dd") + "' and reg_date<='" + endtimeLastMonuth + "' group by reg_year,reg_month order by time";
                     ada = new SqlDataAdapter(sqlcmd, myConn);
                     ada.Fill(dttemp);
-                    if (dttemp.Rows.Count>0)
-                    {                       
+                    if (dttemp.Rows.Count > 0)
+                    {
                         for (int i = 0; i < dttemp.Rows.Count; i++)
                         {
                             string insertSQL = "insert into TJ_Fans_RaiseInfo(compid,ynm,mnm,sumvl,updatetm) values(" + compid + "," + dttemp.Rows[i]["time"].ToString().Substring(0, 4)
@@ -368,15 +396,18 @@ public class DBClass
                 }
             }
             //新增全部
-            else { 
+            else
+            {
                 sqlcmd = "Select count(UserID) as num, (Convert(varchar,reg_year)+RIGHT('0'+Convert(varchar,reg_month),2)) as time from TJ_User where CompID=" + compid + " and RID is null and reg_date>='" +
                            startdaime + "' and reg_date<='" + endtimeLastMonuth + "' group by reg_year,reg_month order by time";
                 ada = new SqlDataAdapter(sqlcmd, myConn);
                 ada.Fill(dttemp);
-                if (dttemp.Rows.Count>0) {
-                    for (int i=0; i< dttemp.Rows.Count;i++) {
-                        string insertSQL = "insert into TJ_Fans_RaiseInfo(compid,ynm,mnm,sumvl,updatetm) values("+ compid+","+ dttemp.Rows[i]["time"].ToString().Substring(0,4)
-                            +","+ dttemp.Rows[i]["time"].ToString().Substring(4)+","+ dttemp.Rows[i]["num"].ToString()+",getdate())";
+                if (dttemp.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dttemp.Rows.Count; i++)
+                    {
+                        string insertSQL = "insert into TJ_Fans_RaiseInfo(compid,ynm,mnm,sumvl,updatetm) values(" + compid + "," + dttemp.Rows[i]["time"].ToString().Substring(0, 4)
+                            + "," + dttemp.Rows[i]["time"].ToString().Substring(4) + "," + dttemp.Rows[i]["num"].ToString() + ",getdate())";
                         SqlCommand cmd = new SqlCommand(insertSQL, myConn);
                         cmd.ExecuteNonQuery();
                     }
@@ -384,8 +415,8 @@ public class DBClass
             }
             //从TJ_Fans_RaiseInfo查询数据
             string QuerySQL = @"select * from(select sumvl as num,(CAST(ynm AS varchar)+CAST((case when mnm <= 9 then '0'+CAST(mnm AS varchar) else CAST(mnm AS varchar) end) as varchar)) 
-               as time from TJ_Fans_RaiseInfo where CompID=" + compid + ")a "+
-              "  where time>='" + Convert.ToDateTime(startdaime).ToString("yyyyMM")+ "' and time<='" + Convert.ToDateTime(endtimeLastMonuth).ToString("yyyyMM") +"'";
+               as time from TJ_Fans_RaiseInfo where CompID=" + compid + ")a " +
+              "  where time>='" + Convert.ToDateTime(startdaime).ToString("yyyyMM") + "' and time<='" + Convert.ToDateTime(endtimeLastMonuth).ToString("yyyyMM") + "'";
             ada = new SqlDataAdapter(QuerySQL, myConn);
             dttemp.Clear();
             ada.Fill(dttemp);
@@ -664,7 +695,7 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from BB_PZinfo where " + str + " ", myConn);
+        ada = new SqlDataAdapter("select * from BB_PZinfo where " + str + " ", myConn); 
         ada.Fill(ds, "TJ_PZinfo");
         return ds.Tables["TJ_PZinfo"];
 
@@ -965,7 +996,7 @@ public class DBClass
                 myConn.Open();
             }
             ds = new DataSet();
-            ada = new SqlDataAdapter("select * from TB_BQLabelTH where " + cxstr + " ", myConn);
+            ada = new SqlDataAdapter("select * from TB_BQLabelTH where " + cxstr + " ", myConn); 
             ada.Fill(ds, "TB_BQLabelTH");
             return ds.Tables["TB_BQLabelTH"];
         }
@@ -1071,7 +1102,7 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from TJ_MSnsInfo where " + str + " ", myConn);
+        ada = new SqlDataAdapter("select * from TJ_MSnsInfo where " + str + " ", myConn); 
         ada.Fill(ds, "TJ_MSnsInfo");
         return ds.Tables["TJ_MSnsInfo"];
     }
@@ -1217,7 +1248,7 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from TJ_User where " + str + " ", myConn);
+        ada = new SqlDataAdapter("select * from TJ_User where " + str + " ", myConn); 
         ada.Fill(ds, "TJ_User");
         return ds.Tables["TJ_User"];
 
@@ -1238,7 +1269,7 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from TJ_Address where " + str + " ", myConn);
+        ada = new SqlDataAdapter("select * from TJ_Address where " + str + " ", myConn); 
         ada.Fill(ds, "TJ_Address");
         return ds.Tables["TJ_Address"];
 
@@ -1260,9 +1291,9 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from TJ_DKWXJPinfo where " + cxstr + " ", myConn);
+        ada = new SqlDataAdapter("select * from TJ_DKWXJPinfo where " + cxstr + " ", myConn); 
         ada.Fill(ds, "DKWXJPinfo");
-        return ds.Tables["DKWXJPinfo"];
+        return ds.Tables["DKWXJPinfo"]; 
     }
 
 
@@ -1302,7 +1333,7 @@ public class DBClass
         }
         ds = new DataSet();
         ada = new SqlDataAdapter("select * from TJ_DKWXJPinfo where BoxLabel='" + BoxLabel + "'", myConn);
-        ada.Fill(ds, "DKWXJPinfo");
+        ada.Fill(ds, "DKWXJPinfo"); 
         return ds.Tables["DKWXJPinfo"];
 
     }
@@ -1323,7 +1354,7 @@ public class DBClass
             ada.Dispose();
             myConn.Close();
             Mydataset.Dispose();
-            return Mydataset.Tables["ob"];
+            return Mydataset.Tables["ob"]; 
         }
     }
 
@@ -1683,9 +1714,9 @@ public class DBClass
     {
         myConn = GetConnection(_showmode);
         ds = new DataSet();
-        ada = new SqlDataAdapter("select LAID from TJ_LotteryActivity where CompID=" + comid + "", myConn);
+        ada = new SqlDataAdapter("select LAID from TJ_LotteryActivity where CompID=" + comid + "", myConn); 
         ada.Fill(ds, "LAID");
-        return ds.Tables["LAID"];
+        return ds.Tables["LAID"]; 
     }
 
 
@@ -1984,15 +2015,15 @@ public class DBClass
             myConn.Open();
         }
         SqlCommand myCmd = new SqlCommand(DeleteSqlstr, myConn);
-
+       
         myCmd.Parameters.Add(new SqlParameter("@ID ", SqlDbType.Int));
         myCmd.Parameters["@ID "].Value = ID;
         myCmd.ExecuteNonQuery();
         myConn.Close();
     }
-    public object insert(string FHPC, string SHNum, string HZSName, string NHName, string SSQuYu, string ChanPinPiCi, string ChanPinDengJi, string ZhiJianYuan, string LianXiRen, string Phone, string ChanPinShuoMing)
+    public object insert(string FHPC,string SHNum,string HZSName,string NHName,string SSQuYu,string ChanPinPiCi,string ChanPinDengJi,string ZhiJianYuan ,string LianXiRen,string Phone, string ChanPinShuoMing)
     {
-
+       
         string InsertSqlstr = "INSERT INTO TJ_MSjbInfo(FHPC,SHNum,HZSName,NHName,SSQuYu,ChanPinPiCi,ChanPinDengJi,ZhiJianYuan,LianXiRen,Phone,ChanPinShuoMing) VALUES (@FHPC,@SHNum,@HZSName,@NHName,@SSQuYu,@ChanPinPiCi,@ChanPinDengJi,@ZhiJianYuan,@LianXiRen,@Phone,@ChanPinShuoMing) select @@identity";
         myConn = GetConnection(_showmode);
         if (myConn.State == ConnectionState.Closed)
@@ -2011,21 +2042,21 @@ public class DBClass
         myCmd.Parameters.Add(new SqlParameter("@LianXiRen ", SqlDbType.VarChar));
         myCmd.Parameters.Add(new SqlParameter("@Phone ", SqlDbType.VarChar));
         myCmd.Parameters.Add(new SqlParameter("@ChanPinShuoMing ", SqlDbType.VarChar));
-
-        myCmd.Parameters["@FHPC "].Value = FHPC;
-        myCmd.Parameters["@SHNum "].Value = SHNum;
-        myCmd.Parameters["@HZSName "].Value = HZSName;
-        myCmd.Parameters["@NHName "].Value = NHName;
-        myCmd.Parameters["@SSQuYu "].Value = SSQuYu;
-        myCmd.Parameters["@ChanPinPiCi "].Value = ChanPinPiCi;
-        myCmd.Parameters["@ChanPinDengJi "].Value = ChanPinDengJi;
-        myCmd.Parameters["@ZhiJianYuan "].Value = ZhiJianYuan;
-        myCmd.Parameters["@LianXiRen "].Value = LianXiRen;
-        myCmd.Parameters["@Phone "].Value = Phone;
+     
+        myCmd.Parameters["@FHPC "].Value= FHPC;
+        myCmd.Parameters["@SHNum "].Value= SHNum;
+        myCmd.Parameters["@HZSName "].Value= HZSName;
+        myCmd.Parameters["@NHName "].Value= NHName;
+        myCmd.Parameters["@SSQuYu "].Value= SSQuYu;
+        myCmd.Parameters["@ChanPinPiCi "].Value= ChanPinPiCi;
+        myCmd.Parameters["@ChanPinDengJi "].Value= ChanPinDengJi;
+        myCmd.Parameters["@ZhiJianYuan "].Value= ZhiJianYuan;
+        myCmd.Parameters["@LianXiRen "].Value= LianXiRen;
+        myCmd.Parameters["@Phone "].Value= Phone;
         myCmd.Parameters["@ChanPinShuoMing "].Value = ChanPinShuoMing;
-
-
-
+        
+       
+       
         int count = myCmd.ExecuteNonQuery();
         myConn.Close();
         return count;
@@ -2034,9 +2065,9 @@ public class DBClass
     /// <summary>
     /// 修改一条记录
     ///</summary>
-    public void Modify(string FHPC, string SHNum, string HZSName, string NHName, string SSQuYu, string ChanPinPiCi, string ChanPinDengJi, string ZhiJianYuan, string LianXiRen, string Phone, string ChanPinShuoMing, int id)
+    public void Modify(string FHPC, string SHNum, string HZSName, string NHName, string SSQuYu, string ChanPinPiCi, string ChanPinDengJi, string ZhiJianYuan, string LianXiRen, string Phone, string ChanPinShuoMing,int id)
     {
-
+        
         string ModifySqlstr = "UPDATE TJ_MSjbInfo SET FHPC=@FHPC,SHNum=@SHNum,HZSName=@HZSName,NHName=@NHName,SSQuYu=@SSQuYu,ChanPinPiCi=@ChanPinPiCi,ChanPinDengJi=@ChanPinDengJi,ZhiJianYuan=@ZhiJianYuan,LianXiRen=@LianXiRen,Phone=@Phone,ChanPinShuoMing=@ChanPinShuoMing where ID=@ID";
         myConn = GetConnection(_showmode);
         if (myConn.State == ConnectionState.Closed)
@@ -2069,16 +2100,16 @@ public class DBClass
         myCmd.Parameters["@Phone "].Value = Phone;
         myCmd.Parameters["@ChanPinShuoMing "].Value = ChanPinShuoMing;
 
-
+        
         int count = myCmd.ExecuteNonQuery();
         myConn.Close();
-
+    
     }
 
     private static SqlParameter[] GetOrderParameters()
     {
         string ModifySqlstr = "UPDATE TJ_MSjbInfo SET FHPC=@FHPC,SHNum=@SHNum,HZSName=@HZSName,NHName=@NHName,SSQuYu=@SSQuYu,ChanPinPiCi=@ChanPinPiCi,ChanPinDengJi=@ChanPinDengJi,ZhiJianYuan=@ZhiJianYuan,LianXiRen=@LianXiRen,Phone=@Phone,ChanPinShuoMing=@ChanPinShuoMing where ID=@ID";
-
+       
         string PARM_FHPC = "@FHPC";
         string PARM_SHNum = "@SHNum";
         string PARM_HZSName = "@HZSName";
@@ -2208,7 +2239,7 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from TB_SmalllabelInfo where " + str + " ", myConn);
+        ada = new SqlDataAdapter("select * from TB_SmalllabelInfo where " + str + " ", myConn); 
         ada.Fill(ds, "TJ_small");
         return ds.Tables["TJ_small"];
 
@@ -2220,7 +2251,7 @@ public class DBClass
     /// <param name="LabelCodeNew"></param>
     /// <param name="compid"></param>
     /// <param name="Remarks"></param>
-    public void InserLOG(string compid, string Uid, string typeid, string ip)
+    public void InserLOG(string compid, string Uid, string typeid,string ip)
     {
         using (var myConn = GetConnection(_showmode))
         {
@@ -2230,7 +2261,7 @@ public class DBClass
             }
             string sql = "";
 
-            sql = "insert into TJ_Log (uid,IPAddress,DoType,DoTime,Compid ) values(" + Uid + ",'" + ip + "'," + typeid + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'," + compid + ")";
+            sql = "insert into TJ_Log (uid,IPAddress,DoType,DoTime,Compid ) values(" + Uid + ",'" + ip + "'," + typeid + ",'" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',"+compid+")";
             SqlCommand cmd = new SqlCommand(sql, myConn);
             cmd.ExecuteNonQuery();
             cmd.Dispose();
@@ -2309,7 +2340,7 @@ public class DBClass
             myConn.Open();
         }
         ds = new DataSet();
-        ada = new SqlDataAdapter("select * from TJ_LQJiLu where " + cxstr + " ", myConn);
+        ada = new SqlDataAdapter("select * from TJ_LQJiLu where " + cxstr + " ", myConn); 
         ada.Fill(ds, "DKWXJPinfo");
         return ds.Tables["DKWXJPinfo"];
     }
@@ -2321,7 +2352,7 @@ public class DBClass
             if (myConn.State == ConnectionState.Closed)
             {
                 myConn.Open();
-            }
+            } 
             string myCmd = "select " + flagstr + " from TJ_375SMinfo  where Compid= " + compid + str + "";
             Mydataset = new DataSet();
             ada = new SqlDataAdapter(myCmd, myConn);
@@ -2336,7 +2367,7 @@ public class DBClass
     /// <param name="compid"></param>
     /// <param name="agentid"></param>
     /// <returns>ProdID，Products_Name</returns>
-    public DataTable GetAuthorProductInfo(string compid, string agentid)
+    public DataTable GetAuthorProductInfo(string compid,string agentid)
     {
         using (var myConn = GetConnectionWL(_showmode))
         {
@@ -2352,12 +2383,12 @@ public class DBClass
             else
             {
                 myCmd = "Select a.ProdID,(select b.Products_Name from TianJianWuLiuWebnew.dbo.TB_Products_Infor b where a.ProdID=b.Infor_ID) Products_Name,(select b.Remarks from TianJianWuLiuWebnew.dbo.TB_Products_Infor b where a.ProdID=b.Infor_ID) pic From TianJianWuLiuWebnew.dbo.TB_ProductAuthorForAgent a Where AgentID=" + agentid + " and CompID=" + compid;
-            }
+            } 
             dttemp = new DataTable();
-            ada = new SqlDataAdapter(myCmd, myConn);
-            ada.Fill(dttemp);
+            ada = new SqlDataAdapter(myCmd, myConn); 
+            ada.Fill(dttemp); 
             return dttemp;
-        }
+        } 
     }
 
     public DataTable GetAuthorProductInfoForJSON(string compid, string agentid)
@@ -2443,7 +2474,7 @@ public class DBClass
             pgcommd = new NpgsqlCommand(sqlstring, myconn);
             return pgcommd.ExecuteNonQuery();
         }
-    }
+    } 
 
     #region 酒鬼酒红包统计
     /// <summary>
@@ -2512,7 +2543,7 @@ public class DBClass
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    public DataTable getsmad_all(string startime, string endtime, string compid, string showmode)
+    public DataTable getsmad_all(string startime, string endtime, string compid,string showmode)
     {
         using (var myConn = GetConnection(_showmode))
         {
@@ -2528,7 +2559,7 @@ public class DBClass
             else
             {
                 myCmd = "SELECT SMProc as address ,COUNT(*) as num  FROM TJ_375SMinfo  where CompID=" + compid + " and SMTime>='" + startime + "' and SMTime<'" + endtime + "' and SMProc is not null group by SMProc ";
-            }
+            } 
             dttemp = new DataTable();
             ada = new SqlDataAdapter(myCmd, myConn);
             ada.Fill(dttemp);
@@ -2556,7 +2587,7 @@ public class DBClass
         }
     }
 
-    public DataTable GetFaHuoPicInfo(string compid, string agentid, string sdate, string edate)
+    public DataTable GetFaHuoPicInfo(string compid,string agentid,string sdate,string edate)
     {
         using (var myConn = GetConnectionWL(_showmode))
         {
@@ -2564,7 +2595,7 @@ public class DBClass
             {
                 myConn.Open();
             }
-            string myCmd = "select a.FHID,a.FHPiCi from TianJianWuLiuWebnew.dbo.TB_FaHuoInfo_" + compid + " a where a.AgentID=" + agentid + " and a.FHDate between '" + sdate + "' and '" + edate + "'";
+            string myCmd = "select a.FHID,a.FHPiCi from TianJianWuLiuWebnew.dbo.TB_FaHuoInfo_" + compid + " a where a.AgentID=" + agentid + " and a.FHDate between '"+sdate+"' and '"+edate+"'";
             dttemp = new DataTable();
             ada = new SqlDataAdapter(myCmd, myConn);
             ada.Fill(dttemp);
@@ -2574,7 +2605,7 @@ public class DBClass
         }
     }
 
-    public DataTable GetFaHuoInfoByFHID(string compid, string FHID)
+    public DataTable GetFaHuoInfoByFHID(string compid,string FHID)
     {
         using (var myConn = GetConnectionWL(_showmode))
         {
@@ -2599,15 +2630,15 @@ public class DBClass
             if (myConn.State == ConnectionState.Closed)
             {
                 myConn.Open();
-            }
-            string temp = "SELECT a.[ProductName] '产品',a.[BoxLabel01] '箱码',(select b.CompName from TJMarketingSystemYin.dbo.TJ_RegisterCompanys b where b.CompID=a.FromAgentID) '从',(select b.CompName from TJMarketingSystemYin.dbo.TJ_RegisterCompanys b where b.CompID=a.[ToAgentID]) '至',[FHDate] '时间',(select COUNT(*)  from (SELECT DISTINCT c.BoxLabel,c.AcceptAgentID FROM TianJianWuLiuWebnew.dbo.AgentAcceptInfo_2019 c where c.BoxLabel=a.BoxLabel01) as cnt) as cs  FROM [TianJianWuLiuWebnew].[dbo].[" + tbname + "_FH] a where a.FHKey='" + fhkey + "'";
+            } 
+            string  temp ="SELECT a.[ProductName] '产品',a.[BoxLabel01] '箱码',(select b.CompName from TJMarketingSystemYin.dbo.TJ_RegisterCompanys b where b.CompID=a.FromAgentID) '从',(select b.CompName from TJMarketingSystemYin.dbo.TJ_RegisterCompanys b where b.CompID=a.[ToAgentID]) '至',[FHDate] '时间',(select COUNT(*)  from (SELECT DISTINCT c.BoxLabel,c.AcceptAgentID FROM TianJianWuLiuWebnew.dbo.AgentAcceptInfo_2019 c where c.BoxLabel=a.BoxLabel01) as cnt) as cs  FROM [TianJianWuLiuWebnew].[dbo].["+tbname+"_FH] a where a.FHKey='"+fhkey+"'";
             dttemp = new DataTable();
             ada = new SqlDataAdapter(temp, myConn);
             ada.Fill(dttemp);
             ada.Dispose();
             myConn.Close();
             return dttemp;
-        }
+        } 
     }
 
     #region 通用
@@ -2685,7 +2716,7 @@ public class DBClass
     }
     #endregion
 
-    private string _returnvl = string.Empty;
+    private string _returnvl=string.Empty;
 
     /// <summary>
     /// 返回公司ID,用户ID,是否激活码
@@ -2713,7 +2744,7 @@ public class DBClass
     {
         bool re = false;
         myConn = GetConnection(_showmode);
-        ada = new SqlDataAdapter("select COUNT(id) cnt from TJ_Comp_Roles where compid=" + compid + " and isactive=1", myConn);
+        ada = new SqlDataAdapter("select COUNT(id) cnt from TJ_Comp_Roles where compid=" + compid+" and isactive=1",myConn);
         dttemp = new DataTable();
         ada.Fill(dttemp);
         if (dttemp.Rows.Count > 0)
@@ -2730,7 +2761,7 @@ public class DBClass
         else
         {
             re = false;
-        }
+        } 
         dttemp.Dispose();
         ada.Dispose();
         return re;
@@ -2747,20 +2778,20 @@ public class DBClass
     /// <param name="number">数量</param>
     /// <param name="jiage">价格</param>
     /// <param name="active">1或0</param>
-    public void RecordActiveInfo(string pid, string prodid, string rpidstr, string number, string jiage, string active, string mchbillno, string compid)
+    public void RecordActiveInfo(string pid, string prodid, string rpidstr, string number, string jiage, string active, string mchbillno,string compid)
     {
         tempsql = "insert into TJ_SWM_PID_Active(pid,prodid,rpidstring,isactive,number,pricevl,mchbillno,compid) values (" + pid +
-                         "," + prodid + ",'" + rpidstr + "'," + active + "," + number + "," + jiage + ",'" + mchbillno + "'," + compid + ")";
+                         "," + prodid + ",'" + rpidstr + "'," + active + "," + number + "," + jiage + ",'" + mchbillno + "',"+compid+")";
         myConn = GetConnection(_showmode);
         myCmd = new SqlCommand(tempsql, myConn);
         if (myConn.State != ConnectionState.Open)
         {
             myConn.Open();
         }
-        myCmd.ExecuteNonQuery();
+        myCmd.ExecuteNonQuery(); 
     }
 
-    public void AddModuleInfo(string mchbillno, string compid)
+    public void AddModuleInfo(string mchbillno,string compid)
     {
         using (myConn = GetConnection(_showmode))
         {
@@ -2808,22 +2839,22 @@ public class DBClass
             dttemp.Dispose();
             ada.Dispose();
             myCmd.Dispose();
-        }
-    }
+        } 
+    } 
 
     private string _basemoduleidstring = "";
     public string GetPageInfoByPid(string pid)
     {
         _basemoduleidstring = GetSWMBaseSiteID();
-        tempsql = "select (stuff((select '' + ridstring  from TJ_Role_Package where id in (SELECT rpid FROM TJ_SWM_PID_RPID where pid=" + pid + ") for xml path('')),1,1,''))";
+        tempsql = "select (stuff((select '' + ridstring  from TJ_Role_Package where id in (SELECT rpid FROM TJ_SWM_PID_RPID where pid="+pid+") for xml path('')),1,1,''))";
         myConn = GetConnection(_showmode);
-        ada = new SqlDataAdapter(tempsql, myConn);
+        ada = new SqlDataAdapter(tempsql,myConn);
         dttemp = new DataTable();
-        ada.Fill(dttemp);
+        ada.Fill(dttemp); 
         if (dttemp.Rows.Count > 0)
         {
             string temp = dttemp.Rows[0][0].ToString();
-            if (temp.Length > 0)
+            if(temp.Length>0)
             {
                 temp += "," + _basemoduleidstring;
             }
@@ -2833,12 +2864,12 @@ public class DBClass
             }
             temp = temp.StartsWith(",") ? temp.Substring(1) : temp;
             tempsql = "select PageName pg,LinkPath lk,LogoName lg,Remarks ky,SiteID id from TJ_SiteMap where SysTypeID=78 and ParentID=38 and SiteID in (" + temp + ") order by ShowOrder";
-            ada = new SqlDataAdapter(tempsql, myConn);
+            ada = new SqlDataAdapter(tempsql,myConn);
             dttemp = new DataTable();
             ada.Fill(dttemp);
             if (dttemp.Rows.Count > 0)
             {
-                return JsonConvert.SerializeObject(dttemp);
+                return JsonConvert.SerializeObject(dttemp); 
             }
         }
         dttemp.Dispose();
@@ -2881,6 +2912,39 @@ public class DBClass
         return "[]";
     }
 
+    /// <summary>
+    /// 获取三维码客户系统模块的新模式
+    /// </summary>
+    /// <param name="pid">三维码激活批次ID</param>
+    /// <param name="compid">公司ID</param>
+    /// <returns></returns>
+    public string GetCustomerPageInfoByCompIdAndPid(string pid, string compid)
+    {
+        using (myConn=GetConnection(_showmode))
+        { 
+            tempsql = "select mdnm pg,lk,logourl lg,ky,mdid id from TJ_SWM_Comp_ModulesConfig where compid=" + compid + " and  pid=" + pid + " and isshow=1 order by showorder";
+            ada = new SqlDataAdapter(tempsql, myConn);
+            dttemp = new DataTable();
+            ada.Fill(dttemp);
+            if (dttemp.Rows.Count > 0)
+            {
+                return JsonConvert.SerializeObject(dttemp);
+            }
+            else
+            {
+                tempsql = "select mdnm pg,lk,logourl lg,ky,mdid id from TJ_SWM_Comp_ModulesConfig where compid=" + compid + " and isshow=1 order by showorder";
+                ada = new SqlDataAdapter(tempsql, myConn);
+                dttemp = new DataTable();
+                ada.Fill(dttemp);
+                if (dttemp.Rows.Count > 0)
+                {
+                    return JsonConvert.SerializeObject(dttemp);
+                }
+            }
+            return "";
+        } 
+    }
+
     public string GetSWMCustomerPageInfoByPid(string pid, string compid)
     {
         _basemoduleidstring = GetSWMBaseSiteID();
@@ -2921,7 +2985,7 @@ public class DBClass
         tempsql = "select ridstring from TJ_Role_Package where id=1";
         dttemp = new DataTable();
         myConn = GetConnection(_showmode);
-        ada = new SqlDataAdapter(tempsql, myConn);
+        ada = new SqlDataAdapter(tempsql,myConn);
         ada.Fill(dttemp);
         string tempvalue = "";
         if (dttemp.Rows.Count > 0)
@@ -2930,7 +2994,7 @@ public class DBClass
         }
         dttemp.Dispose();
         ada.Dispose();
-        return tempvalue.StartsWith(",") ? tempvalue.Substring(1) : tempvalue;
+        return tempvalue.StartsWith(",")?tempvalue.Substring(1):tempvalue;
     }
     /// <summary>
     /// 更新活动范围限定数量
@@ -2943,8 +3007,8 @@ public class DBClass
         switch (type.ToLower())
         {
             case "pd":
-                ada = new SqlDataAdapter("select count(id) from TJ_Activity_Product where acid=" + acid, myConn);
-                dttemp = new DataTable();
+                ada = new SqlDataAdapter("select count(id) from TJ_Activity_Product where acid="+acid,myConn);
+                dttemp =  new DataTable();
                 ada.Fill(dttemp);
                 if (dttemp.Rows.Count > 0)
                 {
@@ -2954,11 +3018,11 @@ public class DBClass
                         myConn.Open();
                     }
                     myCmd.ExecuteNonQuery();
-                }
+                } 
                 break;
             case "ag":
                 ada = new SqlDataAdapter("select count(id) from TJ_Activity_Agent where acid=" + acid, myConn);
-                dttemp = new DataTable();
+                dttemp =  new DataTable();
                 ada.Fill(dttemp);
                 if (dttemp.Rows.Count > 0)
                 {
@@ -2968,11 +3032,11 @@ public class DBClass
                         myConn.Open();
                     }
                     myCmd.ExecuteNonQuery();
-                }
+                } 
                 break;
             case "tm":
                 ada = new SqlDataAdapter("select count(id) from TJ_Activity_Terminal where acid=" + acid, myConn);
-                dttemp = new DataTable();
+                dttemp =  new DataTable();
                 ada.Fill(dttemp);
                 if (dttemp.Rows.Count > 0)
                 {
@@ -2982,14 +3046,14 @@ public class DBClass
                         myConn.Open();
                     }
                     myCmd.ExecuteNonQuery();
-                }
+                } 
                 break;
         }
         myConn.Close();
         dttemp.Dispose();
         ada.Dispose();
         myCmd.Dispose();
-    }
+    } 
 
     public bool GetModuleIsCustomedByCompID(string compid)
     {
@@ -3042,7 +3106,7 @@ public class DBClass
     /// <param name="freeday">试用期限(天)</param>
     /// <param name="unitname">单位名称</param>
     /// <returns></returns>
-    public string ActivePidAndAuthorAllMoudleInfoFrank(string compid, string pid, int activenum, int freeday, string unitname)
+    public string ActivePidAndAuthorAllMoudleInfoFrank(string compid,string pid,int activenum,int freeday,string unitname)
     {
         string sqlstring = "";
         DataTable dttemp = null;
@@ -3052,11 +3116,11 @@ public class DBClass
             if (myconn.State != ConnectionState.Open)
             {
                 myconn.Open();
-            }
-            sqlstring = "select top 1 Infor_ID from TB_Products_Infor where CompID=" + compid + " order by Infor_ID";
-            ada = new SqlDataAdapter(sqlstring, myconn);
+            } 
+            sqlstring = "select top 1 Infor_ID from TB_Products_Infor where CompID=" + compid+ " order by Infor_ID";
+            ada = new SqlDataAdapter(sqlstring,myconn);
             dttemp = new DataTable();
-            ada.Fill(dttemp);
+            ada.Fill(dttemp); 
             if (dttemp.Rows.Count > 0)
             {
                 prodid = dttemp.Rows[0][0].ToString();
@@ -3066,12 +3130,12 @@ public class DBClass
                 sqlstring =
                     "insert into TB_Products_Infor(TypeId,PSID,Product_Code,Products_Name,Products_Summary,Products_Price,Products_date,CompID) values(0,0,'0001','产品名称','我的产品介绍',0,'" +
                     DateTime.Now + "'," + compid + ")  select @@identity";
-                myCmd = new SqlCommand(sqlstring, myconn);
+                myCmd = new SqlCommand(sqlstring,myconn);
                 prodid = myCmd.ExecuteScalar().ToString();
                 myCmd.Dispose();
-            }
+            } 
             dttemp.Dispose();
-            ada.Dispose();
+            ada.Dispose(); 
             myconn.Close();
         }
         using (var myConn = GetConnection(_showmode))
@@ -3087,16 +3151,104 @@ public class DBClass
             if (gid != null)
             {
                 goodsid = gid.ToString();
-            }
+            } 
             if (string.IsNullOrEmpty(goodsid))
             {
-                sqlstring = "insert into TJ_GoodsInfo(CompID,GoodsTypeID,SaleUnitID,GoodsName,Descriptions,GoodsPicURL,GoodsPicURLSmal,Price,BeginSaleDate,EndSaleDate,DisplayDate,WLProID) values(" + compid + ",0,'件','产品名称','我的产品介绍','Images/upload/1/goodsdasheng1.jpg','Images/upload/1/goodsdasheng1.jpg',1,'" + DateTime.Now.ToString("yyyy-MM-dd") + "','" + DateTime.Now.AddYears(3).ToString("yyyy-MM-dd") + "','" + DateTime.Now + "'," + prodid + ") select @@identity";
-                myCmd = new SqlCommand(sqlstring, myConn);
+                sqlstring = "insert into TJ_GoodsInfo(CompID,GoodsTypeID,SaleUnitID,GoodsName,Descriptions,GoodsPicURL,GoodsPicURLSmal,Price,BeginSaleDate,EndSaleDate,DisplayDate,WLProID) values(" + compid +",0,'件','产品名称','我的产品介绍','Images/upload/1/goodsdasheng1.jpg','Images/upload/1/goodsdasheng1.jpg',1,'"+DateTime.Now.ToString("yyyy-MM-dd")+"','"+ DateTime.Now.AddYears(3).ToString("yyyy-MM-dd") + "','"+DateTime.Now+"',"+prodid+") select @@identity";
+                myCmd = new SqlCommand(sqlstring,myConn);
                 goodsid = myCmd.ExecuteScalar().ToString();
             }
 
             sqlstring = "insert into TJ_SWM_PID_Active(pid,prodid,rpidstring,isactive,number,remarks,compid) values(" +
-                        pid + "," + prodid + ",0,1," + activenum + ",'system'," + compid + ")";
+                        pid + "," + prodid + ",0,1," + activenum + ",'system'," + compid + ")";  
+            myCmd = new SqlCommand(sqlstring,myConn);
+            myCmd.ExecuteNonQuery();
+            sqlstring = "insert into TJ_SWM_PID_RPID(pid,rpid,starttm,endtm) values(" + pid + ",1,'" +
+                        DateTime.Now.ToString("yyyy-MM-dd") + "','" + DateTime.MaxValue +
+                        "');insert into TJ_SWM_PID_RPID(pid,rpid,starttm,endtm) values(" + pid + ",2,'" +
+                        DateTime.Now.ToString("yyyy-MM-dd") + "','" +
+                        (freeday.Equals(0)
+                            ? DateTime.MaxValue.ToString("yyyy-MM-dd")
+                            : DateTime.Now.AddDays(freeday + 1).ToString("yyyy-MM-dd")) +
+                        "');insert into TJ_SWM_PID_RPID(pid,rpid,starttm,endtm) values(" + pid + ",3,'" +
+                        DateTime.Now.ToString("yyyy-MM-dd") + "','" +
+                        (freeday.Equals(0)
+                            ? DateTime.MaxValue.ToString("yyyy-MM-dd")
+                            : DateTime.Now.AddDays(freeday + 1).ToString("yyyy-MM-dd")) +
+                        "');insert into TJ_SWM_PID_RPID(pid,rpid,starttm,endtm) values(" + pid + ",4,'" +
+                        DateTime.Now.ToString("yyyy-MM-dd") + "','" +
+                        (freeday.Equals(0)
+                            ? DateTime.MaxValue.ToString("yyyy-MM-dd")
+                            : DateTime.Now.AddDays(freeday + 1).ToString("yyyy-MM-dd")) +
+                        "');insert into TJ_SWM_PID_RPID(pid,rpid,starttm,endtm) values(" + pid + ",5,'" +
+                        DateTime.Now.ToString("yyyy-MM-dd") + "','" +
+                        (freeday.Equals(0)
+                            ? DateTime.MaxValue.ToString("yyyy-MM-dd")
+                            : DateTime.Now.AddDays(freeday + 1).ToString("yyyy-MM-dd")) +
+                        "');insert into TJ_SWM_PID_RPID(pid,rpid,starttm,endtm) values(" + pid + ",6,'" +
+                        DateTime.Now.ToString("yyyy-MM-dd") + "','" + (freeday.Equals(0)
+                            ? DateTime.MaxValue.ToString("yyyy-MM-dd")
+                            : DateTime.Now.AddDays(freeday + 1).ToString("yyyy-MM-dd")) + "');";
+            myCmd = new SqlCommand(sqlstring,myConn);
+            myCmd.ExecuteNonQuery();
+
+            sqlstring =
+                "select distinct rpid from TJ_SWM_PID_RPID where pid in (select ta.pid from TJ_SWM_PID_Active ta where ta.compid=" +
+                compid + ")";
+           ada =new SqlDataAdapter(sqlstring,myConn);
+            dttemp = new DataTable();
+            ada.Fill(dttemp);
+            int nm = 0;
+            if (dttemp.Rows.Count > 0)
+            {
+                foreach (DataRow row in dttemp.Rows)
+                {
+                    sqlstring = "select count(id) from TJ_Comp_Roles where compid=" + compid + " and rpackid=" + row[0];
+                    myCmd = new SqlCommand(sqlstring,myConn);
+                    nm = int.Parse(myCmd.ExecuteScalar().ToString());
+                    if (nm.Equals(0))
+                    {
+                        sqlstring =
+                            "insert into TJ_Comp_Roles(compid,rpackid,authoruserid,authordate,isactive,remarks) values(" +
+                            compid + "," + row[0] + ",0,'" + DateTime.Now + "',1,'system')";
+                        myCmd = new SqlCommand(sqlstring,myConn);
+                        myCmd.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            sqlstring = "select count(IFID) from TJ_PublishInfo where CompID=" + compid;
+            myCmd = new SqlCommand(sqlstring,myConn);
+            nm = int.Parse(myCmd.ExecuteScalar().ToString());
+            if (nm.Equals(0))
+            {
+                sqlstring = "insert into TJ_PublishInfo(CompID,IsHot,CID,LinkURLString,Title,Contents,PublishDate) values(" + compid +
+                            ",1,2,'Images/commup/1/reliezhuhe.jpg','" + unitname + "开始启用结构三维码','热烈祝贺:" + unitname + "于" +
+                            DateTime.Now.ToString("yyyy-MM-dd") + "开始启用三维码，从此走上新征程！','" + DateTime.Now + "')";
+                myCmd = new SqlCommand(sqlstring,myConn);
+                myCmd.ExecuteNonQuery();
+            }
+            dttemp.Dispose();
+            ada.Dispose();
+            myCmd.Dispose();
+            myConn.Close();
+        } 
+        return "";
+    }
+
+    public string ActivePidAndAuthorAllMoudleInfoNoProdidFrank(string compid, string pid, int activenum, int freeday, string unitname)
+    {
+        string sqlstring = "";
+        DataTable dttemp = null;
+        string wlprodid = "0"; 
+        using (var myConn = GetConnection(_showmode))
+        {
+            if (myConn.State != ConnectionState.Open)
+            {
+                myConn.Open();
+            } 
+            sqlstring = "insert into TJ_SWM_PID_Active(pid,prodid,rpidstring,isactive,number,remarks,compid) values(" +
+                        pid + "," + wlprodid + ",0,1," + activenum + ",'system'," + compid + ")";
             myCmd = new SqlCommand(sqlstring, myConn);
             myCmd.ExecuteNonQuery();
             sqlstring = "insert into TJ_SWM_PID_RPID(pid,rpid,starttm,endtm) values(" + pid + ",1,'" +
@@ -3170,8 +3322,7 @@ public class DBClass
             myConn.Close();
         }
         return "";
-    }
-
+    } 
 }
 
 

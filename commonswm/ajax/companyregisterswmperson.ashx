@@ -59,13 +59,15 @@ public class companyregisterswmperson : IHttpHandler
                 muser.WXNumber = openid;
                 muser.LoginName = pPhone;
                 muser.RID = 155;
-                muser.IsActived = 1;
+                //状态
+                muser.IsActived = 0;
+                //muser.IsActived = 1;
                 muser.MobileNumber = pPhone;
                 muser.PassWords = CommonFun.Md5hash_String("123456");
                 muser.AddressInfo = pCity + " " + pAddr;
                 muser.RegisterDate = DateTime.Now;
                 btjuser.Insert(muser);
-                context.Response.Write("{\"rs\":100,\"nr\":\"您的资料已经提交，请稍候！\"}");
+                //context.Response.Write("{\"rs\":100,\"nr\":\"您的资料已经提交，请稍候！\"}");
             }
         }
     }

@@ -79,7 +79,7 @@ public partial class Admin_TJ_SWM_OrderInfo : AuthorPage
            _filtertemp = "1=1";
        }
        AspNetPager1.RecordCount = int.Parse(tab.ExecuteQuery("select count(id) from TJ_SWM_OrderInfo where "+_filtertemp, null).Rows[0][0].ToString());
-       GridView1.DataSource = tab.ExecuteQueryByProPagerNew(pageIndex, "TJ_SWM_OrderInfo", _filtertemp, "id", "id", pageSize);
+       GridView1.DataSource = tab.ExecuteQueryByProPagerNew(pageIndex, "TJ_SWM_OrderInfo", _filtertemp, "BJDate", "id", pageSize);
        GridView1.DataBind();
     }
     protected void AspNetPager1_PageChanging(object src, Wuqi.Webdiyer.PageChangingEventArgs e)

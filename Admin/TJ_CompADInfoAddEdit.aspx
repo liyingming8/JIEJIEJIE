@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <link href="../include/windows.css" rel="stylesheet" /> 
+    <script src="../include/js/UploadImage.js" type="text/javascript"></script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -14,6 +15,9 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server">
             </asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                 <Triggers>
+                    <asp:PostBackTrigger ControlID="Button1" />
+                </Triggers>
                 <ContentTemplate>
                     <table class="gridtable">
                         <tr>
@@ -39,7 +43,7 @@
                                             <asp:Image ID="Image_Pic" Width="200px" runat="server" /> 
                                             <iframe id="I0" frameborder="0" height="23" name="I1" scrolling="no"
                                                 src="Attachment.aspx?PicUrl=adfile&amp;TargetImg=Image_Pic&amp;TargetHd=HF_FilePath&amp;imgMaxSize=102400"
-                                                style="vertical-align: text-bottom" width="250"></iframe>
+                                                style="vertical-align: text-bottom;color:red" width="250"></iframe>
                                         </td>
                                     </tr>
                                 </table>
@@ -85,6 +89,5 @@
         <asp:HiddenField ID="HF_CMD" runat="server" />
         <asp:HiddenField ID="HF_ID" runat="server" />
     </form>
-    <script src="../include/js/UploadImage.js" type="text/javascript"></script>
 </body>
 </html>
